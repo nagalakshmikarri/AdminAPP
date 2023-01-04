@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AdvertaisementsActivity">
+
+    <LinearLayout
+        android:id="@+id/header_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F1744B"
+        android:padding="5sp">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/Business_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/back_btn"
+            android:fontFamily="@font/jost_medium_500"
+            android:text="@string/Advertaisements"
+            android:textColor="@color/text_header_color"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_below="@+id/header_ll"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="15dp"
+        android:background="#F1ECEC"
+        android:padding="5sp">
+
+        <TextView
+            android:id="@+id/Business"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/jost_medium_500"
+            android:text="You can create a location based Advertaisement that is valid upto 7days with 3 simple steps approval\n
+           1.create and submit an Ad for app\n
+              2.Admin will review and Approve\n
+     3.Your Advertaisement is automatically published"
+            android:textColor="@color/text_header_color"
+            android:textSize="12dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/createads"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/header_ll"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#F1744B"
+        android:text="Create Ads"
+        android:textAllCaps="true"
+        android:textColor="@color/black" />
+    <TextView
+        android:id="@+id/tv_Businesslist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#BFECBC"
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/createads"
+        android:text="@string/pastAds"
+        android:textColor="@color/black"
+        android:textSize="14dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Business_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_Businesslist"
+        android:layout_marginEnd="4dp" />
+
+</RelativeLayout>

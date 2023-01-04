@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tttt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/jost_medium_500"
+        android:text="tttttt"
+        android:textColor="@color/text_header_color"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="10dp"
+        android:layout_below="@+id/tttt"
+        android:fontFamily="@font/jost_medium_500"
+        android:text="Dec 01,2022."
+        android:textColor="@color/text_header_color"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/ll_events"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date_tv"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_event"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY" />
+
+        <TextView
+            android:id="@+id/tv_event_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:fontFamily="@font/jost_regular_400"
+            android:text="9090909090"
+            android:textColor="#1189E8"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</RelativeLayout>

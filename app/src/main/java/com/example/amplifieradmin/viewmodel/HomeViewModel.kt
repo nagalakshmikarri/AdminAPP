@@ -1,0 +1,416 @@
+package com.example.amplifieradmin.viewmodel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.amplifier.amplifier.data.network.NetworkResponse
+import com.example.amplifieradmin.data.model.*
+import com.example.amplifieradmin.data.repository.MainRepository
+import com.example.amplifieradmin.ui.main.intent.MainIntent
+import com.example.amplifieradmin.viewstate.MainState
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.consumeAsFlow
+import kotlinx.coroutines.launch
+
+class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
+    val homeIntent = Channel<MainIntent>(Channel.UNLIMITED)
+
+    private val _state = MutableStateFlow<MainState>(MainState.Idle)
+    val state: StateFlow<MainState>
+        get() = _state
+
+    init {
+        handleIntent()
+    }
+
+    private fun handleIntent() {
+        viewModelScope.launch {
+            homeIntent.consumeAsFlow().collect {
+                when (it) {
+                    is MainIntent.AdminUser -> fetchAdminUser()
+                    is MainIntent.SubAdminInfo->fetchSubAdminInfo(it.subadmin_id)
+                    is MainIntent.AdsPending->fetchAdsPending(it.admin_id,it.id)
+                    is MainIntent.AdminAdsAccept->fetchAdminAdsAccept(it.admin_id,it.id)
+                    is MainIntent.AdminAdsReject->fetchAdminAdsReject(it.admin_id,it.id)
+                    is MainIntent.SubAdminAdsAccept->fetchSubAdminAdsAccept(it.subadmin_id)
+                    is MainIntent.SubAdminAdsReject->fetchSubAdminAdsReject(it.subadmin_id)
+                    is MainIntent.CliamBusiness->fetchCliamBusiness(it.admin_id)
+                    is MainIntent.TypeList->fetchTypeList()
+                    is MainIntent.Register->fetchRegister(it.s_email,it.s_phone_code,it.s_phone,
+                    it.s_business,it.s_password,it.s_username,it.s_name,it.s_latit,it.s_longit,it.s_type,
+                    it.s_address,it.admin_id,it.timezone,it.zone)
+                    is MainIntent.BusinessList->fetchBusinessList(it.admin_id)
+                    is MainIntent.RecommendBusiness->recommendBusiness()
+                    else -> {}
+                }
+            }
+        }
+
+
+    }
+
+    private fun recommendBusiness() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val response=repository.recommend_Business()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.RecommendBusiness(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchBusinessList(adminId: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = BusinessListReq(adminId)
+            val response=repository.getBusinessList(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.BusinessList(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchRegister(
+        sEmail: String,
+        sPhoneCode: String,
+        sPhone: String,
+        sBusiness: String,
+        sPassword: String,
+        sUsername: String,
+        sName: String,
+        sLatit: String,
+        sLongit: String,
+        sType: String,
+        sAddress: String,
+        adminId: String,
+        timezone: String,
+        zone: String
+    ) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = RegisterReq(sEmail,sPhoneCode,sPhone,sBusiness,sPassword,sUsername,sName,sLatit,sLongit,
+                sType,sAddress,adminId,timezone,zone)
+            val response=repository.getRegister(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.Register(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchTypeList() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val response=repository.getTypeList()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.TypeList(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchCliamBusiness(adminId: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = CliamBusinessReq(adminId)
+            val response=repository.getCliamBusiness(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.CliamBusiness(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchSubAdminAdsReject(subadminId: Int) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = RejectAdsReq(subadminId)
+            val response=repository.getSubAdminAdsReject(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.SubAdminAdsReject(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchSubAdminAdsAccept(subadminId: Int) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = AcceptAdsReq(subadminId)
+            val response=repository.getSubAdminAdsAccept(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.SubAdminAdsAccept(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+
+    }
+
+    private fun fetchAdminAdsReject(adminId: String, id: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req =RejectReq(adminId, id)
+            val response=repository.getAdminAdsReject(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AdminAdsReject(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+
+    }
+
+    private fun fetchAdminAdsAccept(adminId: String, id: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = AcceptReq(adminId, id)
+            val response=repository.getAdminAdsAccept(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AdminAdsAccept(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchAdsPending(adminId: String, id: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = AdsPendingReq(adminId, id)
+            val response=repository.getAdsPending(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AdsPending(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+    }
+
+    private fun fetchSubAdminInfo(subadminId: Int) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = SubAdminInfoReq(subadminId)
+            val response=repository.getSubAdminInfo(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.SubAdminInfo(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun fetchAdminUser() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val response=repository.getAdminUser()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AdminUser(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+}
