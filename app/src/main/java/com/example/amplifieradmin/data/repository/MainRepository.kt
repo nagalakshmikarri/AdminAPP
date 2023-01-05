@@ -30,4 +30,8 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun getBusinessList(businessListReq: BusinessListReq)=apiHelper.getBusinessList(businessListReq)
 
     suspend fun recommend_Business()=apiHelper.recommend_Business()
+
+    suspend fun category(categoryReq: CategoryReq)=apiHelper.category(categoryReq)
+
+    suspend fun get_category()=apiHelper.get_Category()
 }

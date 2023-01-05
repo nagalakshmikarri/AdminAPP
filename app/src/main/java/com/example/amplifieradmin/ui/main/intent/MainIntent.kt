@@ -33,4 +33,8 @@ sealed class MainIntent {
     class BusinessList(var admin_id: String):MainIntent()
 
     object RecommendBusiness:MainIntent()
+
+    class Category(var name:String):MainIntent()
+
+    object GetCategory:MainIntent()
 }

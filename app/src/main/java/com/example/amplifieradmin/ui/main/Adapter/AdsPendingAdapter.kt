@@ -19,7 +19,7 @@ import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.PendingBinding
 import kotlinx.android.synthetic.main.pending.view.*
 
-class AdsPendingAdapter(
+class AdsPendingAdapter (
     private var adsPendingData: List<AdsPendingData>,
             private val context: Context,
     private var onAcceptClick: OnAcceptClick,
@@ -120,7 +120,7 @@ class AdsPendingAdapter(
     fun filterList(adminUsersData: MutableList<AdsPendingData>) {
         this.adsPendingData = adsPendingData
         notifyDataSetChanged()
-    }
+      }
 
     fun addData(list: List<AdsPendingData>) {
         this.adsPendingData = list

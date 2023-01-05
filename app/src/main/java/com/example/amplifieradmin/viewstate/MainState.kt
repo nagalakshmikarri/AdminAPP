@@ -19,6 +19,7 @@ sealed  class MainState {
     data class Register(val registerResp: RegisterResp):MainState()
     data class BusinessList(val businessListResp: BusinessListResp):MainState()
     data class RecommendBusiness(val recommendBusinessResp: RecommmendBusinnessResp):MainState()
+    data class Category(val categoryResp: CategoryResp):MainState()
+    data class Get_Category(val getCategoryResp: GetCategoryResp):MainState()
     data class Error(val error: String?) : MainState()
-
 }

@@ -72,4 +72,9 @@
     <string name="save">Save</string>
     <string name="Approval">Approval</string>
     <string name="refer_business">Refer a Business List</string>
+    <string name="Category">Add Category</string>
+    <string name="Categories">Categories</string>
+    <string name="add_category">Add Category</string>
+    <string name="add_service">Add Service(*)</string>
+    <string name="Botique">Botique</string>
 </resources>

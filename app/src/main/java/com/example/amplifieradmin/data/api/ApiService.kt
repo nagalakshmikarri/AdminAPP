@@ -109,4 +109,16 @@ interface ApiService {
         @Header("Authorization") authorization: String
     ): NetworkResponse<RecommmendBusinnessResp, ErrorResponse>
 
+    @POST("add_business_category")
+    @FormUrlEncoded
+    suspend fun category(
+        @Header("Authorization") authorization: String,
+        @Field("name") name: String,
+    ):NetworkResponse<CategoryResp,ErrorResponse>
+
+    @GET("list_business_category")
+    suspend fun get_Category(
+        @Header("Authorization") authorization: String
+    ): NetworkResponse<GetCategoryResp, ErrorResponse>
+
 }

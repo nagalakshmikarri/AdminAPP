@@ -38,7 +38,7 @@ class AdsListStatusActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        lifecycleScope.launch {
+        lifecycleScope.launch { 
             homeViewModel.state.collect {
                 when(it){
                     is MainState.Idle -> {
@@ -100,6 +100,10 @@ class AdsListStatusActivity : AppCompatActivity() {
 
         binding.referBusiness.setOnClickListener {
             val intent = Intent(this@AdsListStatusActivity, RecommendBusinessActivity::class.java)
+            startActivity(intent);
+        }
+        binding.category1.setOnClickListener {
+            val intent = Intent(this@AdsListStatusActivity, CategoryActivity::class.java)
             startActivity(intent);
         }
 
