@@ -19,6 +19,7 @@
     <color name="save_bg_color">#4D4B4E</color>
     <color name="litegray">#34CCC2C2</color>
     <color name="light_grey">#f2f2f2</color>
+    <color name="red">#F33535</color>
 
 
 </resources>

@@ -29,7 +29,8 @@ class RecommendBusinessActivity : AppCompatActivity() {
     lateinit var prefHelper: PrefHelper
     private lateinit var adapter: RecommendBusinessAdapter
     private val binding get() = _binding!!
-
+    private var admin_id = ""
+    private var s_id=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityRecommendBusinessBinding.inflate(layoutInflater)
@@ -88,16 +89,12 @@ class RecommendBusinessActivity : AppCompatActivity() {
         homeViewModel =
             ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
                 .get(HomeViewModel::class.java)
-        lifecycleScope.launch {
-            homeViewModel.homeIntent.send(
-                MainIntent.RecommendBusiness
 
-            )
-        }
 
     }
 
     private fun setupUI() {
+        admin_id = intent.getStringExtra("admin_id").toString()
         binding.recyclerView.addItemDecoration(
             DividerItemDecoration(
                 this@RecommendBusinessActivity,
@@ -113,5 +110,15 @@ class RecommendBusinessActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        lifecycleScope.launch {
+            homeViewModel.homeIntent.send(
+                MainIntent.RecommendBusiness
+
+            )
+        }
     }
 }

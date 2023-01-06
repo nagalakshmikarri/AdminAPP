@@ -68,5 +68,7 @@ data class RecommendBusinessData(
     val verified_by: Any,
     val website_link: Any,
     val whatsapp_link: Any,
-    val zone: String
+    val zone: String,
+    val businesscategory: String,
+
 )

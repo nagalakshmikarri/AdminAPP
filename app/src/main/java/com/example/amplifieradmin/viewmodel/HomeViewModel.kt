@@ -45,11 +45,41 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
                     is MainIntent.RecommendBusiness->recommendBusiness()
                     is MainIntent.Category->category(it.name)
                     is MainIntent.GetCategory->get_Category()
+                    is MainIntent.BusinessCategory->businessCategory(it.s_id,it.category)
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun businessCategory(sId: String, category: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = BusinessCategoryReq(sId, category)
+            val response=repository.business_Category(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.business_Category(response.body)
+                    } else {
+                        MainState.Error(response.body.msg)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 

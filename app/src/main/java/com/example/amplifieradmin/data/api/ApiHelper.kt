@@ -35,4 +35,6 @@ interface ApiHelper {
     suspend fun category(categoryReq: CategoryReq):NetworkResponse<CategoryResp,ErrorResponse>
 
     suspend fun get_Category():NetworkResponse<GetCategoryResp,ErrorResponse>
+
+    suspend fun business_Category(businessCategoryReq: BusinessCategoryReq):NetworkResponse<BusinessCategoryResp,ErrorResponse>
 }

@@ -77,4 +77,5 @@
     <string name="add_category">Add Category</string>
     <string name="add_service">Add Service(*)</string>
     <string name="Botique">Botique</string>
+    <string name="Business_category">BusinessCategory</string>
 </resources>

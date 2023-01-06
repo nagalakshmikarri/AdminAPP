@@ -37,4 +37,7 @@ sealed class MainIntent {
     class Category(var name:String):MainIntent()
 
     object GetCategory:MainIntent()
+
+    class BusinessCategory(
+        var s_id:String,var category:String):MainIntent()
 }

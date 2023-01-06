@@ -121,4 +121,12 @@ interface ApiService {
         @Header("Authorization") authorization: String
     ): NetworkResponse<GetCategoryResp, ErrorResponse>
 
+    @POST("update_business_category")
+    @FormUrlEncoded
+    suspend fun business_Category(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String,
+        @Field("category") category: String,
+        ):NetworkResponse<BusinessCategoryResp,ErrorResponse>
+
 }

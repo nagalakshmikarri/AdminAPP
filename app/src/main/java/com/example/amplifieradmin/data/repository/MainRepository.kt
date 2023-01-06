@@ -34,4 +34,6 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun category(categoryReq: CategoryReq)=apiHelper.category(categoryReq)
 
     suspend fun get_category()=apiHelper.get_Category()
+
+    suspend fun business_Category(businessCategoryReq: BusinessCategoryReq)=apiHelper.business_Category(businessCategoryReq)
 }

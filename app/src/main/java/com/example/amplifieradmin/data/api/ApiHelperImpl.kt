@@ -85,4 +85,8 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun get_Category():NetworkResponse<GetCategoryResp,ErrorResponse>{
         return apiService.get_Category("Basic $base64".trim())
     }
+
+    override suspend fun business_Category(businessCategoryReq: BusinessCategoryReq):NetworkResponse<BusinessCategoryResp,ErrorResponse>{
+        return apiService.business_Category("Basic $base64".trim(),businessCategoryReq.s_id,businessCategoryReq.category)
+    }
 }
