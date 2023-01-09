@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:padding="5sp"
-        android:background="#F1744B">
+        android:background="#F7A07B">
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="35dp"

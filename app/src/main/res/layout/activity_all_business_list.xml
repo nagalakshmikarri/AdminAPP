@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".CliamBusinessActivity">
-
+    tools:context=".AllBusinessListActivity">
     <LinearLayout
         android:id="@+id/header_ll"
         android:layout_width="match_parent"
@@ -24,22 +22,57 @@
             android:src="@drawable/back" />
 
         <TextView
-            android:id="@+id/Business_tv"
+            android:id="@+id/pending_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@+id/back_btn"
             android:fontFamily="@font/jost_medium_500"
-            android:text="@string/CliamBusiness"
+            android:text="@string/all_stores"
             android:textColor="@color/text_header_color"
             android:textSize="18sp" />
     </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cliambusiness_recyclerview"
+    <RelativeLayout
+        android:id="@+id/search_rl"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header_ll"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/border"
+        android:orientation="horizontal"
+        android:layout_below="@+id/header_ll"
+        android:padding="5dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/search_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_search" />
+
+        <EditText
+            android:id="@+id/searchBarText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/search_iv"
+            android:background="@null"
+            android:fontFamily="@font/jost_regular_400"
+            android:hint="Search by Store..."
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp" />
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_rl"
         android:layout_marginStart="4dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="4dp" />
@@ -51,17 +84,16 @@
         android:layout_gravity="center_vertical"
         android:fontFamily="@font/jost_medium_500"
         android:gravity="center"
-        android:text="No Claim Business Found"
+        android:text="No BusinessList Users Found"
         android:textSize="16sp"
         android:visibility="visible" />
-
     <LinearLayout
         android:id="@+id/progressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@color/glass_transperent2"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +107,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:cardCornerRadius="6dp"
             app:cardUseCompatPadding="true">
 
@@ -112,4 +144,5 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
+
 </RelativeLayout>

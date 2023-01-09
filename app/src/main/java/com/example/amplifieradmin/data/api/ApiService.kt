@@ -114,7 +114,8 @@ interface ApiService {
     suspend fun category(
         @Header("Authorization") authorization: String,
         @Field("name") name: String,
-    ):NetworkResponse<CategoryResp,ErrorResponse>
+        @Field("tag") tag: String,
+        ):NetworkResponse<CategoryResp,ErrorResponse>
 
     @GET("list_business_category")
     suspend fun get_Category(
@@ -128,5 +129,15 @@ interface ApiService {
         @Field("s_id") s_id: String,
         @Field("category") category: String,
         ):NetworkResponse<BusinessCategoryResp,ErrorResponse>
+
+    @GET("allbusiness")
+    suspend fun all_business(
+        @Header("Authorization") authorization: String
+    ): NetworkResponse<AllBusinessListResp, ErrorResponse>
+
+    @GET("get_tags")
+    suspend fun get_Tags(
+        @Header("Authorization") authorization: String
+    ): NetworkResponse<GetTagsResp, ErrorResponse>
 
 }

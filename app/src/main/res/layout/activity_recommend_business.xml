@@ -10,7 +10,7 @@
         android:id="@+id/header_ll"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#F1744B"
+        android:background="#F7A07B"
         android:padding="5sp">
 
         <ImageView

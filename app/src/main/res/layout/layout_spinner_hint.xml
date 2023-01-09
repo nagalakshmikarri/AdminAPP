@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/til_title"
     app:hintAnimationEnabled="false"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
     android:layout_height="wrap_content">
 
     <com.google.android.material.textfield.TextInputEditText
@@ -22,6 +19,7 @@
         android:gravity="start|center_vertical"
         android:inputType="text"
         android:maxLines="1"
+        android:drawableEnd="@drawable/ic_arrow_down_black"
         android:fontFamily="@font/jost_regular_400"
         android:textSize="15sp"
         app:backgroundTint="@color/white"

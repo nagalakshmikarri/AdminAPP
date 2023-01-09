@@ -45,7 +45,7 @@ class RecommendBusinessAdapter(
                                             if (!recommendBusinessData.city.isNullOrEmpty())
                                                 recommendBusinessData.city + ", " else ""
 
-            binding.tvCategory.setOnClickListener {
+            binding.businessCategoryTv.setOnClickListener {
                 val intent = Intent(context, BusinessCategoryActivity::class.java)
                 intent.putExtra("subadmin_id", recommendBusinessData.admin_id)
                 intent.putExtra("s_id",recommendBusinessData.s_id)

@@ -19,7 +19,7 @@
             android:id="@+id/headerregister"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#F1744B"
+            android:background="#F7A07B"
             android:orientation="horizontal"
             android:paddingTop="5sp"
             android:paddingBottom="5sp">

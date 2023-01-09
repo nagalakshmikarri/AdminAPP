@@ -60,19 +60,63 @@
                 android:textSize="14sp" />
 
             <EditText
-                android:id="@+id/services_et"
+                android:id="@+id/category_et"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/round"
                 android:backgroundTint="@color/white"
-                android:hint="@string/add_service"
                 android:imeOptions="actionDone"
                 android:inputType="textAutoComplete"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="15dp"
                 android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="22sp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="22sp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/text1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/jost_regular_400"
+                    android:text="@string/type"
+                    android:textColor="#24343F"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <Spinner
+                    android:id="@+id/sp_destinations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:focusable="true"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text2" />
+            </LinearLayout>
+            <Button
+                android:id="@+id/save_button"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="22dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="22dp"
+                android:layout_marginBottom="10sp"
+                android:backgroundTint="#F7A07B"
+                android:text="@string/save"
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:textColor="@color/black"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="match_parent"

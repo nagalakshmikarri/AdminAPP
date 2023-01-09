@@ -22,5 +22,7 @@ sealed  class MainState {
     data class Category(val categoryResp: CategoryResp):MainState()
     data class Get_Category(val getCategoryResp: GetCategoryResp):MainState()
     data class business_Category(val businessCategoryResp: BusinessCategoryResp):MainState()
+    data class All_business(val allBusinessListResp: AllBusinessListResp):MainState()
+    data class Get_Tags(val getTagsResp: GetTagsResp):MainState()
     data class Error(val error: String?) : MainState()
 }

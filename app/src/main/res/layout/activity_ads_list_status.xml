@@ -15,7 +15,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="#EC8868">
+            android:background="#F7A07B">
 
             <TextView
                 android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:layout_marginStart="22dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="22dp"
-            android:background="#F88E6B"
+            android:background="#F7A07B"
             android:orientation="vertical"
             android:padding="5dp">
 
@@ -459,6 +459,54 @@
                 android:layout_toEndOf="@+id/category"
                 android:fontFamily="@font/jost_medium_500"
                 android:text="@string/Category"
+                android:textColor="@color/text_header_color"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="15sp"
+                android:src="@drawable/ic_baseline_arrow_right_24"
+                android:visibility="visible"
+                app:tint="#F1744B" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="15sp"
+            android:background="@color/litegray" />
+
+        <RelativeLayout
+            android:id="@+id/business_list_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/List_business"
+                android:layout_width="25dp"
+                android:layout_height="25sp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/business_add"
+                android:visibility="visible"
+                app:tint="#F1744B" />
+
+            <TextView
+                android:id="@+id/Business_List"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/List_business"
+                android:fontFamily="@font/jost_medium_500"
+                android:text="@string/Business_list"
                 android:textColor="@color/text_header_color"
                 android:textSize="15sp" />
 

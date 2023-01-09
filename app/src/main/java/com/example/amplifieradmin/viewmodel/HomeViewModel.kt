@@ -43,14 +43,72 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
                     it.s_address,it.admin_id,it.timezone,it.zone)
                     is MainIntent.BusinessList->fetchBusinessList(it.admin_id)
                     is MainIntent.RecommendBusiness->recommendBusiness()
-                    is MainIntent.Category->category(it.name)
+                    is MainIntent.Category->category(it.name,it.tag)
                     is MainIntent.GetCategory->get_Category()
                     is MainIntent.BusinessCategory->businessCategory(it.s_id,it.category)
+                    is MainIntent.AllBusinessList->allBusinessList()
+                    is MainIntent.GetTags->getTags()
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun getTags() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val response=repository.get_Tags()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.Get_Tags(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun allBusinessList() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val response=repository.all_business()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.All_business(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 
@@ -111,12 +169,12 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
 
     }
 
-    private fun category(name: String) {
+    private fun category(name: String,tag:String) {
         viewModelScope.launch {
             //loading state
             _state.value = MainState.Loading
 
-            val req = CategoryReq(name)
+            val req = CategoryReq(name,tag)
             val response=repository.category(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {

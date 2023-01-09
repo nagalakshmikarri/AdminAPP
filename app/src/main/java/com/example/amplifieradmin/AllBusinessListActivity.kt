@@ -10,12 +10,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
-import com.example.amplifieradmin.data.model.RecommmendBusinnessResp
-import com.example.amplifieradmin.databinding.ActivityCliamBusinessBinding
+import com.example.amplifieradmin.data.model.AllBusinessListResp
+import com.example.amplifieradmin.databinding.ActivityAllBusinessListBinding
 import com.example.amplifieradmin.databinding.ActivityRecommendBusinessBinding
 import com.example.amplifieradmin.helper.PrefHelper
-import com.example.amplifieradmin.ui.main.Adapter.CliamBusinessAdapter
+import com.example.amplifieradmin.ui.main.Adapter.AllBusinessListAdapter
 import com.example.amplifieradmin.ui.main.Adapter.RecommendBusinessAdapter
+import com.example.amplifieradmin.ui.main.Adapter.TagsSpinnerAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
@@ -23,17 +24,17 @@ import com.example.amplifieradmin.viewstate.MainState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class RecommendBusinessActivity : AppCompatActivity() {
+class AllBusinessListActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
-    private var _binding: ActivityRecommendBusinessBinding? = null
+    private var _binding: ActivityAllBusinessListBinding? = null
     lateinit var prefHelper: PrefHelper
-    private lateinit var adapter: RecommendBusinessAdapter
+    private lateinit var adapter: AllBusinessListAdapter
     private val binding get() = _binding!!
     private var admin_id = ""
     private var s_id=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        _binding = ActivityRecommendBusinessBinding.inflate(layoutInflater)
+        _binding = ActivityAllBusinessListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupClicks()
         setupUI()
@@ -52,21 +53,20 @@ class RecommendBusinessActivity : AppCompatActivity() {
                     is MainState.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
-
                     is MainState.Error -> {
                         Log.e("testtt", "Not found/Error")
                         binding.progressBar.visibility = View.GONE
                         //Toast.makeText(context, R.string.datanotfound, Toast.LENGTH_LONG).show()
                     }
-                    is MainState.RecommendBusiness -> {
-                        Log.e("testtt", it.recommendBusinessResp?.status.toString())
+                    is MainState.All_business -> {
+                        Log.e("testtt", it.allBusinessListResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
-                        adapter = RecommendBusinessAdapter(
-                            it.recommendBusinessResp!!.data,
-                            this@RecommendBusinessActivity
+                        adapter = AllBusinessListAdapter(
+                            it.allBusinessListResp!!.data,
+                            this@AllBusinessListActivity
                         )
-                        binding.recyclerView.adapter = adapter
-                        homeRenderList(it.recommendBusinessResp)
+                        binding.listRecyclerView.adapter = adapter
+                        homeRenderList(it.allBusinessListResp)
 
                     }
 
@@ -77,12 +77,12 @@ class RecommendBusinessActivity : AppCompatActivity() {
 
     }
 
-    private fun homeRenderList(recommendBusinessResp: RecommmendBusinnessResp) {
-        if (recommendBusinessResp!!.data.isNotEmpty()) {
-            binding.recyclerView.visibility = View.VISIBLE
+    private fun homeRenderList(allBusinessListResp: AllBusinessListResp) {
+        if (allBusinessListResp!!.data.isNotEmpty()) {
+            binding.listRecyclerView.visibility = View.VISIBLE
             binding.tvEmptyMsg.visibility = View.GONE
         } else {
-            binding.recyclerView.visibility = View.GONE
+            binding.listRecyclerView.visibility = View.GONE
             binding.tvEmptyMsg.visibility = View.VISIBLE
         }
 
@@ -93,19 +93,18 @@ class RecommendBusinessActivity : AppCompatActivity() {
             ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
                 .get(HomeViewModel::class.java)
 
-
     }
 
     private fun setupUI() {
         admin_id = intent.getStringExtra("admin_id").toString()
-        binding.recyclerView.addItemDecoration(
+        binding.listRecyclerView.addItemDecoration(
             DividerItemDecoration(
-                this@RecommendBusinessActivity,
+                this@AllBusinessListActivity,
                 DividerItemDecoration.VERTICAL
             )
         )
-        binding.recyclerView.layoutManager =
-            LinearLayoutManager(this@RecommendBusinessActivity)
+        binding.listRecyclerView.layoutManager =
+            LinearLayoutManager(this@AllBusinessListActivity)
     }
 
     private fun setupClicks() {
@@ -114,14 +113,14 @@ class RecommendBusinessActivity : AppCompatActivity() {
         }
 
     }
-
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
-                MainIntent.RecommendBusiness
+                MainIntent.AllBusinessList
 
             )
         }
     }
+
 }

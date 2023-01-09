@@ -107,6 +107,11 @@ class AdsListStatusActivity : AppCompatActivity() {
             startActivity(intent);
         }
 
+        binding.businessListTv.setOnClickListener {
+            val intent = Intent(this@AdsListStatusActivity, AllBusinessListActivity::class.java)
+            startActivity(intent);
+        }
+
         binding.tvAceeptads.setOnClickListener {
             val intent = Intent(this@AdsListStatusActivity, AcceptAdsActivity::class.java)
             startActivity(intent);

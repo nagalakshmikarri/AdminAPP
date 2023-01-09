@@ -51,6 +51,10 @@ class CliamBusinessActivity : AppCompatActivity() {
                         Log.e("testtt", "Idle")
 
                     }
+                    is MainState.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+
 
                     is MainState.Error -> {
                         Log.e("testtt", "Not found/Error")

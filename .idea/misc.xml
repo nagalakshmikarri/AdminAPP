@@ -19,6 +19,7 @@
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/activity_accept_ads.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/activity_ads_list_status.xml" value="0.2" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/activity_advertaisements.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/activity_all_business_list.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/activity_business_category.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/activity_business_list.xml" value="0.18" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/activity_category.xml" value="0.20416666666666666" />
@@ -36,6 +37,7 @@
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/adsliststatus.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/advertaisement.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/alert_dialog.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/allbusinesslist.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/businesslist.xml" value="0.2" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/businessscategory.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/category.xml" value="0.1073170731707317" />
@@ -43,7 +45,7 @@
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/ic_check_circle.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/layout_spinner_dropdown.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/layout_spinner_dropdown_empty.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/layout_spinner_hint.xml" value="0.16" />
+        <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/layout_spinner_hint.xml" value="0.22" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/layout_spinner_plain.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/pending.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Suresh/AndroidStudioProjects/AmplifierAdmin2/app/src/main/res/layout/recommendbusiness.xml" value="0.20416666666666666" />

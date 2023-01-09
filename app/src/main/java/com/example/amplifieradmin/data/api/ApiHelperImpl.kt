@@ -79,7 +79,7 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     }
 
     override suspend fun category(categoryReq: CategoryReq):NetworkResponse<CategoryResp,ErrorResponse>{
-        return apiService.category("Basic $base64".trim(),categoryReq.name)
+        return apiService.category("Basic $base64".trim(),categoryReq.name,categoryReq.tag)
     }
 
     override suspend fun get_Category():NetworkResponse<GetCategoryResp,ErrorResponse>{
@@ -88,5 +88,13 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
 
     override suspend fun business_Category(businessCategoryReq: BusinessCategoryReq):NetworkResponse<BusinessCategoryResp,ErrorResponse>{
         return apiService.business_Category("Basic $base64".trim(),businessCategoryReq.s_id,businessCategoryReq.category)
+    }
+
+    override suspend fun all_business():NetworkResponse<AllBusinessListResp,ErrorResponse>{
+        return apiService.all_business("Basic $base64".trim())
+    }
+
+    override suspend fun get_Tags():NetworkResponse<GetTagsResp,ErrorResponse>{
+        return apiService.get_Tags("Basic $base64".trim())
     }
 }

@@ -28,7 +28,7 @@
     <string name="no_txt">No</string>
     <string name="yes_txt">Yes</string>
     <string name="RejectedList">Rejected List</string>
-    <string name="BusinessADSList">ADS Business List</string>
+    <string name="BusinessADSList">ADD Business List</string>
     <string name="CliamBusiness">Claim Business</string>
     <string name="BusinessesList">Businesses List</string>
     <string name="Registration">Registration</string>
@@ -74,8 +74,11 @@
     <string name="refer_business">Refer a Business List</string>
     <string name="Category">Add Category</string>
     <string name="Categories">Categories</string>
-    <string name="add_category">Add Category</string>
+    <string name="add_category">Category Name*</string>
     <string name="add_service">Add Service(*)</string>
     <string name="Botique">Botique</string>
     <string name="Business_category">BusinessCategory</string>
+    <string name="type">Tags*</string>
+    <string name="Business_list">All Business List</string>
+    <string name="all_stores">All Stores</string>
 </resources>

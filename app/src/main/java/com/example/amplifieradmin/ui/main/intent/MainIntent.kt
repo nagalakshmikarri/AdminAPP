@@ -34,10 +34,14 @@ sealed class MainIntent {
 
     object RecommendBusiness:MainIntent()
 
-    class Category(var name:String):MainIntent()
+    class Category(var name:String,var tag:String):MainIntent()
 
     object GetCategory:MainIntent()
 
     class BusinessCategory(
         var s_id:String,var category:String):MainIntent()
+
+    object AllBusinessList:MainIntent()
+
+    object GetTags:MainIntent()
 }
