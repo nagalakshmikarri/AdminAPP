@@ -140,4 +140,12 @@ interface ApiService {
         @Header("Authorization") authorization: String
     ): NetworkResponse<GetTagsResp, ErrorResponse>
 
+    @POST("updatedevice")
+    @FormUrlEncoded
+    suspend fun updatedevice(
+        @Header("Authorization") authorization: String,
+        @Field("id") id: String?,
+        @Field("token") token: String?
+    ): NetworkResponse<UpdateDeviceResp, ErrorResponse>
+
 }

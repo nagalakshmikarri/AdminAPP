@@ -21,8 +21,12 @@ import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
 import com.google.android.libraries.places.internal.it
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
@@ -30,7 +34,6 @@ class HomeActivity : AppCompatActivity() {
     lateinit var prefHelper: PrefHelper
     private lateinit var adapter: AdminUserAdapter
     private val binding get() = _binding!!
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -55,6 +58,8 @@ class HomeActivity : AppCompatActivity() {
                         Log.e("testtt", "Loading")
                         binding.progressBar.visibility = View.VISIBLE
                     }
+
+
                     is MainState.AdminUser -> {
                         Log.e("testtt", it.adminUsersResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
@@ -65,6 +70,7 @@ class HomeActivity : AppCompatActivity() {
                         binding.recyclerView.adapter = adapter
                         homeRenderList(it.adminUsersResp)
                     }
+
 
 
                     is MainState.Error -> {
@@ -104,6 +110,7 @@ class HomeActivity : AppCompatActivity() {
 
             )
         }
+
     }
 
     private fun setupUI() {

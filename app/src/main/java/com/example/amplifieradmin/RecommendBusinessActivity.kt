@@ -20,8 +20,13 @@ import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.Constants
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 class RecommendBusinessActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel

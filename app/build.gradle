@@ -3,19 +3,18 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdk 32
-
     defaultConfig {
-        applicationId "com.example.amplifieradmin"
+        applicationId "com.spryntsllc.amplifieradmin"
         minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     viewBinding {
@@ -33,7 +32,13 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            ext.enableCrashlytics = false
+
         }
     }
     compileOptions {
@@ -43,6 +48,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {

@@ -72,7 +72,7 @@ class BusinessCategoryAdapter(
         }
 
     }
-    fun filterList(adminUsersData: MutableList<GetCategoryRespData>) {
+    fun filterList(getCategoryData: MutableList<GetCategoryRespData>) {
         this.getCategoryData = getCategoryData
         notifyDataSetChanged()
     }

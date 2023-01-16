@@ -2,6 +2,8 @@ package com.example.amplifieradmin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.AllBusinessListData
 import com.example.amplifieradmin.data.model.AllBusinessListResp
 import com.example.amplifieradmin.databinding.ActivityAllBusinessListBinding
 import com.example.amplifieradmin.databinding.ActivityRecommendBusinessBinding
@@ -31,7 +34,8 @@ class AllBusinessListActivity : AppCompatActivity() {
     private lateinit var adapter: AllBusinessListAdapter
     private val binding get() = _binding!!
     private var admin_id = ""
-    private var s_id=""
+    private var s_id = ""
+    var filteredDataList: AllBusinessListResp? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityAllBusinessListBinding.inflate(layoutInflater)
@@ -65,6 +69,7 @@ class AllBusinessListActivity : AppCompatActivity() {
                             it.allBusinessListResp!!.data,
                             this@AllBusinessListActivity
                         )
+                        filteredDataList=it.allBusinessListResp
                         binding.listRecyclerView.adapter = adapter
                         homeRenderList(it.allBusinessListResp)
 
@@ -112,7 +117,40 @@ class AllBusinessListActivity : AppCompatActivity() {
             onBackPressed()
         }
 
+
+
+            binding.searchBarText.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {
+                }
+
+                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                    filter(s.toString())
+                    Log.e("TAG", "filter1: " + s)
+
+                }
+            })
+
     }
+
+    private fun filter(text: String?) {
+        val filteredHomeList = mutableListOf<AllBusinessListData>()
+
+        Log.e("TAG", "filter: " + text)
+        if (filteredDataList != null) {
+            for (filteredList in filteredDataList!!.data) {
+                if (filteredList.s_business.toLowerCase().contains(text?.toLowerCase().toString())) {
+                    filteredHomeList.add(filteredList)
+                }
+            }
+            adapter?.filterList(filteredHomeList)
+        }
+
+    }
+
     override fun onResume() {
         super.onResume()
         lifecycleScope.launch {

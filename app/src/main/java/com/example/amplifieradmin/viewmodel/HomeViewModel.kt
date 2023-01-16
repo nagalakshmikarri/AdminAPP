@@ -48,11 +48,45 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
                     is MainIntent.BusinessCategory->businessCategory(it.s_id,it.category)
                     is MainIntent.AllBusinessList->allBusinessList()
                     is MainIntent.GetTags->getTags()
+                    is MainIntent.UpdateDevice -> updateDevice(
+                        it.id!!,
+                        it.token!!
+                    )
+
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun updateDevice(id: String, token: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = UpdateDeviceReq(id, token)
+            val response=repository.updatedevice(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.Updatedevice(response.body)
+                    } else {
+                        MainState.Error(response.body.message)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 

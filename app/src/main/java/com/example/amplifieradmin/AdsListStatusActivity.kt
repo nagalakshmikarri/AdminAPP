@@ -12,19 +12,27 @@ import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.databinding.ActivityAdsListStatusBinding
 import com.example.amplifieradmin.databinding.ActivityPendingBinding
+import com.example.amplifieradmin.helper.Constants
+import com.example.amplifieradmin.helper.PrefHelper
 import com.example.amplifieradmin.ui.main.Adapter.AdminUserAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 class AdsListStatusActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: ActivityAdsListStatusBinding? = null
     private val binding get() = _binding!!
     private var subadmin_id = ""
+    private var pushToken: String = ""
+    lateinit var prefHelper: PrefHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +57,13 @@ class AdsListStatusActivity : AppCompatActivity() {
                         Log.e("testtt", "Loading")
                         binding.progressBar.visibility = View.VISIBLE
                     }
+
+                    is MainState.Updatedevice -> {
+                        Log.e("UpdateDevice", "Success: " + it.updateDeviceResp.toString())
+
+
+                    }
+
                     is MainState.SubAdminInfo -> {
                         Log.e("testtt", it.subAdminInfoResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
@@ -82,12 +97,57 @@ class AdsListStatusActivity : AppCompatActivity() {
 
             )
         }
+        try {
+            val isFirebase = FirebaseApp.initializeApp(this@AdsListStatusActivity)
+            // Log.d("FIRE BASE", "  : " + isFirebase);
+            if (isFirebase != null) {
+                val messaging = FirebaseMessaging.getInstance()
+                Log.e("tokenFCM", messaging.token.toString())
+                // Log.d("FCM Token", "  : " + fcmToken);
+            }
+
+
+            val messaging = FirebaseMessaging.getInstance()
+            messaging.token.addOnSuccessListener { s: String ->
+                Log.d("ON_TOKEN", s)
+                pushToken = s
+                val params = JSONObject()
+                val info = JSONObject()
+                try {
+                    info.put("os", "android")
+                    info.put("framework", "flutter")
+                    info.put("cihaz_bilgisi", JSONObject())
+                    params.put("token", pushToken)
+                    params.put("device_info", info)
+                    lifecycleScope.launch {
+                        homeViewModel.homeIntent.send(
+                            MainIntent.UpdateDevice(
+                                prefHelper.getString(com.example.amplifieradmin.helper.Constants.PREF_ADMINID),
+                                pushToken,
+                            )
+
+                        )
+                    }
+
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                }
+
+            }
+        } catch (e: Exception) {
+            Log.e("FIRE BASE", "  : $e")
+        }
+
 
     }
 
     private fun setupUI() {
 //        Toast.makeText(this, intent.getStringExtra("subadmin_id").toString(), Toast.LENGTH_SHORT).show()
         subadmin_id = intent.getStringExtra("subadmin_id").toString()
+
+        prefHelper = PrefHelper(this)
+        Log.e("SubAdminId", prefHelper.getString(Constants.PREF_ADMINID)!!)
+
     }
 
     private fun setupClicks() {

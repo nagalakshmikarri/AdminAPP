@@ -41,4 +41,6 @@ interface ApiHelper {
     suspend fun all_business():NetworkResponse<AllBusinessListResp,ErrorResponse>
 
     suspend fun get_Tags():NetworkResponse<GetTagsResp,ErrorResponse>
+
+    suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq):NetworkResponse<UpdateDeviceResp,ErrorResponse>
 }

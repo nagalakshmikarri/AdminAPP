@@ -40,4 +40,6 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun all_business()=apiHelper.all_business()
 
     suspend fun get_Tags()=apiHelper.get_Tags()
+
+    suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq)=apiHelper.updatedevice(updateDeviceReq)
 }

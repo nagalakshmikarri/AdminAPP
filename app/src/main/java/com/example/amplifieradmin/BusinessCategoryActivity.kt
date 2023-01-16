@@ -2,6 +2,8 @@ package com.example.amplifieradmin
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.ViewModelProviders
@@ -10,6 +12,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.AllBusinessListData
+import com.example.amplifieradmin.data.model.AllBusinessListResp
 import com.example.amplifieradmin.data.model.GetCategoryResp
 import com.example.amplifieradmin.data.model.GetCategoryRespData
 import com.example.amplifieradmin.databinding.ActivityAdvertaisementsBinding
@@ -30,6 +34,7 @@ class BusinessCategoryActivity : AppCompatActivity() {
     private var s_id = ""
     private lateinit var adapter: BusinessCategoryAdapter
     var getCategoryResp: GetCategoryResp? = null
+    var filteredDataList: GetCategoryResp? = null
     private lateinit var getCatData: GetCategoryRespData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +95,7 @@ class BusinessCategoryActivity : AppCompatActivity() {
                             }
 
                         )
+                        filteredDataList=it.getCategoryResp
                         binding.businessCategory.adapter = adapter
                         homeRenderList(it.getCategoryResp!!.list)
 
@@ -139,6 +145,20 @@ class BusinessCategoryActivity : AppCompatActivity() {
         binding.back.setOnClickListener {
             onBackPressed()
         }
+        binding.searchBarText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                filter(s.toString())
+                Log.e("TAG", "filter1: " + s)
+
+            }
+        })
 
         binding.tvSave.setOnClickListener {
             lifecycleScope.launch {
@@ -148,4 +168,19 @@ class BusinessCategoryActivity : AppCompatActivity() {
             }
         }
     }
+    private fun filter(text: String?) {
+        val filteredHomeList = mutableListOf<GetCategoryRespData>()
+
+        Log.e("TAG", "filter: " + text)
+        if (filteredDataList != null) {
+            for (filteredList in filteredDataList!!.list) {
+                if (filteredList.name.toLowerCase().contains(text?.toLowerCase().toString())) {
+                    filteredHomeList.add(filteredList)
+                }
+            }
+            adapter?.filterList(filteredHomeList)
+        }
+
+    }
+
 }

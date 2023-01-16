@@ -97,4 +97,8 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun get_Tags():NetworkResponse<GetTagsResp,ErrorResponse>{
         return apiService.get_Tags("Basic $base64".trim())
     }
+
+    override suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq):NetworkResponse<UpdateDeviceResp,ErrorResponse>{
+        return apiService.updatedevice("Basic $base64".trim(),updateDeviceReq.id,updateDeviceReq.token)
+    }
 }

@@ -2,6 +2,7 @@ package com.example.amplifieradmin.ui.main.Adapter
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -70,8 +71,9 @@ class AllBusinessListAdapter(
 
     }
 
-    fun filterList(adminUsersData: MutableList<AllBusinessListData>) {
-        this.allBusinessData = allBusinessData
+    fun filterList(adminUsersData1: MutableList<AllBusinessListData>) {
+        Log.e("TAG", "filterList: "+adminUsersData1)
+        this.allBusinessData = adminUsersData1
         notifyDataSetChanged()
     }
 

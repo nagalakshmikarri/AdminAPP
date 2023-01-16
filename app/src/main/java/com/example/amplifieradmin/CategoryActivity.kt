@@ -109,7 +109,7 @@ class CategoryActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         getCategoryResp = it.getCategoryResp
                         binding.categoryEt.text.clear()
-                       // binding.spDestinations.text.clear()
+                        callTypesAPI()
                         if (it.getCategoryResp.list.isNotEmpty()) {
                             binding.servicessRecyc.visibility = View.VISIBLE
                             binding.noTextTv.visibility = View.GONE

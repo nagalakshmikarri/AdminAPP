@@ -44,4 +44,9 @@ sealed class MainIntent {
     object AllBusinessList:MainIntent()
 
     object GetTags:MainIntent()
+
+    class UpdateDevice(
+        var id: String?, var token: String?,
+    ) : MainIntent()
+
 }
