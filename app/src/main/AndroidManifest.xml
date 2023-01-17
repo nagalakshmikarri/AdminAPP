@@ -77,10 +77,13 @@
             android:value="com.spryntsllc.amplifieradmin" />
 
         <service
-            android:name=".notification.MyFirebaseMessagingService"
-            android:exported="false">
+            android:name=".notification.PushNotificationService"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action
+                    android:name="com.google.firebase.MESSAGING_EVENT">
+                </action>
             </intent-filter>
         </service>
     </application>

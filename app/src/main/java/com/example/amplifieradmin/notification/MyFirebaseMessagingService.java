@@ -28,29 +28,13 @@ import java.util.Random;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
-    private NotificationUtils notificationUtils;
-    String notificationTitle;
     Random rand = new Random();
     private PendingIntent pendingIntent;
-    private SharedPreferences sharedPreferences;
-    SharedPreferences.Editor sharedPreferencesEditor;
-    boolean isFleetbookingLoggedIn;
-    boolean isCargoDriverLoggedIn;
-    boolean isFleetOwnerLoggedIn;
-    boolean isFleetAdminLoggedIn;
-    boolean isFleetManagerLoggedIn;
-    String tripStatus = " ";
-    private String tripId="";
-    private void getSharedPrefs() {
-        sharedPreferences = getApplicationContext().getSharedPreferences("AdminApp", 0);
-        sharedPreferencesEditor = sharedPreferences.edit();
-    }
+
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        getSharedPrefs();
+        Log.d(TAG, "RemoteMessage : " +"Yes");
         if (remoteMessage != null) {
-            Log.d(TAG, "RemoteMessage : " + new Gson().toJson(remoteMessage));
-            //remoteMessage.getData();
             Log.e(TAG, "RemoteMessageData : " + new Gson().toJson(remoteMessage.getData()));
             if (remoteMessage.getData().size() > 0) {
                 Type type = new TypeToken<PushNotificationResp>() {
@@ -78,8 +62,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
                 createNotificationChannels(notificationManager);
-
-                // channel_id = notificationManager.getNotificationChannel("com.assettl.eazyship").getId();
                 channel_id = notificationManager.getNotificationChannel("com.spryntsllc.amplifieradmin").getId();
                  Log.e("!!!!", "CH ID : " + channel_id);
 
