@@ -14,6 +14,7 @@ import android.widget.RemoteViews;
 
 import androidx.core.app.NotificationCompat;
 
+import com.example.amplifieradmin.AdsListStatusActivity;
 import com.example.amplifieradmin.HomeActivity;
 import com.example.amplifieradmin.R;
 import com.example.amplifieradmin.data.model.PushNotificationResp;
@@ -43,7 +44,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 PushNotificationResp data = new Gson().fromJson(dataStr, type);
                 Intent intent = null;
                 int n = rand.nextInt(5000) + 1;
-                intent = new Intent(this, HomeActivity.class);
+                intent = new Intent(this, AdsListStatusActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 generateNotification(intent, data, n);
 

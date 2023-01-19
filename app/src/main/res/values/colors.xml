@@ -20,6 +20,8 @@
     <color name="litegray">#34CCC2C2</color>
     <color name="light_grey">#f2f2f2</color>
     <color name="red">#F33535</color>
+    <color name="transparent">#00000000</color>
+    <color name="light_red">#d9534f</color>
 
 
 </resources>

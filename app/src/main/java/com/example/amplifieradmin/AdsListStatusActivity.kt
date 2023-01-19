@@ -1,9 +1,12 @@
 package com.example.amplifieradmin
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +15,7 @@ import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.databinding.ActivityAdsListStatusBinding
 import com.example.amplifieradmin.databinding.ActivityPendingBinding
+import com.example.amplifieradmin.databinding.DialogLogoutBinding
 import com.example.amplifieradmin.helper.Constants
 import com.example.amplifieradmin.helper.PrefHelper
 import com.example.amplifieradmin.ui.main.Adapter.AdminUserAdapter
@@ -46,9 +50,9 @@ class AdsListStatusActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        lifecycleScope.launch { 
+        lifecycleScope.launch {
             homeViewModel.state.collect {
-                when(it){
+                when (it) {
                     is MainState.Idle -> {
                         Log.e("testtt", "Idle")
 
@@ -67,10 +71,10 @@ class AdsListStatusActivity : AppCompatActivity() {
                     is MainState.SubAdminInfo -> {
                         Log.e("testtt", it.subAdminInfoResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
-                        binding.tvSubAdminName.text=it.subAdminInfoResp.data.admin_name
-                        binding.tvPhoneNumber.text=it.subAdminInfoResp.data.admin_phone
-                        binding.tvAcceptCount.text=it.subAdminInfoResp.accepted.toString()
-                        binding.tvRejectCount.text=it.subAdminInfoResp.rejected.toString()
+                        binding.tvSubAdminName.text = it.subAdminInfoResp.data.admin_name
+                        binding.tvPhoneNumber.text = it.subAdminInfoResp.data.admin_phone
+                        binding.tvAcceptCount.text = it.subAdminInfoResp.accepted.toString()
+                        binding.tvRejectCount.text = it.subAdminInfoResp.rejected.toString()
                     }
 
 
@@ -151,9 +155,31 @@ class AdsListStatusActivity : AppCompatActivity() {
     }
 
     private fun setupClicks() {
+
+
+        binding.logout.setOnClickListener {
+
+            val dialog = Dialog(this)
+            val inflaterBlock =
+                getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val bindingBlock = DialogLogoutBinding.inflate(inflaterBlock)
+            dialog.setContentView(bindingBlock.root)
+            dialog.show()
+            bindingBlock.btnYes.setOnClickListener {
+                prefHelper.clear()
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
+            bindingBlock.btnNo.setOnClickListener {
+                dialog.cancel()
+            }
+
+        }
+
         binding.tvPendingList.setOnClickListener {
             val intent = Intent(this@AdsListStatusActivity, PendingActivity::class.java)
-            intent.putExtra("subadmin_id",subadmin_id)
+            intent.putExtra("subadmin_id", subadmin_id)
             startActivity(intent);
         }
 
@@ -182,12 +208,12 @@ class AdsListStatusActivity : AppCompatActivity() {
         }
 
         binding.BusinessList.setOnClickListener {
-            val intent=Intent(this@AdsListStatusActivity,BusinessListActivity::class.java)
+            val intent = Intent(this@AdsListStatusActivity, BusinessListActivity::class.java)
             startActivity(intent);
         }
 
         binding.CliamBusiness.setOnClickListener {
-            val intent=Intent(this@AdsListStatusActivity,CliamBusinessActivity::class.java)
+            val intent = Intent(this@AdsListStatusActivity, CliamBusinessActivity::class.java)
             startActivity(intent);
         }
     }

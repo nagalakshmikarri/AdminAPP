@@ -57,6 +57,10 @@
     <string name="startdate_txt">Start Date</string>
     <string name="provideactivedate_txt">Provide when the ad to be effective from</string>
     <string name="enddate_txt">End Date</string>
+    <string name="title_logout">Logout</string>
+    <string name="btn_no">No</string>
+    <string name="btn_yes">Yes</string>
+    <string name="logout_msg">Are you sure you want to logout?</string>
     <string name="location_txt">Location</string>
     <string name="locationexpire_txt">This is when the ad expires.Plz keep this date same as offer expiry date.Max allowed 7 days</string>
     <string name="currentlocation_txt">Current Location</string>
