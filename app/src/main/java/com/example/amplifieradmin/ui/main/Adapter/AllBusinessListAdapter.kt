@@ -32,7 +32,7 @@ class AllBusinessListAdapter(
                 val intent = Intent(context, BusinessCategoryActivity::class.java)
                 intent.putExtra("subadmin_id", allBusinessData.admin_id)
                 intent.putExtra("s_id",allBusinessData.s_id)
-                context.startActivity(intent);
+                    context.startActivity(intent);
 
             }
             binding.tvAddress.text = if (!allBusinessData.s_address.isNullOrEmpty())

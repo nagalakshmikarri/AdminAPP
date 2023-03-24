@@ -148,4 +148,16 @@ interface ApiService {
         @Field("token") token: String?
     ): NetworkResponse<UpdateDeviceResp, ErrorResponse>
 
+    @POST("user_claimedbusiness")
+    suspend fun claimedBusinessList(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<CliamBusinessListResp, ErrorResponse>
+
+    @POST("list_detail_claimedbusiness")
+    @FormUrlEncoded
+    suspend fun detailClaimBusiness(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String,
+        ): NetworkResponse<CliamDetailResp, ErrorResponse>
+
 }

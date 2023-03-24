@@ -43,4 +43,8 @@ interface ApiHelper {
     suspend fun get_Tags():NetworkResponse<GetTagsResp,ErrorResponse>
 
     suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq):NetworkResponse<UpdateDeviceResp,ErrorResponse>
+
+    suspend fun cliamBusinessList():NetworkResponse<CliamBusinessListResp,ErrorResponse>
+
+    suspend fun cliamDetail(cliamDetailReq: CliamDetailReq):NetworkResponse<CliamDetailResp,ErrorResponse>
 }

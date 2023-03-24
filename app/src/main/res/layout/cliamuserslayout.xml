@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="@color/text_header_color"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/jost_regular_400"
+        android:layout_marginHorizontal="12dp"/>
+    <TextView
+        android:id="@+id/tv_phonenumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/text_header_color"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/jost_regular_400"
+        android:layout_marginHorizontal="10dp"/>
+
+</LinearLayout>

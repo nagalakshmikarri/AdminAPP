@@ -49,4 +49,9 @@ sealed class MainIntent {
         var id: String?, var token: String?,
     ) : MainIntent()
 
+    object ClaimBusinessList:MainIntent()
+
+    class CliamDetail(
+        var s_id: String?
+    ):MainIntent()
 }

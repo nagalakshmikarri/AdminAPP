@@ -11,36 +11,34 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
-import com.example.amplifieradmin.data.model.CliamBusinessResp
+import com.example.amplifieradmin.data.model.CliamBusinessListResp
+import com.example.amplifieradmin.databinding.ActivityAllBusinessListBinding
 import com.example.amplifieradmin.databinding.ActivityCliamBusinessBinding
-import com.example.amplifieradmin.databinding.ActivityPendingBinding
-import com.example.amplifieradmin.helper.Constants
+import com.example.amplifieradmin.databinding.ActivityCliamBusinessListBinding
 import com.example.amplifieradmin.helper.PrefHelper
-import com.example.amplifieradmin.ui.main.Adapter.AdsPendingAdapter
+import com.example.amplifieradmin.ui.main.Adapter.AllBusinessListAdapter
 import com.example.amplifieradmin.ui.main.Adapter.CliamBusinessAdapter
+import com.example.amplifieradmin.ui.main.Adapter.CliamBusinessListAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class CliamBusinessActivity : AppCompatActivity() {
+class CliamBusinessListActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
-    private var _binding: ActivityCliamBusinessBinding? = null
+    private var _binding: ActivityCliamBusinessListBinding? = null
     lateinit var prefHelper: PrefHelper
-    private lateinit var adapter: CliamBusinessAdapter
+    private lateinit var adapter: CliamBusinessListAdapter
     private val binding get() = _binding!!
-    private var admin_id = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-            _binding = ActivityCliamBusinessBinding.inflate(layoutInflater)
-            setContentView(binding.root)
-            setupClicks()
-            setupUI()
-            setupViewModel()
-            observeViewModel()
-
+        _binding = ActivityCliamBusinessListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setupClicks()
+        setupUI()
+        setupViewModel()
+        observeViewModel()
     }
 
     private fun observeViewModel() {
@@ -54,22 +52,37 @@ class CliamBusinessActivity : AppCompatActivity() {
                     is MainState.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                     }
-
-
                     is MainState.Error -> {
                         Log.e("testtt", "Not found/Error")
                         binding.progressBar.visibility = View.GONE
                         //Toast.makeText(context, R.string.datanotfound, Toast.LENGTH_LONG).show()
                     }
-                    is MainState.CliamBusiness -> {
-                        Log.e("testtt", it.cliamBusinessResp?.status.toString())
+                    is MainState.ClaimBusinesssList -> {
+                        Log.e("testtt", it.cliamBusinessListResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
-                        adapter = CliamBusinessAdapter(
-                            it.cliamBusinessResp!!.data,
-                            this@CliamBusinessActivity
+                        adapter = CliamBusinessListAdapter(
+                            it.cliamBusinessListResp!!.data,
+                            this@CliamBusinessListActivity,
+                            object :CliamBusinessListAdapter.OnItemClick{
+                                override fun onItemClick(
+                                    s_business: String,
+                                    s_id:String
+                                ) {
+                                    val intent =
+                                        Intent(
+                                            this@CliamBusinessListActivity,
+                                            CliamUsersListActivity::class.java
+                                        )
+                                    intent.putExtra("s_id", s_id)
+                                    intent.putExtra("s_business", s_business)
+                                    startActivity(intent);
+
+                                }
+
+                            }
                         )
                         binding.cliambusinessRecyclerview.adapter = adapter
-                        homeRenderList(it.cliamBusinessResp)
+                        homeRenderList(it.cliamBusinessListResp)
 
                     }
 
@@ -80,15 +93,14 @@ class CliamBusinessActivity : AppCompatActivity() {
 
     }
 
-    private fun homeRenderList(cliamBusinessResp: CliamBusinessResp) {
-        if (cliamBusinessResp!!.data.isNotEmpty()) {
+    private fun homeRenderList(cliamBusinessListResp: CliamBusinessListResp) {
+        if (cliamBusinessListResp!!.data.isNotEmpty()) {
             binding.cliambusinessRecyclerview.visibility = View.VISIBLE
             binding.tvEmptyMsg.visibility = View.GONE
         } else {
             binding.cliambusinessRecyclerview.visibility = View.GONE
             binding.tvEmptyMsg.visibility = View.VISIBLE
         }
-
     }
 
     private fun setupViewModel() {
@@ -97,25 +109,21 @@ class CliamBusinessActivity : AppCompatActivity() {
                 .get(HomeViewModel::class.java)
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
-                MainIntent.CliamBusiness(
-                    "4"
-                )
+                MainIntent.ClaimBusinessList
 
             )
         }
-
     }
 
     private fun setupUI() {
-        admin_id = intent.getStringExtra("admin_id").toString()
         binding.cliambusinessRecyclerview.addItemDecoration(
             DividerItemDecoration(
-                this@CliamBusinessActivity,
+                this@CliamBusinessListActivity,
                 DividerItemDecoration.VERTICAL
             )
         )
         binding.cliambusinessRecyclerview.layoutManager =
-            LinearLayoutManager(this@CliamBusinessActivity)
+            LinearLayoutManager(this@CliamBusinessListActivity)
         prefHelper = PrefHelper(this)
 
     }
@@ -124,6 +132,5 @@ class CliamBusinessActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener {
             onBackPressed()
         }
-
     }
 }

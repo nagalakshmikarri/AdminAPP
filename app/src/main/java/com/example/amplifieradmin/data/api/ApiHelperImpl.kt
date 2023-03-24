@@ -101,4 +101,14 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq):NetworkResponse<UpdateDeviceResp,ErrorResponse>{
         return apiService.updatedevice("Basic $base64".trim(),updateDeviceReq.id,updateDeviceReq.token)
     }
+
+    override suspend fun cliamBusinessList(): NetworkResponse<CliamBusinessListResp, ErrorResponse> {
+        return apiService.claimedBusinessList("Basic $base64".trim())
+
+    }
+
+    override suspend fun cliamDetail(cliamDetailReq: CliamDetailReq): NetworkResponse<CliamDetailResp, ErrorResponse> {
+        return apiService.detailClaimBusiness("Basic $base64".trim(),cliamDetailReq.s_id)
+    }
+
 }

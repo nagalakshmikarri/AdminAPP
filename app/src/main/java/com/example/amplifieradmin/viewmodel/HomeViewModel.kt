@@ -52,12 +52,71 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
                         it.id!!,
                         it.token!!
                     )
+                    is MainIntent.ClaimBusinessList->claimBusinessList()
+                    is MainIntent.CliamDetail->cliamDetail(it.s_id)
 
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun cliamDetail(sId: String?) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = CliamDetailReq(sId!!)
+            val response=repository.cliamDetail(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.CliamDetail(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun claimBusinessList() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val response=repository.claimBusinessList()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.ClaimBusinesssList(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 

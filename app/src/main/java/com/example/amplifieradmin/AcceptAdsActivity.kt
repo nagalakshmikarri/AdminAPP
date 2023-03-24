@@ -69,7 +69,6 @@ class AcceptAdsActivity : AppCompatActivity() {
                                             )
                                         )
                                     }
-
                                 }
                             })
                         binding.acceptRecyclerview.adapter = adapter

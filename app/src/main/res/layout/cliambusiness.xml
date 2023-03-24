@@ -4,25 +4,23 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:id="@+id/linear_layout_tv">
+        <TextView
+            android:id="@+id/tv_business"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/jost_medium_500"
+            android:layout_marginHorizontal="15dp"/>
     <TextView
-        android:id="@+id/tv_business"
+        android:id="@+id/tv_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Savadhan"
-        android:textSize="16dp"
-        android:textColor="@color/black"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/jost_medium_500"
-        android:layout_marginHorizontal="22dp"/>
-    <TextView
-        android:id="@+id/tv_address"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="60 Feet Road,Bank Colony Rd,Salem Nagar,Narasaraopeta,\nAndhra Pradesh 522601,India"
         android:textSize="14dp"
         android:textColor="#24343F"
         android:layout_marginTop="5dp"
         android:fontFamily="@font/jost_regular_400"
-        android:layout_marginHorizontal="22dp"/>
+        android:layout_marginHorizontal="15dp"/>
 
 </LinearLayout>

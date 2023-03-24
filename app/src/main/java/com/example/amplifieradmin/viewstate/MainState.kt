@@ -25,5 +25,9 @@ sealed  class MainState {
     data class All_business(val allBusinessListResp: AllBusinessListResp):MainState()
     data class Get_Tags(val getTagsResp: GetTagsResp):MainState()
     data class Updatedevice(val updateDeviceResp: UpdateDeviceResp):MainState()
+
+    data class ClaimBusinesssList(val cliamBusinessListResp: CliamBusinessListResp):MainState()
+
+    data class CliamDetail(val cliamDetailResp: CliamDetailResp):MainState()
     data class Error(val error: String?) : MainState()
 }

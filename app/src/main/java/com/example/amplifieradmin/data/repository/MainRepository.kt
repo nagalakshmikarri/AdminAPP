@@ -42,4 +42,8 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun get_Tags()=apiHelper.get_Tags()
 
     suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq)=apiHelper.updatedevice(updateDeviceReq)
+
+    suspend fun claimBusinessList()=apiHelper.cliamBusinessList()
+
+    suspend fun cliamDetail(cliamDetailReq: CliamDetailReq)=apiHelper.cliamDetail(cliamDetailReq)
 }

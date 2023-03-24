@@ -213,7 +213,7 @@ class AdsListStatusActivity : AppCompatActivity() {
         }
 
         binding.CliamBusiness.setOnClickListener {
-            val intent = Intent(this@AdsListStatusActivity, CliamBusinessActivity::class.java)
+            val intent = Intent(this@AdsListStatusActivity, CliamBusinessListActivity::class.java)
             startActivity(intent);
         }
     }
