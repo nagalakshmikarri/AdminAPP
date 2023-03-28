@@ -11,7 +11,10 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.CliamBusinessListResp
+import com.example.amplifieradmin.data.model.CliamBusinessListRespData
 import com.example.amplifieradmin.data.model.CliamDetailResp
+import com.example.amplifieradmin.data.model.CliamDetailRespData
 import com.example.amplifieradmin.databinding.ActivityCliamBusinessListBinding
 import com.example.amplifieradmin.databinding.ActivityCliamUsersListBinding
 import com.example.amplifieradmin.helper.Constants
@@ -32,6 +35,7 @@ class CliamUsersListActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private var sID: String? = "0"
     private var sBusiness: String? = null
+    private var sPhone: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +69,14 @@ class CliamUsersListActivity : AppCompatActivity() {
                         adapter = CliamDetailAdaper(
                             it.cliamDetailResp!!.list,
                             this@CliamUsersListActivity,
-                        )
+                            object : CliamDetailAdaper.OnItemClick {
+                                override fun onItemClick(cliamDetailRespData: CliamDetailRespData) {
+                                    var intent=Intent(this@CliamUsersListActivity,UserDetailsActivity::class.java)
+                                    intent.putExtra("user_details",cliamDetailRespData)
+                                    startActivity(intent)
+                                }
+
+                            })
                         binding.cliamUsersRecyclerview.adapter = adapter
                         homeRenderList(it.cliamDetailResp)
 
@@ -105,11 +116,14 @@ class CliamUsersListActivity : AppCompatActivity() {
         }
 
     }
+
     private fun setupUI() {
         prefHelper = PrefHelper(this)
-        sID=intent.getStringExtra("s_id").toString()
-        sBusiness=intent.getStringExtra("s_business").toString()
-        binding.tvBusinessName.text=sBusiness
+        sID = intent.getStringExtra("s_id").toString()
+        sBusiness = intent.getStringExtra("s_business").toString()
+        sPhone = intent.getStringExtra("s_phone").toString()
+        binding.tvBusinessName.text = sBusiness
+        binding.tvBusinessPhone.text = sPhone
         binding.cliamUsersRecyclerview.addItemDecoration(
             DividerItemDecoration(
                 this@CliamUsersListActivity,

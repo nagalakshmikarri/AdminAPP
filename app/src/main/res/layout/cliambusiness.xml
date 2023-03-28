@@ -3,24 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginHorizontal="8dp"
+    android:paddingVertical="5dp"
+    android:layout_marginVertical="5dp"
     android:id="@+id/linear_layout_tv">
         <TextView
             android:id="@+id/tv_business"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16dp"
+            android:textSize="16sp"
             android:textColor="@color/black"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/jost_medium_500"
-            android:layout_marginHorizontal="15dp"/>
+            android:fontFamily="@font/jost_medium_500" />
     <TextView
         android:id="@+id/tv_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
+        android:textSize="14sp"
         android:textColor="#24343F"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/jost_regular_400"
-        android:layout_marginHorizontal="15dp"/>
+        android:fontFamily="@font/jost_regular_400" />
 
 </LinearLayout>

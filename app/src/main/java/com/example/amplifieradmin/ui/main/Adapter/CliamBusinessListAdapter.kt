@@ -31,8 +31,8 @@ class CliamBusinessListAdapter(
             }
 */
 
-            binding.tvBusiness.setOnClickListener {
-                onItemClick.onItemClick(cliamBusinessListRespData.s_business,cliamBusinessListRespData.s_id)
+            binding.linearLayoutTv.setOnClickListener {
+                onItemClick.onItemClick(cliamBusinessListRespData.s_business,cliamBusinessListRespData.s_id,cliamBusinessListRespData)
 
             }
 
@@ -75,7 +75,11 @@ class CliamBusinessListAdapter(
 
 
     interface OnItemClick {
-        fun onItemClick(s_business: String,sId:String)
+        fun onItemClick(
+            s_business: String,
+            sId: String,
+            cliamBusinessListRespData: CliamBusinessListRespData
+        )
     }
 
 }

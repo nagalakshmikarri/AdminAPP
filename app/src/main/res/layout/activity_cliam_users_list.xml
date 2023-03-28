@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/white"
+    android:orientation="vertical"
     tools:context=".CliamUsersListActivity">
+
     <LinearLayout
         android:id="@+id/header_ll"
         android:layout_width="match_parent"
@@ -35,25 +36,42 @@
             android:textColor="@color/text_header_color"
             android:textSize="18sp" />
     </LinearLayout>
-    <TextView
-        android:id="@+id/tv_business_name"
+
+    <LinearLayout
+        android:id="@+id/business_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/jost_medium_500"
         android:layout_below="@id/header_ll"
-        android:textColor="@color/text_header_color"
-        android:textSize="16sp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="10dp"
-        android:visibility="visible" />
+        android:background="#F3EFEF"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="10dp">
+
+        <TextView
+            android:id="@+id/tv_business_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jost_medium_500"
+            android:textColor="@color/text_header_color"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_business_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/jost_medium_500"
+            android:textColor="@color/text_header_color"
+            android:textSize="14sp"
+            android:visibility="visible" />
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cliam_users_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_business_name"
+        android:layout_below="@id/business_ll"
         android:layout_marginStart="4dp"
-        android:layout_marginTop="15dp"
         android:layout_marginEnd="4dp" />
 
     <TextView

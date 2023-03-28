@@ -12,12 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.data.model.CliamBusinessListResp
-import com.example.amplifieradmin.databinding.ActivityAllBusinessListBinding
-import com.example.amplifieradmin.databinding.ActivityCliamBusinessBinding
+import com.example.amplifieradmin.data.model.CliamBusinessListRespData
 import com.example.amplifieradmin.databinding.ActivityCliamBusinessListBinding
 import com.example.amplifieradmin.helper.PrefHelper
-import com.example.amplifieradmin.ui.main.Adapter.AllBusinessListAdapter
-import com.example.amplifieradmin.ui.main.Adapter.CliamBusinessAdapter
 import com.example.amplifieradmin.ui.main.Adapter.CliamBusinessListAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
@@ -66,7 +63,8 @@ class CliamBusinessListActivity : AppCompatActivity() {
                             object :CliamBusinessListAdapter.OnItemClick{
                                 override fun onItemClick(
                                     s_business: String,
-                                    s_id:String
+                                    s_id: String,
+                                    cliamBusinessListRespData: CliamBusinessListRespData
                                 ) {
                                     val intent =
                                         Intent(
@@ -75,6 +73,7 @@ class CliamBusinessListActivity : AppCompatActivity() {
                                         )
                                     intent.putExtra("s_id", s_id)
                                     intent.putExtra("s_business", s_business)
+                                    intent.putExtra("s_phone", cliamBusinessListRespData.s_phone)
                                     startActivity(intent);
 
                                 }
@@ -116,6 +115,7 @@ class CliamBusinessListActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
+
         binding.cliambusinessRecyclerview.addItemDecoration(
             DividerItemDecoration(
                 this@CliamBusinessListActivity,

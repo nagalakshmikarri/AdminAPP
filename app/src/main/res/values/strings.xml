@@ -86,4 +86,7 @@
     <string name="Business_list">All Business List</string>
     <string name="all_stores">All Stores</string>
     <string name="cliamusers">Cliam Users</string>
+    <string name="user_details">Details</string>
+    <string name="Business_name">Business Name</string>
+    <string name="phone">Phone</string>
 </resources>

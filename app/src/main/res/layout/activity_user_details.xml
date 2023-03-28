@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".UserDetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/header_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#F7A07B"
+        android:padding="5sp">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/jost_medium_500"
+            android:text="@string/user_details"
+            android:textColor="@color/text_header_color"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/header_ll"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_business_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="@string/Business_name"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/jost_regular_400"
+
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text=":"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/Business_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.25"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="@string/UserName"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/jost_regular_400"
+
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text=":"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.25"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="@string/phone"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/jost_regular_400"
+
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text=":"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.25"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.65"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="@string/email"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text=":"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.25"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="start"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.95"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/jost_regular_400"
+
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text=":"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.95"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:weightSum="2">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.95"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:fontFamily="@font/jost_regular_400"
+
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text=":"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.95"
+                android:fontFamily="@font/jost_regular_400"
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:text="Name"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_below="@id/linear_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#ABDF1B"
+        android:paddingHorizontal="40dp"
+        android:text="@string/Accept"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+</RelativeLayout>
