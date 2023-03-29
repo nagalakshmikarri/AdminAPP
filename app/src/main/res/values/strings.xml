@@ -86,7 +86,20 @@
     <string name="Business_list">All Business List</string>
     <string name="all_stores">All Stores</string>
     <string name="cliamusers">Cliam Users</string>
-    <string name="user_details">Details</string>
+    <string name="user_details">Business Details</string>
     <string name="Business_name">Business Name</string>
     <string name="phone">Phone</string>
+    <string name="companyname">Business Name*</string>
+    <string name="business">Business Category*</string>
+    <string name="type_txext">Listing Type*</string>
+    <string name="email_tv">Email*</string>
+    <string name="username">Business Username*</string>
+    <string name="business_location">Business Location</string>
+    <string name="building_number"><![CDATA[Building Number & street Name*]]></string>
+    <string name="mall_shop">Mall / Shopping Complex / Airports / Office Building etc</string>
+    <string name="unit_floor">Unit / Shop, floor etc</string>
+    <string name="area_name">AreaName,Mandal,District</string>
+    <string name="city">City / Town / Village*</string>
+    <string name="pincode">Pincode*</string>
+    <string name="state">State*</string>
 </resources>
