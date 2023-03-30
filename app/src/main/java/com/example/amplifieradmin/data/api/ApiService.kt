@@ -159,5 +159,15 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("s_id") s_id: String,
         ): NetworkResponse<CliamDetailResp, ErrorResponse>
+    @POST("get_states")
+    @FormUrlEncoded
+    suspend fun states(
+        @Header("Authorization") authorization: String,
+        @Field("country_id") s_type: String?
+    ): NetworkResponse<StatesResp, ErrorResponse>
+    @GET("api_s/get_countries")
+    suspend fun get_countries(
+        @Header("Authorization") authorization: String
+    ): NetworkResponse<GetCountriesResp, ErrorResponse>
 
 }

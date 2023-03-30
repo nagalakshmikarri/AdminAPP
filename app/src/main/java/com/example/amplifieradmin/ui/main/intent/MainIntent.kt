@@ -54,4 +54,10 @@ sealed class MainIntent {
     class CliamDetail(
         var s_id: String?
     ):MainIntent()
+
+    class States(
+        var country_id: String
+    ) : MainIntent()
+    class GetCountries() : MainIntent()
+
 }

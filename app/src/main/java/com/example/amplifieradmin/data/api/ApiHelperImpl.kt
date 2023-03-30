@@ -111,4 +111,12 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         return apiService.detailClaimBusiness("Basic $base64".trim(),cliamDetailReq.s_id)
     }
 
+    override suspend fun states(statesReq: StatesReq):NetworkResponse<StatesResp,ErrorResponse>{
+        return apiService.states("Basic $base64".trim(),statesReq.country_id)
+    }
+
+    override suspend fun get_countries(): NetworkResponse<GetCountriesResp, ErrorResponse> {
+        return apiService.get_countries("Basic $base64".trim())
+    }
+
 }

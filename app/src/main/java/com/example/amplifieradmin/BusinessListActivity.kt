@@ -25,7 +25,7 @@ import com.example.amplifieradmin.viewstate.MainState
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class BusinessListActivity : AppCompatActivity() {
+class   BusinessListActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: ActivityBusinessListBinding? = null
     private lateinit var adapter: BusinessListAdapter

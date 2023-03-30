@@ -46,4 +46,9 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun claimBusinessList()=apiHelper.cliamBusinessList()
 
     suspend fun cliamDetail(cliamDetailReq: CliamDetailReq)=apiHelper.cliamDetail(cliamDetailReq)
+
+    suspend fun states(statesReq: StatesReq)=apiHelper.states(statesReq)
+
+    suspend fun get_countries() = apiHelper.get_countries()
+
 }

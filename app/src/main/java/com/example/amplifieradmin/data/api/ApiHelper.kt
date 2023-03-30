@@ -47,4 +47,9 @@ interface ApiHelper {
     suspend fun cliamBusinessList():NetworkResponse<CliamBusinessListResp,ErrorResponse>
 
     suspend fun cliamDetail(cliamDetailReq: CliamDetailReq):NetworkResponse<CliamDetailResp,ErrorResponse>
+
+    suspend fun states(statesReq: StatesReq):NetworkResponse<StatesResp,ErrorResponse>
+
+    suspend fun get_countries():NetworkResponse<GetCountriesResp,ErrorResponse>
+
 }

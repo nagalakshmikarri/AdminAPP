@@ -102,4 +102,5 @@
     <string name="city">City / Town / Village*</string>
     <string name="pincode">Pincode*</string>
     <string name="state">State*</string>
+    <string name="approve_text">Approve</string>
 </resources>

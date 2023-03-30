@@ -29,5 +29,10 @@ sealed  class MainState {
     data class ClaimBusinesssList(val cliamBusinessListResp: CliamBusinessListResp):MainState()
 
     data class CliamDetail(val cliamDetailResp: CliamDetailResp):MainState()
+
+    data class States(val statesResp: StatesResp?):MainState()
+
+    data class GetCounteries(val getCountriesResp: GetCountriesResp?) : MainState()
+
     data class Error(val error: String?) : MainState()
 }

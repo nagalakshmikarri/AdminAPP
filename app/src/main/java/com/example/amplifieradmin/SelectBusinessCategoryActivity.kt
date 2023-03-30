@@ -1,5 +1,6 @@
 package com.example.amplifieradmin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -24,10 +25,11 @@ import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
+import com.google.gson.Gson
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class BusinessCategoryActivity : AppCompatActivity() {
+class SelectBusinessCategoryActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: ActivityBusinessCategoryBinding? = null
     private val binding get() = _binding!!
@@ -85,7 +87,7 @@ class BusinessCategoryActivity : AppCompatActivity() {
                             binding.noTextTv.visibility = View.VISIBLE
                         }
 
-                        adapter = BusinessCategoryAdapter(it.getCategoryResp.list,this@BusinessCategoryActivity,
+                        adapter = BusinessCategoryAdapter(it.getCategoryResp.list,this@SelectBusinessCategoryActivity,
                             object : BusinessCategoryAdapter.OnItemClick {
                                 override fun onClick(
                                     data: GetCategoryRespData
@@ -133,11 +135,11 @@ class BusinessCategoryActivity : AppCompatActivity() {
         s_id = intent.getStringExtra("s_id").toString()
         binding.businessCategory.addItemDecoration(
             DividerItemDecoration(
-                this@BusinessCategoryActivity,
+                this@SelectBusinessCategoryActivity,
                 DividerItemDecoration.VERTICAL
             )
         )
-        binding.businessCategory.layoutManager = LinearLayoutManager(this@BusinessCategoryActivity)
+        binding.businessCategory.layoutManager = LinearLayoutManager(this@SelectBusinessCategoryActivity)
 
     }
 
@@ -161,12 +163,11 @@ class BusinessCategoryActivity : AppCompatActivity() {
         })
 
         binding.tvSave.setOnClickListener {
-            lifecycleScope.launch {
-                homeViewModel.homeIntent.send(
-                    MainIntent.BusinessCategory(s_id,getCatData.id)
-
-                )
-            }
+            val intent = Intent()
+            val catData = Gson().toJson(getCatData)
+            intent.putExtra("BussCat", catData)
+            setResult(RESULT_OK, intent)
+            finish()
         }
     }
     private fun filter(text: String?) {

@@ -1,23 +1,34 @@
 package com.example.amplifieradmin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.amplifieradmin.data.api.ApiHelperImpl
+import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.data.model.CliamDetailRespData
+import com.example.amplifieradmin.data.model.GetCategoryRespData
 import com.example.amplifieradmin.data.model.TypeListData
 import com.example.amplifieradmin.databinding.ActivityCliamBusinessListBinding
 import com.example.amplifieradmin.databinding.ActivityUserDetailsBinding
 import com.example.amplifieradmin.helper.PrefHelper
+import com.example.amplifieradmin.ui.main.Adapter.CountrySpinnerAdapter
+import com.example.amplifieradmin.ui.main.Adapter.StatesSpinnerAdapter
 import com.example.amplifieradmin.ui.main.Adapter.TypesSpinnerAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
+import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
@@ -27,28 +38,22 @@ class UserDetailsActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     lateinit var prefHelper: PrefHelper
     private lateinit var destinationAdapter: TypesSpinnerAdapter
+    private lateinit var statesAdapter: StatesSpinnerAdapter
+    private lateinit var countryAdapter: CountrySpinnerAdapter
+
+    private var busiCatId = ""
 
     private var cliamDetailRespData: CliamDetailRespData? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityUserDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupClicks()
         setupUI()
-        callTypesAPI()
+        setupClicks()
         setupViewModel()
         observeViewModel()
     }
 
-    private fun callTypesAPI() {
-        lifecycleScope.launch {
-            homeViewModel.homeIntent.send(
-                MainIntent.TypeList()
-            )
-
-        }
-
-    }
 
     private fun observeViewModel() {
         lifecycleScope.launch {
@@ -127,6 +132,16 @@ class UserDetailsActivity : AppCompatActivity() {
     }
 
     private fun setupViewModel() {
+        homeViewModel =
+            ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
+                .get(HomeViewModel::class.java)
+
+        lifecycleScope.launch {
+            homeViewModel.homeIntent.send(
+                MainIntent.TypeList()
+            )
+
+        }
 
     }
 
@@ -146,5 +161,30 @@ class UserDetailsActivity : AppCompatActivity() {
         binding.backBtn.setOnClickListener {
             onBackPressed()
         }
+
+
+        binding.etBusinessCat.setOnClickListener {
+            val intent = Intent(this, SelectBusinessCategoryActivity::class.java)
+            someActivityResultLauncher.launch(intent)
+        }
+
     }
+
+    private var someActivityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            // There are no request codes
+            val data = result.data
+            if (data!!.hasExtra("BussCat")) {
+                val s = data.getStringExtra("BussCat")
+                val type = object : TypeToken<GetCategoryRespData?>() {}.type
+                val cat: GetCategoryRespData = Gson().fromJson(s, type)
+                binding.etBusinessCat.setText(cat.name)
+                busiCatId = cat.id
+            }
+
+        }
+    }
+
 }

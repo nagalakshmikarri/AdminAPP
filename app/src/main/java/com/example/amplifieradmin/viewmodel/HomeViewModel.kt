@@ -54,12 +54,72 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
                     )
                     is MainIntent.ClaimBusinessList->claimBusinessList()
                     is MainIntent.CliamDetail->cliamDetail(it.s_id)
+                    is MainIntent.States -> states(it.country_id)
+                    is MainIntent.GetCountries->get_countrries()
 
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun get_countrries() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.get_countries()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.GetCounteries(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun states(countryId: String) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+            val req = StatesReq(countryId!!)
+            val response=repository.states(req)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.States(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 
