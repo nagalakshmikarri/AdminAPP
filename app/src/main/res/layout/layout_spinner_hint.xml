@@ -1,28 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.textfield.TextInputLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/til_title"
     app:hintAnimationEnabled="false"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_gravity="center_vertical"
+    android:layout_marginStart="22sp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="22sp"
+    android:background="@drawable/round"
+    android:gravity="center_vertical"
+    android:layout_height="50dp">
 
-    <com.google.android.material.textfield.TextInputEditText
+    <EditText
         android:id="@+id/et_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingStart="15sp"
+        android:paddingEnd="15sp"
+        android:textSize="16sp"
+        android:background="@null"
         android:cursorVisible="false"
-        android:includeFontPadding="false"
+        android:drawableEnd="@drawable/ic_arrow_down_black"
         android:ellipsize="end"
         android:focusable="false"
         android:focusableInTouchMode="false"
+        android:fontFamily="@font/jost_regular_400"
         android:gravity="start|center_vertical"
+        android:includeFontPadding="false"
         android:inputType="text"
         android:maxLines="1"
-        android:drawableEnd="@drawable/ic_arrow_down_black"
-        android:fontFamily="@font/jost_regular_400"
-        android:textSize="15sp"
         app:backgroundTint="@color/white"
         tools:hint="Title" />
 
-</com.google.android.material.textfield.TextInputLayout>
+</RelativeLayout>

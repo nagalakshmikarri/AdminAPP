@@ -1,5 +1,7 @@
 package com.example.amplifieradmin.ui.main.intent
 
+import com.example.amplifieradmin.data.model.ApproveClaimBusiReq
+
 sealed class MainIntent {
     class LoginUser(var username: String, var password: String) : MainIntent()
 
@@ -55,9 +57,20 @@ sealed class MainIntent {
         var s_id: String?
     ):MainIntent()
 
+    class EditClaimedBusiness(
+        var id: String?
+    ):MainIntent()
+
     class States(
         var country_id: String
     ) : MainIntent()
-    class GetCountries() : MainIntent()
+
+    class ApproveClaimedBusiness(
+        var approveClaimBusiReq: ApproveClaimBusiReq
+    ) : MainIntent()
+
+    object GetCountries : MainIntent()
+
+    object UserApprovedBusiness : MainIntent()
 
 }

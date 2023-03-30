@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
+class HomeViewModel(private val repository: MainRepository) : ViewModel() {
     val homeIntent = Channel<MainIntent>(Channel.UNLIMITED)
 
     private val _state = MutableStateFlow<MainState>(MainState.Idle)
@@ -30,32 +30,48 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             homeIntent.consumeAsFlow().collect {
                 when (it) {
                     is MainIntent.AdminUser -> fetchAdminUser()
-                    is MainIntent.SubAdminInfo->fetchSubAdminInfo(it.subadmin_id)
-                    is MainIntent.AdsPending->fetchAdsPending(it.admin_id,it.id)
-                    is MainIntent.AdminAdsAccept->fetchAdminAdsAccept(it.admin_id,it.id)
-                    is MainIntent.AdminAdsReject->fetchAdminAdsReject(it.admin_id,it.id)
-                    is MainIntent.SubAdminAdsAccept->fetchSubAdminAdsAccept(it.subadmin_id)
-                    is MainIntent.SubAdminAdsReject->fetchSubAdminAdsReject(it.subadmin_id)
-                    is MainIntent.CliamBusiness->fetchCliamBusiness(it.admin_id)
-                    is MainIntent.TypeList->fetchTypeList()
-                    is MainIntent.Register->fetchRegister(it.s_email,it.s_phone_code,it.s_phone,
-                    it.s_business,it.s_password,it.s_username,it.s_name,it.s_latit,it.s_longit,it.s_type,
-                    it.s_address,it.admin_id,it.timezone,it.zone)
-                    is MainIntent.BusinessList->fetchBusinessList(it.admin_id)
-                    is MainIntent.RecommendBusiness->recommendBusiness()
-                    is MainIntent.Category->category(it.name,it.tag)
-                    is MainIntent.GetCategory->get_Category()
-                    is MainIntent.BusinessCategory->businessCategory(it.s_id,it.category)
-                    is MainIntent.AllBusinessList->allBusinessList()
-                    is MainIntent.GetTags->getTags()
+                    is MainIntent.SubAdminInfo -> fetchSubAdminInfo(it.subadmin_id)
+                    is MainIntent.AdsPending -> fetchAdsPending(it.admin_id, it.id)
+                    is MainIntent.AdminAdsAccept -> fetchAdminAdsAccept(it.admin_id, it.id)
+                    is MainIntent.AdminAdsReject -> fetchAdminAdsReject(it.admin_id, it.id)
+                    is MainIntent.SubAdminAdsAccept -> fetchSubAdminAdsAccept(it.subadmin_id)
+                    is MainIntent.SubAdminAdsReject -> fetchSubAdminAdsReject(it.subadmin_id)
+                    is MainIntent.CliamBusiness -> fetchCliamBusiness(it.admin_id)
+                    is MainIntent.TypeList -> fetchTypeList()
+                    is MainIntent.Register -> fetchRegister(
+                        it.s_email,
+                        it.s_phone_code,
+                        it.s_phone,
+                        it.s_business,
+                        it.s_password,
+                        it.s_username,
+                        it.s_name,
+                        it.s_latit,
+                        it.s_longit,
+                        it.s_type,
+                        it.s_address,
+                        it.admin_id,
+                        it.timezone,
+                        it.zone
+                    )
+                    is MainIntent.BusinessList -> fetchBusinessList(it.admin_id)
+                    is MainIntent.RecommendBusiness -> recommendBusiness()
+                    is MainIntent.Category -> category(it.name, it.tag)
+                    is MainIntent.GetCategory -> get_Category()
+                    is MainIntent.BusinessCategory -> businessCategory(it.s_id, it.category)
+                    is MainIntent.AllBusinessList -> allBusinessList()
+                    is MainIntent.GetTags -> getTags()
                     is MainIntent.UpdateDevice -> updateDevice(
                         it.id!!,
                         it.token!!
                     )
-                    is MainIntent.ClaimBusinessList->claimBusinessList()
-                    is MainIntent.CliamDetail->cliamDetail(it.s_id)
+                    is MainIntent.ClaimBusinessList -> claimBusinessList()
+                    is MainIntent.CliamDetail -> cliamDetail(it.s_id)
                     is MainIntent.States -> states(it.country_id)
-                    is MainIntent.GetCountries->get_countrries()
+                    is MainIntent.GetCountries -> get_countrries()
+                    is MainIntent.UserApprovedBusiness -> userApprovedBusiness()
+                    is MainIntent.EditClaimedBusiness -> editClaimedBusiness(it.id)
+                    is MainIntent.ApproveClaimedBusiness -> approveClaimedBusiness(it.approveClaimBusiReq)
 
                     else -> {}
                 }
@@ -93,6 +109,34 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
         }
 
     }
+    private fun userApprovedBusiness() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.userApprovedBusiness()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.UserApprovedBusiness(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
 
     private fun states(countryId: String) {
         viewModelScope.launch {
@@ -100,11 +144,40 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = StatesReq(countryId!!)
-            val response=repository.states(req)
+            val response = repository.states(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
                         MainState.States(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun approveClaimedBusiness(approveClaimBusiReq: ApproveClaimBusiReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.approveClaimedBusiness(approveClaimBusiReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.ApproveClaimedBusiness(response.body)
                     } else {
                         MainState.Error(response.body.status)
                     }
@@ -129,11 +202,40 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = CliamDetailReq(sId!!)
-            val response=repository.cliamDetail(req)
+            val response = repository.cliamDetail(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
                         MainState.CliamDetail(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun editClaimedBusiness(id: String?) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.editClaimedBusiness(id)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.EditClaimedBusiness(response.body)
                     } else {
                         MainState.Error(response.body.status)
                     }
@@ -157,7 +259,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val response=repository.claimBusinessList()
+            val response = repository.claimBusinessList()
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -186,7 +288,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = UpdateDeviceReq(id, token)
-            val response=repository.updatedevice(req)
+            val response = repository.updatedevice(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -214,7 +316,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val response=repository.get_Tags()
+            val response = repository.get_Tags()
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -242,7 +344,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val response=repository.all_business()
+            val response = repository.all_business()
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -271,7 +373,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = BusinessCategoryReq(sId, category)
-            val response=repository.business_Category(req)
+            val response = repository.business_Category(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -299,7 +401,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val response=repository.get_category()
+            val response = repository.get_category()
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -322,13 +424,13 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
 
     }
 
-    private fun category(name: String,tag:String) {
+    private fun category(name: String, tag: String) {
         viewModelScope.launch {
             //loading state
             _state.value = MainState.Loading
 
-            val req = CategoryReq(name,tag)
-            val response=repository.category(req)
+            val req = CategoryReq(name, tag)
+            val response = repository.category(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -356,7 +458,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val response=repository.recommend_Business()
+            val response = repository.recommend_Business()
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -385,7 +487,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = BusinessListReq(adminId)
-            val response=repository.getBusinessList(req)
+            val response = repository.getBusinessList(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -428,9 +530,11 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val req = RegisterReq(sEmail,sPhoneCode,sPhone,sBusiness,sPassword,sUsername,sName,sLatit,sLongit,
-                sType,sAddress,adminId,timezone,zone)
-            val response=repository.getRegister(req)
+            val req = RegisterReq(
+                sEmail, sPhoneCode, sPhone, sBusiness, sPassword, sUsername, sName, sLatit, sLongit,
+                sType, sAddress, adminId, timezone, zone
+            )
+            val response = repository.getRegister(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -458,7 +562,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val response=repository.getTypeList()
+            val response = repository.getTypeList()
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -487,7 +591,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = CliamBusinessReq(adminId)
-            val response=repository.getCliamBusiness(req)
+            val response = repository.getCliamBusiness(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -516,7 +620,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = RejectAdsReq(subadminId)
-            val response=repository.getSubAdminAdsReject(req)
+            val response = repository.getSubAdminAdsReject(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -545,7 +649,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = AcceptAdsReq(subadminId)
-            val response=repository.getSubAdminAdsAccept(req)
+            val response = repository.getSubAdminAdsAccept(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -574,8 +678,8 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val req =RejectReq(adminId, id)
-            val response=repository.getAdminAdsReject(req)
+            val req = RejectReq(adminId, id)
+            val response = repository.getAdminAdsReject(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -605,7 +709,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = AcceptReq(adminId, id)
-            val response=repository.getAdminAdsAccept(req)
+            val response = repository.getAdminAdsAccept(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -634,7 +738,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = AdsPendingReq(adminId, id)
-            val response=repository.getAdsPending(req)
+            val response = repository.getAdsPending(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -662,7 +766,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             _state.value = MainState.Loading
 
             val req = SubAdminInfoReq(subadminId)
-            val response=repository.getSubAdminInfo(req)
+            val response = repository.getSubAdminInfo(req)
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {
@@ -690,7 +794,7 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel()  {
             //loading state
             _state.value = MainState.Loading
 
-            val response=repository.getAdminUser()
+            val response = repository.getAdminUser()
             _state.value = when (response) {
                 is NetworkResponse.Success -> {
                     if (response.body.status == "ok") {

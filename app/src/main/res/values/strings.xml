@@ -104,4 +104,5 @@
     <string name="state">State*</string>
     <string name="approve_text">Approve</string>
     <string name="Country">Country</string>
+    <string name="approved_list">Approved List</string>
 </resources>

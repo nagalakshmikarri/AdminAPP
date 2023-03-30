@@ -12,19 +12,19 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("username") username: String,
         @Field("password") password: String?,
-    ):NetworkResponse<LoginResp, ErrorResponse>
+    ): NetworkResponse<LoginResp, ErrorResponse>
 
     @POST("admin_users")
     suspend fun getAdminUser(
         @Header("Authorization") authorization: String,
-        ):NetworkResponse<AdminUsersResp,ErrorResponse>
+    ): NetworkResponse<AdminUsersResp, ErrorResponse>
 
     @POST("subadmin_info")
     @FormUrlEncoded
     suspend fun getSubAdminInfo(
         @Header("Authorization") authorization: String,
-        @Field("subadmin_id") subadmin_id:Int
-    ):NetworkResponse<SubAdminInfoResp,ErrorResponse>
+        @Field("subadmin_id") subadmin_id: Int
+    ): NetworkResponse<SubAdminInfoResp, ErrorResponse>
 
     @POST("subadmin_ads_pending")
     @FormUrlEncoded
@@ -32,7 +32,7 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("admin_id") admin_id: String,
         @Field("id") id: String?,
-    ):NetworkResponse<AdsPendingResp, ErrorResponse>
+    ): NetworkResponse<AdsPendingResp, ErrorResponse>
 
     @POST("admin_ads_accept")
     @FormUrlEncoded
@@ -40,7 +40,7 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("admin_id") admin_id: String,
         @Field("id") id: String?,
-        ):NetworkResponse<AcceptResp,ErrorResponse>
+    ): NetworkResponse<AcceptResp, ErrorResponse>
 
     @POST("admin_ads_reject")
     @FormUrlEncoded
@@ -48,33 +48,33 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("admin_id") admin_id: String,
         @Field("id") id: String?,
-    ):NetworkResponse<RejectResp,ErrorResponse>
+    ): NetworkResponse<RejectResp, ErrorResponse>
 
     @POST("subadmin_ads_accept")
     @FormUrlEncoded
     suspend fun getSubAdminAdsAccept(
         @Header("Authorization") authorization: String,
-        @Field("subadmin_id") subadmin_id:Int
-    ):NetworkResponse<AcceptAdsResp,ErrorResponse>
+        @Field("subadmin_id") subadmin_id: Int
+    ): NetworkResponse<AcceptAdsResp, ErrorResponse>
 
     @POST("subadmin_ads_reject")
     @FormUrlEncoded
     suspend fun getSubAdminAdsReject(
         @Header("Authorization") authorization: String,
-        @Field("subadmin_id") subadmin_id:Int
-    ):NetworkResponse<RejectAdsResp,ErrorResponse>
+        @Field("subadmin_id") subadmin_id: Int
+    ): NetworkResponse<RejectAdsResp, ErrorResponse>
 
     @POST("admin_addedbusiness_claimed")
     @FormUrlEncoded
     suspend fun getCliamBusiness(
         @Header("Authorization") authorization: String,
         @Field("admin_id") admin_id: String,
-    ):NetworkResponse<CliamBusinessResp,ErrorResponse>
+    ): NetworkResponse<CliamBusinessResp, ErrorResponse>
 
     @POST("get_types")
     suspend fun getTypesList(
         @Header("Authorization") authorization: String,
-    ):NetworkResponse<TypesLIstResp,ErrorResponse>
+    ): NetworkResponse<TypesLIstResp, ErrorResponse>
 
     @POST("business_register")
     @FormUrlEncoded
@@ -95,14 +95,14 @@ interface ApiService {
         @Field("timezone") timezone: String,
         @Field("zone") zone: String,
 
-    ): NetworkResponse<RegisterResp, ErrorResponse>
+        ): NetworkResponse<RegisterResp, ErrorResponse>
 
     @POST("admin_addedbusiness_pendings")
     @FormUrlEncoded
     suspend fun getBusinessList(
         @Header("Authorization") authorization: String,
         @Field("admin_id") admin_id: String,
-    ):NetworkResponse<BusinessListResp,ErrorResponse>
+    ): NetworkResponse<BusinessListResp, ErrorResponse>
 
     @GET("user_addedbusiness")
     suspend fun recommend_Business(
@@ -115,7 +115,7 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("name") name: String,
         @Field("tag") tag: String,
-        ):NetworkResponse<CategoryResp,ErrorResponse>
+    ): NetworkResponse<CategoryResp, ErrorResponse>
 
     @GET("list_business_category")
     suspend fun get_Category(
@@ -128,7 +128,7 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("s_id") s_id: String,
         @Field("category") category: String,
-        ):NetworkResponse<BusinessCategoryResp,ErrorResponse>
+    ): NetworkResponse<BusinessCategoryResp, ErrorResponse>
 
     @GET("allbusiness")
     suspend fun all_business(
@@ -158,16 +158,56 @@ interface ApiService {
     suspend fun detailClaimBusiness(
         @Header("Authorization") authorization: String,
         @Field("s_id") s_id: String,
-        ): NetworkResponse<CliamDetailResp, ErrorResponse>
+    ): NetworkResponse<CliamDetailResp, ErrorResponse>
+
+    @POST("edit_claimedbusiness")
+    @FormUrlEncoded
+    suspend fun editClaimedBusiness(
+        @Header("Authorization") authorization: String,
+        @Field("id") id: String?,
+    ): NetworkResponse<EditClaimBusinessResponse, ErrorResponse>
+
+
     @POST("get_states")
     @FormUrlEncoded
     suspend fun states(
         @Header("Authorization") authorization: String,
         @Field("country_id") s_type: String?
     ): NetworkResponse<StatesResp, ErrorResponse>
-    @GET("api_s/get_countries")
+
+    @GET("get_countries")
     suspend fun get_countries(
         @Header("Authorization") authorization: String
     ): NetworkResponse<GetCountriesResp, ErrorResponse>
+
+    @GET("user_approvedbusiness")
+    suspend fun userApprovedBusiness(
+        @Header("Authorization") authorization: String
+    ): NetworkResponse<ApprovedBusinessListResp, ErrorResponse>
+
+
+    @POST("approve_claimedbusiness")
+    @FormUrlEncoded
+    suspend fun approveClaimedBusiness(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String?,
+        @Field("id") id: String?,
+        @Field("s_email") s_email: String?,
+        @Field("country") country: String?,
+        @Field("s_address1") s_address1: String?,
+        @Field("s_address2") s_address2: String?,
+        @Field("s_address3") s_address3: String?,
+        @Field("s_latit") s_latit: String?,
+        @Field("s_longit") s_longit: String?,
+        @Field("s_type") s_type: String?,
+        @Field("admin_id") admin_id: String?,
+        @Field("s_phone") s_phone: String?,
+        @Field("s_phone_code") s_phone_code: String?,
+        @Field("s_categoty") s_categoty: String?,
+        @Field("state") state: String?,
+        @Field("city") city: String?,
+        @Field("s_business") s_business: String?,
+        @Field("s_username") s_username: String?,
+    ): NetworkResponse<ApproveClaimBusinessResp, ErrorResponse>
 
 }

@@ -30,9 +30,15 @@ sealed  class MainState {
 
     data class CliamDetail(val cliamDetailResp: CliamDetailResp):MainState()
 
+    data class EditClaimedBusiness(val editClaimBusinessResponse: EditClaimBusinessResponse):MainState()
+
     data class States(val statesResp: StatesResp?):MainState()
 
     data class GetCounteries(val getCountriesResp: GetCountriesResp?) : MainState()
+
+    data class UserApprovedBusiness(val approvedBusinessListResp: ApprovedBusinessListResp?) : MainState()
+
+    data class ApproveClaimedBusiness(val approveClaimBusinessResp: ApproveClaimBusinessResp?) : MainState()
 
     data class Error(val error: String?) : MainState()
 }

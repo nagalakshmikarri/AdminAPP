@@ -70,36 +70,44 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         )
     }
 
-    override suspend fun getBusinessList(businessListReq: BusinessListReq):NetworkResponse<BusinessListResp,ErrorResponse>{
-        return apiService.getBusinessList("Basic $base64".trim(),businessListReq.admin_id)
+    override suspend fun getBusinessList(businessListReq: BusinessListReq): NetworkResponse<BusinessListResp, ErrorResponse> {
+        return apiService.getBusinessList("Basic $base64".trim(), businessListReq.admin_id)
     }
 
-    override suspend fun recommend_Business():NetworkResponse<RecommmendBusinnessResp,ErrorResponse>{
+    override suspend fun recommend_Business(): NetworkResponse<RecommmendBusinnessResp, ErrorResponse> {
         return apiService.recommend_Business("Basic $base64".trim())
     }
 
-    override suspend fun category(categoryReq: CategoryReq):NetworkResponse<CategoryResp,ErrorResponse>{
-        return apiService.category("Basic $base64".trim(),categoryReq.name,categoryReq.tag)
+    override suspend fun category(categoryReq: CategoryReq): NetworkResponse<CategoryResp, ErrorResponse> {
+        return apiService.category("Basic $base64".trim(), categoryReq.name, categoryReq.tag)
     }
 
-    override suspend fun get_Category():NetworkResponse<GetCategoryResp,ErrorResponse>{
+    override suspend fun get_Category(): NetworkResponse<GetCategoryResp, ErrorResponse> {
         return apiService.get_Category("Basic $base64".trim())
     }
 
-    override suspend fun business_Category(businessCategoryReq: BusinessCategoryReq):NetworkResponse<BusinessCategoryResp,ErrorResponse>{
-        return apiService.business_Category("Basic $base64".trim(),businessCategoryReq.s_id,businessCategoryReq.category)
+    override suspend fun business_Category(businessCategoryReq: BusinessCategoryReq): NetworkResponse<BusinessCategoryResp, ErrorResponse> {
+        return apiService.business_Category(
+            "Basic $base64".trim(),
+            businessCategoryReq.s_id,
+            businessCategoryReq.category
+        )
     }
 
-    override suspend fun all_business():NetworkResponse<AllBusinessListResp,ErrorResponse>{
+    override suspend fun all_business(): NetworkResponse<AllBusinessListResp, ErrorResponse> {
         return apiService.all_business("Basic $base64".trim())
     }
 
-    override suspend fun get_Tags():NetworkResponse<GetTagsResp,ErrorResponse>{
+    override suspend fun get_Tags(): NetworkResponse<GetTagsResp, ErrorResponse> {
         return apiService.get_Tags("Basic $base64".trim())
     }
 
-    override suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq):NetworkResponse<UpdateDeviceResp,ErrorResponse>{
-        return apiService.updatedevice("Basic $base64".trim(),updateDeviceReq.id,updateDeviceReq.token)
+    override suspend fun updatedevice(updateDeviceReq: UpdateDeviceReq): NetworkResponse<UpdateDeviceResp, ErrorResponse> {
+        return apiService.updatedevice(
+            "Basic $base64".trim(),
+            updateDeviceReq.id,
+            updateDeviceReq.token
+        )
     }
 
     override suspend fun cliamBusinessList(): NetworkResponse<CliamBusinessListResp, ErrorResponse> {
@@ -108,15 +116,46 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     }
 
     override suspend fun cliamDetail(cliamDetailReq: CliamDetailReq): NetworkResponse<CliamDetailResp, ErrorResponse> {
-        return apiService.detailClaimBusiness("Basic $base64".trim(),cliamDetailReq.s_id)
+        return apiService.detailClaimBusiness("Basic $base64".trim(), cliamDetailReq.s_id)
     }
 
-    override suspend fun states(statesReq: StatesReq):NetworkResponse<StatesResp,ErrorResponse>{
-        return apiService.states("Basic $base64".trim(),statesReq.country_id)
+    override suspend fun editClaimedBusiness(id: String?): NetworkResponse<EditClaimBusinessResponse, ErrorResponse> {
+        return apiService.editClaimedBusiness("Basic $base64".trim(), id)
+    }
+
+    override suspend fun states(statesReq: StatesReq): NetworkResponse<StatesResp, ErrorResponse> {
+        return apiService.states("Basic $base64".trim(), statesReq.country_id)
     }
 
     override suspend fun get_countries(): NetworkResponse<GetCountriesResp, ErrorResponse> {
         return apiService.get_countries("Basic $base64".trim())
+    }
+    override suspend fun userApprovedBusiness(): NetworkResponse<ApprovedBusinessListResp, ErrorResponse> {
+        return apiService.userApprovedBusiness("Basic $base64".trim())
+    }
+
+    override suspend fun approveClaimedBusiness(approveClaimBusiReq: ApproveClaimBusiReq): NetworkResponse<ApproveClaimBusinessResp, ErrorResponse> {
+        return apiService.approveClaimedBusiness(
+            "Basic $base64".trim(),
+            approveClaimBusiReq.s_id,
+            approveClaimBusiReq.id,
+            approveClaimBusiReq.s_email,
+            approveClaimBusiReq.country,
+            approveClaimBusiReq.s_address1,
+            approveClaimBusiReq.s_address2,
+            approveClaimBusiReq.s_address3,
+            approveClaimBusiReq.s_latit,
+            approveClaimBusiReq.s_longit,
+            approveClaimBusiReq.s_type,
+            approveClaimBusiReq.admin_id,
+            approveClaimBusiReq.s_phone,
+            approveClaimBusiReq.s_phone_code,
+            approveClaimBusiReq.s_categoty,
+            approveClaimBusiReq.state,
+            approveClaimBusiReq.city,
+            approveClaimBusiReq.s_business,
+            approveClaimBusiReq.s_username,
+        )
     }
 
 }

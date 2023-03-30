@@ -52,4 +52,7 @@ interface ApiHelper {
 
     suspend fun get_countries():NetworkResponse<GetCountriesResp,ErrorResponse>
 
+    suspend fun editClaimedBusiness(id: String?): NetworkResponse<EditClaimBusinessResponse, ErrorResponse>
+    suspend fun approveClaimedBusiness(approveClaimBusiReq: ApproveClaimBusiReq): NetworkResponse<ApproveClaimBusinessResp, ErrorResponse>
+    suspend fun userApprovedBusiness(): NetworkResponse<ApprovedBusinessListResp, ErrorResponse>
 }
