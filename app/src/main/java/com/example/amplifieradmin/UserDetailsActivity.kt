@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
-import com.example.amplifieradmin.data.model.CliamDetailRespData
-import com.example.amplifieradmin.data.model.GetCategoryRespData
-import com.example.amplifieradmin.data.model.TypeListData
+import com.example.amplifieradmin.data.model.*
 import com.example.amplifieradmin.databinding.ActivityCliamBusinessListBinding
 import com.example.amplifieradmin.databinding.ActivityUserDetailsBinding
 import com.example.amplifieradmin.helper.PrefHelper
@@ -49,9 +47,21 @@ class UserDetailsActivity : AppCompatActivity() {
         _binding = ActivityUserDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupUI()
-        setupClicks()
         setupViewModel()
+        callTypesAPI()
         observeViewModel()
+        setupClicks()
+
+    }
+
+    private fun callTypesAPI() {
+        lifecycleScope.launch {
+            homeViewModel.homeIntent.send(
+                MainIntent.GetCountries()
+            )
+
+        }
+
     }
 
 
@@ -81,10 +91,104 @@ class UserDetailsActivity : AppCompatActivity() {
                         }
                     }
 
+                    is MainState.GetCounteries -> {
+                        binding.progressBar.visibility = View.GONE
+
+                        if (it.getCountriesResp?.status.equals("ok")) {
+                            countryAdapter(it.getCountriesResp!!.list)
+                        } else {
+                            Toast.makeText(
+                                this@UserDetailsActivity,
+                                it.getCountriesResp?.status,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    is MainState.States -> {
+                        binding.progressBar.visibility = View.GONE
+
+                        if (it.statesResp?.status.equals("ok")) {
+                            statesAdapter(it.statesResp!!.stateList)
+                        } else {
+                            Toast.makeText(
+                                this@UserDetailsActivity,
+                                it.statesResp?.status,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
 
                     else -> {}
                 }
             }
+        }
+
+    }
+
+    private fun statesAdapter(stateList: List<StatesData>) {
+        TODO("Not yet implemented")
+    }
+
+    private fun countryAdapter(list: List<GetCountriesData>) {
+        val filteredTypes = ArrayList<GetCountriesData>()
+        filteredTypes.add(GetCountriesData("", "-1", ""))
+        filteredTypes.addAll(list)
+
+        Log.e("jgjkbm", filteredTypes.toString())
+
+
+        if (filteredTypes.isNotEmpty()) {
+            countryAdapter =
+                CountrySpinnerAdapter(
+                    this@UserDetailsActivity,
+                    true,
+                    filteredTypes,
+                    View.OnClickListener {
+                        binding.spCountry.performClick()
+                    })
+            binding.spCountry.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        countryAdapter.updateSelection(position)
+                        if (countryAdapter.list[countryAdapter.selectedId].id != "-1") {
+                            lifecycleScope.launch {
+                                homeViewModel.homeIntent.send(
+                                    MainIntent.States(countryAdapter.list[countryAdapter.selectedId].id)
+                                )
+                                if (countryAdapter.list[countryAdapter.selectedId].name == "USA") {
+                                    binding.etAreaName.visibility = View.GONE
+                                    binding.tvAreaName.visibility = View.GONE
+                                    // binding.etPincode.hint = "Zipcode"
+                                    binding.tvPincode.text = "Zipcode*"
+                                } else {
+                                    binding.etAreaName.visibility = View.VISIBLE
+                                    binding.tvAreaName.visibility = View.VISIBLE
+                                    //  binding.etPincode.hint = "Pincode"
+                                    binding.tvPincode.text = "Pincode*"
+                                }
+
+                            }
+                        }
+                        Log.e(
+                            "jhfdgjghk",
+                            countryAdapter.list[countryAdapter.selectedId].name.toString()
+                        )
+
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+                    }
+                }
+
+            binding.spCountry.adapter = countryAdapter
+
         }
 
     }

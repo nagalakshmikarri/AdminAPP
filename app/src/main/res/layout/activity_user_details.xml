@@ -220,46 +220,39 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
-                        android:fontFamily="@font/jost_regular_400"
+                        android:fontFamily="@font/jost_medium_500"
                         android:text="@string/business_location"
+                        android:textColor="#24343F"
+                        android:textSize="18sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <TextView
+                        android:id="@+id/country"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/jost_regular_400"
+                        android:text="@string/Country"
                         android:textColor="#24343F"
                         android:textSize="14sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
 
-                    <RelativeLayout
-                        android:id="@+id/location"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    <Spinner
+                        android:id="@+id/sp_country"
+                        style="@style/CustomSpinner"
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center_vertical"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="22sp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/round"
-                        android:gravity="center_vertical"
-                        app:hintAnimationEnabled="false">
+                        android:layout_marginEnd="22sp"
+                        android:focusable="true"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text2" />
 
-                        <EditText
-                            android:id="@+id/et_business_location"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@null"
-                            android:cursorVisible="false"
-                            android:drawableEnd="@drawable/ic_arrow_down_black"
-                            android:ellipsize="end"
-                            android:focusable="false"
-                            android:focusableInTouchMode="false"
-                            android:fontFamily="@font/jost_regular_400"
-                            android:gravity="start|center_vertical"
-                            android:includeFontPadding="false"
-                            android:inputType="text"
-                            android:maxLines="1"
-                            android:paddingStart="15sp"
-                            android:paddingEnd="15sp"
-                            android:textSize="16sp"
-                            app:backgroundTint="@color/white" />
-
-                    </RelativeLayout>
                 </LinearLayout>
 
                 <TextView
@@ -332,6 +325,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tv_area_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22sp"
@@ -342,7 +336,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/area_et"
+                    android:id="@+id/et_area_name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:layout_marginStart="22sp"
@@ -430,6 +424,7 @@
                     android:paddingEnd="15sp"
                     android:textSize="16sp" />
                 <TextView
+                    android:id="@+id/tv_pincode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="22sp"
