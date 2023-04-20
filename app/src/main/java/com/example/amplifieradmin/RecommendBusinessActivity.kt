@@ -63,7 +63,7 @@ class RecommendBusinessActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         //Toast.makeText(context, R.string.datanotfound, Toast.LENGTH_LONG).show()
                     }
-                    is MainState.RecommendBusiness -> {
+                   /* is MainState.RecommendBusiness -> {
                         Log.e("testtt", it.recommendBusinessResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
                         adapter = RecommendBusinessAdapter(
@@ -73,7 +73,7 @@ class RecommendBusinessActivity : AppCompatActivity() {
                         binding.recyclerView.adapter = adapter
                         homeRenderList(it.recommendBusinessResp)
 
-                    }
+                    }*/
 
                     else -> {}
                 }

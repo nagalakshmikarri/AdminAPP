@@ -40,5 +40,12 @@ sealed  class MainState {
 
     data class ApproveClaimedBusiness(val approveClaimBusinessResp: ApproveClaimBusinessResp?) : MainState()
 
+    data class ConfirmList(val confirmedListResp: ConfirmedListResp?):MainState()
+
+    data class BlockedList(val blockedListResp: BlockedListResp?):MainState()
+
+    data class BlockedUser(val blockedUserResp: BlockUserResp?):MainState()
+
+    data class ConfirmUser(val confirmUserResp: ConfirmUserResp?):MainState()
     data class Error(val error: String?) : MainState()
 }

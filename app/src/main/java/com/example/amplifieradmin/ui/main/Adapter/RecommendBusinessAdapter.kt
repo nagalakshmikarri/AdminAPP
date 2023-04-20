@@ -6,18 +6,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.example.amplifieradmin.AdvertaisementsActivity
 import com.example.amplifieradmin.BusinessCategoryActivity
 import com.example.amplifieradmin.R
-import com.example.amplifieradmin.data.model.CliamBusinessData
 import com.example.amplifieradmin.data.model.RecommendBusinessData
-import com.example.amplifieradmin.databinding.CliambusinessBinding
 import com.example.amplifieradmin.databinding.RecommendbusinessBinding
-import com.google.android.libraries.places.internal.it
 
 class RecommendBusinessAdapter(
     private var recommendBusinessData: List<RecommendBusinessData>,
     private val context: Context,
+    private var onConfirmClick:OnConfirmClick,
+    private var onBlockClick:OnBlockClick,
+
 ) : RecyclerView.Adapter<RecommendBusinessAdapter.DataViewHolder>() {
     class DataViewHolder(itemView: RecommendbusinessBinding) :
         RecyclerView.ViewHolder(itemView.root) {
@@ -25,6 +24,8 @@ class RecommendBusinessAdapter(
         fun bind(
             recommendBusinessData: RecommendBusinessData,
             context: Context,
+            onConfirmClick: OnConfirmClick,
+            onBlockClick: OnBlockClick,
         ) {
             binding.tvBusiness.text = recommendBusinessData.s_business
             if (recommendBusinessData.businesscategory.isNullOrEmpty()){
@@ -52,6 +53,14 @@ class RecommendBusinessAdapter(
                 context.startActivity(intent);
 
             }
+
+            binding.confirmBtn.setOnClickListener {
+                onConfirmClick.onConfirmClick(recommendBusinessData.s_id)
+            }
+            binding.blockBtn.setOnClickListener {
+                onBlockClick.onBlockClick(recommendBusinessData.s_id)
+            }
+
         }
     }
 
@@ -76,6 +85,8 @@ class RecommendBusinessAdapter(
         holder.bind(
             recommendBusinessData[position],
             context,
+            onConfirmClick,
+            onBlockClick
         )
 
     }
@@ -87,6 +98,12 @@ class RecommendBusinessAdapter(
 
     fun addData(list: List<RecommendBusinessData>) {
         this.recommendBusinessData = list
+    }
+    interface OnConfirmClick{
+        fun onConfirmClick(s_id:String)
+    }
+    interface OnBlockClick{
+        fun onBlockClick(s_id:String)
     }
 
 }

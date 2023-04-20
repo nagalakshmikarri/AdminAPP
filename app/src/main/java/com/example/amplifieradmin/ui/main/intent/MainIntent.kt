@@ -1,6 +1,6 @@
 package com.example.amplifieradmin.ui.main.intent
 
-import com.example.amplifieradmin.data.model.ApproveClaimBusiReq
+import com.example.amplifieradmin.data.model.*
 
 sealed class MainIntent {
     class LoginUser(var username: String, var password: String) : MainIntent()
@@ -73,4 +73,19 @@ sealed class MainIntent {
 
     object UserApprovedBusiness : MainIntent()
 
+    class ConfirmList(
+        var confirmListReq: ConfirmListReq
+    ):MainIntent()
+
+    class BlockedList(
+        var blockedListReq: BlockedListReq
+    ):MainIntent()
+
+    class BlockeUser(
+        var blockUserReq: BlockUserReq
+    ):MainIntent()
+
+    class ConfirmUser(
+        val confirmUserReq: ConfirmUserReq
+    ):MainIntent()
 }

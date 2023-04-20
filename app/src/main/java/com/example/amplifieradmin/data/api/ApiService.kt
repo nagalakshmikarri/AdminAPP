@@ -210,4 +210,30 @@ interface ApiService {
         @Field("s_username") s_username: String?,
     ): NetworkResponse<ApproveClaimBusinessResp, ErrorResponse>
 
+    @POST("user_confirmed_addedbusiness")
+    @FormUrlEncoded
+    suspend fun confirmedList(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String?,
+    ): NetworkResponse<ConfirmedListResp, ErrorResponse>
+
+    @POST("user_blocked_addedbusiness")
+    @FormUrlEncoded
+    suspend fun blockedList(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String?,
+    ): NetworkResponse<BlockedListResp, ErrorResponse>
+  @POST("block_user_addedbusiness")
+    @FormUrlEncoded
+    suspend fun blockedUser(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String?,
+    ): NetworkResponse<BlockUserResp, ErrorResponse>
+ @POST("confirm_user_addedbusiness")
+    @FormUrlEncoded
+    suspend fun confirmUser(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String?,
+    ): NetworkResponse<ConfirmUserResp, ErrorResponse>
+
 }

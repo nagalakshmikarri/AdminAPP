@@ -72,12 +72,131 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel() {
                     is MainIntent.UserApprovedBusiness -> userApprovedBusiness()
                     is MainIntent.EditClaimedBusiness -> editClaimedBusiness(it.id)
                     is MainIntent.ApproveClaimedBusiness -> approveClaimedBusiness(it.approveClaimBusiReq)
-
+                    is MainIntent.ConfirmList->confirmList(it.confirmListReq)
+                    is MainIntent.BlockedList->blockedList(it.blockedListReq)
+                    is MainIntent.BlockeUser->blockedUser(it.blockUserReq)
+                    is MainIntent.ConfirmUser->confirmUser(it.confirmUserReq)
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun confirmUser(confirmUserReq: ConfirmUserReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.confirmUser(confirmUserReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.ConfirmUser(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun blockedUser(blockUserReq: BlockUserReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.blockedUser(blockUserReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.BlockedUser(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun blockedList(blockedListReq: BlockedListReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.blockedList(blockedListReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.BlockedList(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun confirmList(confirmListReq: ConfirmListReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.confirmList(confirmListReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.ConfirmList(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 

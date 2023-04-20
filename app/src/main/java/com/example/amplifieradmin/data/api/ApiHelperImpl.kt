@@ -130,6 +130,7 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun get_countries(): NetworkResponse<GetCountriesResp, ErrorResponse> {
         return apiService.get_countries("Basic $base64".trim())
     }
+
     override suspend fun userApprovedBusiness(): NetworkResponse<ApprovedBusinessListResp, ErrorResponse> {
         return apiService.userApprovedBusiness("Basic $base64".trim())
     }
@@ -158,4 +159,31 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         )
     }
 
+    override suspend fun confirmList(confirmListReq: ConfirmListReq): NetworkResponse<ConfirmedListResp, ErrorResponse> {
+        return apiService.confirmedList(
+            "Basic $base64".trim(),
+            confirmListReq.s_id
+        )
+    }
+
+    override suspend fun blockedList(blockedListReq: BlockedListReq): NetworkResponse<BlockedListResp, ErrorResponse> {
+        return apiService.blockedList(
+            "Basic $base64".trim(),
+            blockedListReq.s_id
+        )
+    }
+
+    override suspend fun blockedUser(blockUserReq: BlockUserReq): NetworkResponse<BlockUserResp, ErrorResponse> {
+        return apiService.blockedUser(
+            "Basic $base64".trim(),
+            blockUserReq.s_id
+        )
+    }
+
+    override suspend fun confirmUser(confirmUserReq: ConfirmUserReq): NetworkResponse<ConfirmUserResp, ErrorResponse> {
+        return apiService.confirmUser(
+            "Basic $base64".trim(),
+            confirmUserReq.s_id
+        )
+    }
 }

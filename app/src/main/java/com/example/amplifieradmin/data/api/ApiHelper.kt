@@ -55,4 +55,12 @@ interface ApiHelper {
     suspend fun editClaimedBusiness(id: String?): NetworkResponse<EditClaimBusinessResponse, ErrorResponse>
     suspend fun approveClaimedBusiness(approveClaimBusiReq: ApproveClaimBusiReq): NetworkResponse<ApproveClaimBusinessResp, ErrorResponse>
     suspend fun userApprovedBusiness(): NetworkResponse<ApprovedBusinessListResp, ErrorResponse>
+
+    suspend fun confirmList(confirmListReq: ConfirmListReq):NetworkResponse<ConfirmedListResp,ErrorResponse>
+
+    suspend fun blockedList(blockedListReq: BlockedListReq):NetworkResponse<BlockedListResp,ErrorResponse>
+
+    suspend fun blockedUser(blockedUserReq: BlockUserReq):NetworkResponse<BlockUserResp,ErrorResponse>
+
+    suspend fun confirmUser(confirmUserReq: ConfirmUserReq):NetworkResponse<ConfirmUserResp,ErrorResponse>
 }

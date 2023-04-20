@@ -8,24 +8,20 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.databinding.ActivityAdsListStatusBinding
-import com.example.amplifieradmin.databinding.ActivityPendingBinding
 import com.example.amplifieradmin.databinding.DialogLogoutBinding
 import com.example.amplifieradmin.helper.Constants
 import com.example.amplifieradmin.helper.PrefHelper
-import com.example.amplifieradmin.ui.main.Adapter.AdminUserAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
 import com.google.firebase.FirebaseApp
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
@@ -185,7 +181,7 @@ class AdsListStatusActivity : AppCompatActivity() {
 
 
         binding.referBusiness.setOnClickListener {
-            val intent = Intent(this@AdsListStatusActivity, RecommendBusinessActivity::class.java)
+            val intent = Intent(this@AdsListStatusActivity, ReferBusinessActivity::class.java)
             startActivity(intent);
         }
         binding.category1.setOnClickListener {
