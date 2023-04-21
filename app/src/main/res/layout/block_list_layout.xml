@@ -20,6 +20,7 @@
         android:layout_marginTop="10sp"
         android:fontFamily="@font/jost_regular_400"
         android:layout_below="@+id/username"
+        android:maxLines="2"
         android:textColor="@color/black"
         android:textSize="16dp" />
     <TextView

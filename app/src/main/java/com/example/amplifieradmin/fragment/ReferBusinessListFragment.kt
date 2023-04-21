@@ -194,10 +194,10 @@ class ReferBusinessListFragment : Fragment() {
     private fun homeRenderList(recommendBusinessResp: RecommmendBusinnessResp) {
         if (recommendBusinessResp!!.data.isNotEmpty()) {
             binding.recyclerView.visibility = View.VISIBLE
-            binding.tvEmptyMsg.visibility = View.GONE
+            binding.noResultTv.visibility = View.GONE
         } else {
             binding.recyclerView.visibility = View.GONE
-            binding.tvEmptyMsg.visibility = View.VISIBLE
+            binding.noResultTv.visibility = View.VISIBLE
         }
 
     }

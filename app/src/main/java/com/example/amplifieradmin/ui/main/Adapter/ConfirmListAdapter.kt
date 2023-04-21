@@ -10,7 +10,8 @@ import com.example.amplifieradmin.databinding.ConfirmListLayoutBinding
 class ConfirmListAdapter(
     private var confirmedListRespData: List<ConfirmedListRespData>,
     private val context: Context,
-    private var onItemClick:OnItemClick
+    private var onItemClick:OnItemClick,
+    private var onPhoneClick:OnPhoneClick,
 ): RecyclerView.Adapter<ConfirmListAdapter.DataViewHolder>(){
 
     class DataViewHolder(itemView: ConfirmListLayoutBinding):
@@ -19,7 +20,8 @@ class ConfirmListAdapter(
         fun bind(
             confirmedListRespData: ConfirmedListRespData,
             context: Context,
-            onItemClick: OnItemClick
+            onItemClick: OnItemClick,
+            onPhoneClick: OnPhoneClick
         ) {
             binding.username.text=confirmedListRespData.s_business
             binding.address.text =
@@ -31,11 +33,16 @@ class ConfirmListAdapter(
                                     confirmedListRespData.s_address2 + ", " else " " +
                                         if (!confirmedListRespData.s_address3.isNullOrEmpty())
                                             confirmedListRespData.s_address3 + ", " else ""
-            binding.phoneNumber.text=confirmedListRespData.s_phone
+            binding.phoneNumber.text=confirmedListRespData.s_phone_code+confirmedListRespData.s_phone
             binding.category.text=confirmedListRespData.businesscategory
 
             binding.blockBtn.setOnClickListener {
                 onItemClick.onItemClick(confirmedListRespData.s_id)
+            }
+
+
+            binding.phoneNumber.setOnClickListener {
+                onPhoneClick.onPhoneClick(confirmedListRespData.s_phone)
             }
 
 
@@ -60,7 +67,8 @@ class ConfirmListAdapter(
         holder.bind(
             confirmedListRespData[position],
             context,
-            onItemClick
+            onItemClick,
+            onPhoneClick
         )
 
     }
@@ -74,6 +82,9 @@ class ConfirmListAdapter(
     }
     interface OnItemClick{
         fun onItemClick(s_id:String)
+    }
+    interface OnPhoneClick{
+        fun onPhoneClick(phone:String)
     }
 
 }

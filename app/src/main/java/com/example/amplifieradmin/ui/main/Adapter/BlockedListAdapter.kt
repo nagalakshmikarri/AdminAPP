@@ -11,6 +11,7 @@ class BlockedListAdapter(
     private var blockedListRespData: List<BlockedListRespData>,
     private val context: Context,
     private var onItemClick:OnItemClick,
+    private var onPhoneClick:OnPhoneClick,
 ): RecyclerView.Adapter<BlockedListAdapter.DataViewHolder>() {
 
     class DataViewHolder(itemView: BlockListLayoutBinding):
@@ -19,7 +20,8 @@ class BlockedListAdapter(
         fun bind(
             blockedListRespData: BlockedListRespData,
             context: Context,
-            onItemClick: OnItemClick
+            onItemClick: OnItemClick,
+            onPhoneClick: OnPhoneClick
         ) {
             binding.username.text=blockedListRespData.s_business
             binding.address.text =
@@ -31,11 +33,15 @@ class BlockedListAdapter(
                                     blockedListRespData.s_address2 + ", " else " " +
                                         if (!blockedListRespData.s_address3.isNullOrEmpty())
                                             blockedListRespData.s_address3 + ", " else ""
-            binding.phoneNumber.text=blockedListRespData.s_phone
+            binding.phoneNumber.text=blockedListRespData.s_phone_code+blockedListRespData.s_phone
             binding.category.text=blockedListRespData.businesscategory
 
             binding.confirmBtn.setOnClickListener {
                 onItemClick.onItemClick(blockedListRespData.s_id)
+            }
+
+            binding.phoneNumber.setOnClickListener {
+                onPhoneClick.onPhoneClick(blockedListRespData.s_phone)
             }
 
         }
@@ -59,7 +65,8 @@ class BlockedListAdapter(
         holder.bind(
             blockedListRespData[position],
             context,
-            onItemClick
+            onItemClick,
+            onPhoneClick
         )
 
     }
@@ -73,6 +80,9 @@ class BlockedListAdapter(
     }
     interface OnItemClick{
         fun onItemClick(s_id:String)
+    }
+    interface OnPhoneClick{
+        fun onPhoneClick(phone:String)
     }
 
 }
