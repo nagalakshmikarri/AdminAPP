@@ -18,6 +18,8 @@ import com.example.amplifieradmin.databinding.AdminSupportersBinding
 import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.PendingBinding
 import kotlinx.android.synthetic.main.pending.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AdsPendingAdapter (
     private var adsPendingData: List<AdsPendingData>,
@@ -38,6 +40,20 @@ class AdsPendingAdapter (
             binding.description.text=adsPendingData.descript
             binding.tvWatchnow.text=adsPendingData.link_name
             Glide.with(context).load(adsPendingData.img).into(binding.bannerImage)
+
+
+            val inputPattern = "yyyy-MM-dd"
+            val outputPattern = "MMM dd"
+            val inputFormat = SimpleDateFormat(inputPattern, Locale.US)
+            val outputFormat = SimpleDateFormat(outputPattern, Locale.US)
+            val date: Date? =
+                inputFormat.parse(adsPendingData.sdate)
+            binding.startDateTv.text = "${outputFormat.format(date)}"
+            binding.endDateTv.text = "${outputFormat.format(date)}"
+
+
+
+
         }
     }
 

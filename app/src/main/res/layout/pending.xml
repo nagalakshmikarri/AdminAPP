@@ -36,7 +36,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:gravity="start"
-                    android:text="@string/fullname_txt"
                     android:fontFamily="@font/jost_regular_400"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -70,20 +69,60 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5sp"
         android:layout_marginTop="10sp"
-        android:text="@string/fullname_txt"
         android:textColor="@color/black"
         android:fontFamily="@font/jost_regular_400"
         android:textSize="16dp"
         />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/start_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/jost_regular_400"
+            android:padding="1sp"
+            android:textColor="#24343F"
+            android:textSize="12dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:fontFamily="@font/jost_bold_700"
+            android:text="\u00b7"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/end_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/jost_regular_400"
+            android:padding="1sp"
+            android:textColor="#24343F"
+            android:visibility="visible"
+            android:textSize="12dp" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5sp"
-        android:layout_marginTop="25sp"
+        android:layout_marginTop="5sp"
         android:lineSpacingExtra="3sp"
-        android:text="@string/dummytext"
         android:textColor="@color/black"
         android:textSize="14dp"
         android:fontFamily="@font/jost_regular_400"/>
@@ -94,7 +133,6 @@
         android:layout_marginStart="5sp"
         android:layout_marginTop="10sp"
         android:lineSpacingExtra="3sp"
-        android:text="@string/WatchNow"
         android:textColor="@color/appcolor"
         android:textSize="14dp"
         android:fontFamily="@font/jost_regular_400"/>

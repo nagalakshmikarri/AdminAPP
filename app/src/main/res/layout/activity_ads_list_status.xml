@@ -140,6 +140,53 @@
                     android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/category1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/category"
+                android:layout_width="25dp"
+                android:layout_height="25sp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/add_category"
+                android:visibility="visible"
+                app:tint="#F1744B" />
+
+            <TextView
+                android:id="@+id/category_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/category"
+                android:fontFamily="@font/jost_medium_500"
+                android:text="@string/Category"
+                android:textColor="@color/text_header_color"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="15sp"
+                android:src="@drawable/ic_baseline_arrow_right_24"
+                android:visibility="visible"
+                app:tint="#F1744B" />
+        </RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="15sp"
+            android:background="@color/litegray" />
 
         <RelativeLayout
             android:id="@+id/businesscategory"
@@ -155,7 +202,7 @@
                 android:layout_height="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/pending_list"
+                android:src="@drawable/ads_pending"
                 android:visibility="visible"
                 app:tint="#F1744B" />
 
@@ -206,7 +253,7 @@
                 android:layout_height="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/accepted_list"
+                android:src="@drawable/ads_accepted"
                 android:visibility="visible"
                 app:tint="#F1744B" />
 
@@ -255,7 +302,7 @@
                 android:layout_height="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/rejected_list"
+                android:src="@drawable/ads_rejected"
                 android:visibility="visible"
                 app:tint="#F1744B" />
 
@@ -283,19 +330,14 @@
                 app:tint="#F1744B" />
         </RelativeLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="15sp"
-            android:background="@color/litegray" />
         <RelativeLayout
             android:id="@+id/business"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15sp"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/businnessslist"
@@ -353,7 +395,7 @@
                 android:layout_height="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/cliam_business"
+                android:src="@drawable/user_claim"
                 android:visibility="visible"
                 app:tint="#F1744B" />
 
@@ -366,7 +408,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_toEndOf="@+id/cliambusiness"
                 android:fontFamily="@font/jost_medium_500"
-                android:text="@string/CliamBusiness"
+                android:text="@string/user_Cliam_Business"
                 android:textColor="@color/text_header_color"
                 android:textSize="15sp" />
 
@@ -402,7 +444,7 @@
                 android:layout_height="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/cliam_business"
+                android:src="@drawable/aproved_business"
                 android:visibility="visible"
                 app:tint="#F1744B" />
 
@@ -450,7 +492,7 @@
                 android:layout_height="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/business_add"
+                android:src="@drawable/refer_business1"
                 android:visibility="visible"
                 app:tint="#F1744B" />
 
@@ -485,53 +527,6 @@
             android:layout_marginStart="10sp"
             android:layout_marginTop="15sp"
             android:background="@color/litegray" />
-        <RelativeLayout
-            android:id="@+id/category1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15sp"
-            android:background="@color/white"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/category"
-                android:layout_width="25dp"
-                android:layout_height="25sp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="10dp"
-                android:src="@drawable/business_add"
-                android:visibility="visible"
-                app:tint="#F1744B" />
-
-            <TextView
-                android:id="@+id/category_add"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="15dp"
-                android:layout_toEndOf="@+id/category"
-                android:fontFamily="@font/jost_medium_500"
-                android:text="@string/Category"
-                android:textColor="@color/text_header_color"
-                android:textSize="15sp" />
-
-            <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25sp"
-                android:layout_alignParentRight="true"
-                android:layout_centerInParent="true"
-                android:layout_marginEnd="15sp"
-                android:src="@drawable/ic_baseline_arrow_right_24"
-                android:visibility="visible"
-                app:tint="#F1744B" />
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="15sp"
-            android:background="@color/litegray" />
 
         <RelativeLayout
             android:id="@+id/business_list_tv"
@@ -547,7 +542,7 @@
                 android:layout_height="25sp"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/business_add"
+                android:src="@drawable/all_businesses"
                 android:visibility="visible"
                 app:tint="#F1744B" />
 
