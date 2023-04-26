@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".JobsActivity">
+    <RelativeLayout
+        android:id="@+id/header_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F7A07B"
+        android:padding="5sp">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:padding="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:id="@+id/Business_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/jost_medium_500"
+            android:text="@string/jobs"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/text_header_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/buttton_border_gray"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/headerregister">
+        <View
+            android:id="@+id/indicator"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:background="@drawable/buttton_border_tabs" />
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@color/transparent"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="@null"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabRippleColor="@null"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/text_header_color" />
+    </FrameLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/frame_layout" />
+
+</LinearLayout>

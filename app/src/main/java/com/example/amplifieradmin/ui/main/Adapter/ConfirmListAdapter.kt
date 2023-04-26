@@ -12,6 +12,7 @@ class ConfirmListAdapter(
     private val context: Context,
     private var onItemClick:OnItemClick,
     private var onPhoneClick:OnPhoneClick,
+    private var onConfirmClick:OnConfirmClick
 ): RecyclerView.Adapter<ConfirmListAdapter.DataViewHolder>(){
 
     class DataViewHolder(itemView: ConfirmListLayoutBinding):
@@ -21,7 +22,8 @@ class ConfirmListAdapter(
             confirmedListRespData: ConfirmedListRespData,
             context: Context,
             onItemClick: OnItemClick,
-            onPhoneClick: OnPhoneClick
+            onPhoneClick: OnPhoneClick,
+            onConfirmClick: OnConfirmClick
         ) {
             binding.username.text=confirmedListRespData.s_business
             binding.address.text =
@@ -56,6 +58,9 @@ class ConfirmListAdapter(
                 onPhoneClick.onPhoneClick(confirmedListRespData.s_phone)
             }
 
+            binding.rlText.setOnClickListener {
+                onConfirmClick.onConfirmClick(confirmedListRespData)
+            }
 
         }
     }
@@ -79,7 +84,8 @@ class ConfirmListAdapter(
             confirmedListRespData[position],
             context,
             onItemClick,
-            onPhoneClick
+            onPhoneClick,
+            onConfirmClick
         )
 
     }
@@ -96,6 +102,9 @@ class ConfirmListAdapter(
     }
     interface OnPhoneClick{
         fun onPhoneClick(phone:String)
+    }
+    interface OnConfirmClick{
+        fun onConfirmClick(item:ConfirmedListRespData)
     }
 
 }

@@ -76,11 +76,101 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel() {
                     is MainIntent.BlockedList->blockedList(it.blockedListReq)
                     is MainIntent.BlockeUser->blockedUser(it.blockUserReq)
                     is MainIntent.ConfirmUser->confirmUser(it.confirmUserReq)
+                    is MainIntent.AllJobs->allJobs()
+                    is MainIntent.ConfirmJobs->confirmJobs()
+                    is MainIntent.BlockJobs->blockJobs()
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun blockJobs() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.blockJobs()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.BlockJobs(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun confirmJobs() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.confirmJobs()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.ConfirmJobs(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun allJobs() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.allJobs()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AllJobs(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 

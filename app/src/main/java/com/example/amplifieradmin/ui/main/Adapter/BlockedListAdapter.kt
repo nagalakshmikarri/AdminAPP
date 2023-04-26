@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.amplifieradmin.data.model.AllJobsRespData
 import com.example.amplifieradmin.data.model.BlockedListRespData
 import com.example.amplifieradmin.databinding.BlockListLayoutBinding
 
@@ -12,6 +13,7 @@ class BlockedListAdapter(
     private val context: Context,
     private var onItemClick:OnItemClick,
     private var onPhoneClick:OnPhoneClick,
+    private var onBlockClick:OnBlockClick
 ): RecyclerView.Adapter<BlockedListAdapter.DataViewHolder>() {
 
     class DataViewHolder(itemView: BlockListLayoutBinding):
@@ -21,7 +23,8 @@ class BlockedListAdapter(
             blockedListRespData: BlockedListRespData,
             context: Context,
             onItemClick: OnItemClick,
-            onPhoneClick: OnPhoneClick
+            onPhoneClick: OnPhoneClick,
+            onBlockClick: OnBlockClick
         ) {
             binding.username.text=blockedListRespData.s_business
             binding.address.text =
@@ -53,6 +56,9 @@ class BlockedListAdapter(
                 onPhoneClick.onPhoneClick(blockedListRespData.s_phone)
             }
 
+            binding.rlBlock.setOnClickListener {
+                onBlockClick.onBlockClick(blockedListRespData)
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int)=
@@ -75,7 +81,8 @@ class BlockedListAdapter(
             blockedListRespData[position],
             context,
             onItemClick,
-            onPhoneClick
+            onPhoneClick,
+            onBlockClick
         )
 
     }
@@ -92,6 +99,9 @@ class BlockedListAdapter(
     }
     interface OnPhoneClick{
         fun onPhoneClick(phone:String)
+    }
+    interface OnBlockClick{
+        fun onBlockClick(item:BlockedListRespData)
     }
 
 }

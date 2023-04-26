@@ -17,12 +17,15 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.amplifieradmin.BusinessInfoActivity
+import com.example.amplifieradmin.ConfirmDetailsActivity
 import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.data.model.BlockUserReq
 import com.example.amplifieradmin.data.model.ConfirmListReq
 import com.example.amplifieradmin.data.model.ConfirmedListResp
+import com.example.amplifieradmin.data.model.ConfirmedListRespData
 import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.FragmentConfirmListBinding
 import com.example.amplifieradmin.databinding.FragmentReferBusinessListBinding
@@ -108,6 +111,17 @@ class ConfirmListFragment : Fragment() {
                                     )
                                     startActivity(intent)
 
+
+                                }
+
+                            },
+                            object:ConfirmListAdapter.OnConfirmClick{
+                                override fun onConfirmClick(
+                                    item: ConfirmedListRespData
+                                ) {
+                                    var intent = Intent(requireActivity(), ConfirmDetailsActivity::class.java)
+                                    intent.putExtra("info", item)
+                                    startActivity(intent)
 
                                 }
 

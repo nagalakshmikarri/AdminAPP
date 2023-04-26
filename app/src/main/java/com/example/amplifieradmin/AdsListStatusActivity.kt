@@ -184,6 +184,10 @@ class AdsListStatusActivity : AppCompatActivity() {
             val intent = Intent(this@AdsListStatusActivity, ReferBusinessActivity::class.java)
             startActivity(intent);
         }
+        binding.jobsList.setOnClickListener {
+            val intent = Intent(this@AdsListStatusActivity, JobsActivity::class.java)
+            startActivity(intent);
+        }
         binding.category1.setOnClickListener {
             val intent = Intent(this@AdsListStatusActivity, CategoryActivity::class.java)
             startActivity(intent);

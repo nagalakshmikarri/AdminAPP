@@ -16,6 +16,8 @@ class RecommendBusinessAdapter(
     private val context: Context,
     private var onConfirmClick:OnConfirmClick,
     private var onBlockClick:OnBlockClick,
+    private var onItemClick:OnItemClick,
+    private var onPhoneClick:OnPhoneClick,
 
 ) : RecyclerView.Adapter<RecommendBusinessAdapter.DataViewHolder>() {
     class DataViewHolder(itemView: RecommendbusinessBinding) :
@@ -26,6 +28,8 @@ class RecommendBusinessAdapter(
             context: Context,
             onConfirmClick: OnConfirmClick,
             onBlockClick: OnBlockClick,
+            onItemClick: OnItemClick,
+            onPhoneClick: OnPhoneClick,
         ) {
             binding.tvBusiness.text = recommendBusinessData.s_business
             binding.phoneNumber.text=recommendBusinessData.s_phone_code+recommendBusinessData.s_phone
@@ -55,7 +59,7 @@ class RecommendBusinessAdapter(
                     ""
                 }
 
-            binding.businessCategoryTv.setOnClickListener {
+            binding.tvCategory.setOnClickListener {
                 val intent = Intent(context, BusinessCategoryActivity::class.java)
                 intent.putExtra("subadmin_id", recommendBusinessData.admin_id)
                 intent.putExtra("s_id",recommendBusinessData.s_id)
@@ -68,6 +72,14 @@ class RecommendBusinessAdapter(
             }
             binding.blockBtn.setOnClickListener {
                 onBlockClick.onBlockClick(recommendBusinessData.s_id)
+            }
+
+            binding.businessCategoryTv.setOnClickListener {
+                onItemClick.onItemClick(recommendBusinessData)
+            }
+
+            binding.phoneNumber.setOnClickListener {
+                onPhoneClick.onPhoneClick(recommendBusinessData.s_phone)
             }
 
         }
@@ -95,7 +107,9 @@ class RecommendBusinessAdapter(
             recommendBusinessData[position],
             context,
             onConfirmClick,
-            onBlockClick
+            onBlockClick,
+            onItemClick,
+            onPhoneClick
         )
 
     }
@@ -113,6 +127,12 @@ class RecommendBusinessAdapter(
     }
     interface OnBlockClick{
         fun onBlockClick(s_id:String)
+    }
+    interface OnItemClick{
+        fun onItemClick(item:RecommendBusinessData)
+    }
+    interface OnPhoneClick{
+        fun onPhoneClick(phone:String)
     }
 
 }

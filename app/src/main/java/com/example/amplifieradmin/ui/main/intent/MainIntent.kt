@@ -88,4 +88,10 @@ sealed class MainIntent {
     class ConfirmUser(
         val confirmUserReq: ConfirmUserReq
     ):MainIntent()
+
+    object AllJobs:MainIntent()
+
+    object ConfirmJobs:MainIntent()
+
+    object BlockJobs:MainIntent()
 }

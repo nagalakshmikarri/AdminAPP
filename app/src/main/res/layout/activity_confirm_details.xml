@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmDetailsActivity">
+    <RelativeLayout
+        android:id="@+id/header_ll"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:background="#F7A07B"
+        android:padding="5sp">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@drawable/back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/back_btn"
+            android:fontFamily="@font/jost_medium_500"
+            android:text="@string/business_info"
+            android:textColor="@color/text_header_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header_ll"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/Business_name_refer"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/bussiness_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/Business_categorys"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/category_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/listing_type"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/listing_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/phone_number"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/phone_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_medium_500"
+                android:text="@string/business_location"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/located"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/located_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/building_number"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/street_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/area_name"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/areaname_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/state"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/state_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/city"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/city_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
+                android:text="@string/pincode"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/pincode_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

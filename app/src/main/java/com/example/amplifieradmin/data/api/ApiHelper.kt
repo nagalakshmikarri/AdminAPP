@@ -63,4 +63,10 @@ interface ApiHelper {
     suspend fun blockedUser(blockedUserReq: BlockUserReq):NetworkResponse<BlockUserResp,ErrorResponse>
 
     suspend fun confirmUser(confirmUserReq: ConfirmUserReq):NetworkResponse<ConfirmUserResp,ErrorResponse>
+
+    suspend fun allJobs():NetworkResponse<AllJobsResp,ErrorResponse>
+
+    suspend fun confirmJobs():NetworkResponse<ConfirmedJobsResp,ErrorResponse>
+
+    suspend fun blockJobs():NetworkResponse<BlockJobsResp,ErrorResponse>
 }

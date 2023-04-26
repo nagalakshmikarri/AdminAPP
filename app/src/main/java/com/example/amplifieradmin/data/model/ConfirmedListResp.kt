@@ -1,5 +1,8 @@
 package com.example.amplifieradmin.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class ConfirmedListResp(
     val api: String,
     val `data`: List<ConfirmedListRespData>,
@@ -7,6 +10,7 @@ data class ConfirmedListResp(
     val next: String,
     val status: String
 )
+@Parcelize
 data class ConfirmedListRespData(
     val admin_id: String,
     val block: String,
@@ -19,17 +23,10 @@ data class ConfirmedListRespData(
     val country: String,
     val created: String,
     val currency: String,
-    val delmethods: Any,
-    val facebook_link: Any,
     val hide: String,
-    val instagram_link: Any,
-    val landmark: Any,
     val locatedin: String,
     val miles: String,
-    val orderonline_link: Any,
-    val pass: String,
     val `public`: String,
-    val restcat: Any,
     val s_address: String,
     val s_address1: String,
     val s_address2: String,
@@ -68,14 +65,10 @@ data class ConfirmedListRespData(
     val s_user_img: String,
     val s_username: String,
     val s_verified: String,
-    val saved: String,
     val state: String,
     val tag: String,
-    val telegram_link: Any,
     val timezone: String,
-    val verified_by: Any,
-    val website_link: Any,
     val weight: String,
-    val whatsapp_link: Any,
-    val zone: String
-)
+    val zone: String,
+    val listing_type: String,
+): Parcelable

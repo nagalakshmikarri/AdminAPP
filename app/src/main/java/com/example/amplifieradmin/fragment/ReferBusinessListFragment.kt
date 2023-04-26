@@ -2,8 +2,10 @@ package com.example.amplifieradmin.fragment
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,14 +17,17 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.amplifieradmin.BusinessInfoActivity
 import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.data.model.BlockUserReq
 import com.example.amplifieradmin.data.model.ConfirmUserReq
+import com.example.amplifieradmin.data.model.RecommendBusinessData
 import com.example.amplifieradmin.data.model.RecommmendBusinnessResp
 import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.FragmentReferBusinessListBinding
+import com.example.amplifieradmin.ui.main.Adapter.ConfirmListAdapter
 import com.example.amplifieradmin.ui.main.Adapter.RecommendBusinessAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
@@ -95,7 +100,34 @@ class ReferBusinessListFragment : Fragment() {
                                     blockClicks(s_id)
                                 }
 
+                            },
+                            object:RecommendBusinessAdapter.OnItemClick{
+                                override fun onItemClick(
+                                    item: RecommendBusinessData
+                                ) {
+                                    var intent = Intent(requireActivity(), BusinessInfoActivity::class.java)
+                                    intent.putExtra("info", item)
+                                    startActivity(intent)
+
+                                }
+
+                            },
+                            object : RecommendBusinessAdapter.OnPhoneClick{
+                                override fun onPhoneClick(
+                                    phone: String
+                                ) {
+                                    val intent = Intent(
+                                        Intent.ACTION_DIAL, Uri.parse(
+                                            "tel:" +phone
+                                        )
+                                    )
+                                    startActivity(intent)
+
+
+                                }
+
                             }
+
                         )
                         binding.recyclerView.adapter = adapter
                         homeRenderList(it.recommendBusinessResp)

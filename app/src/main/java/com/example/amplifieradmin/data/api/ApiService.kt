@@ -223,17 +223,34 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("s_id") s_id: String?,
     ): NetworkResponse<BlockedListResp, ErrorResponse>
-  @POST("block_user_addedbusiness")
+
+    @POST("block_user_addedbusiness")
     @FormUrlEncoded
     suspend fun blockedUser(
         @Header("Authorization") authorization: String,
         @Field("s_id") s_id: String?,
     ): NetworkResponse<BlockUserResp, ErrorResponse>
- @POST("confirm_user_addedbusiness")
+
+    @POST("confirm_user_addedbusiness")
     @FormUrlEncoded
     suspend fun confirmUser(
         @Header("Authorization") authorization: String,
         @Field("s_id") s_id: String?,
     ): NetworkResponse<ConfirmUserResp, ErrorResponse>
+
+    @POST("admin_jobs")
+    suspend fun allJobs(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<AllJobsResp, ErrorResponse>
+
+    @POST("admin_confirmed_jobs")
+    suspend fun confirmJobs(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<ConfirmedJobsResp, ErrorResponse>
+
+    @POST("admin_blocked_jobs")
+    suspend fun blockJobs(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<BlockJobsResp, ErrorResponse>
 
 }

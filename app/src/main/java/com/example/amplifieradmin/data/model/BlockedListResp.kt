@@ -1,5 +1,8 @@
 package com.example.amplifieradmin.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class BlockedListResp(
     val api: String,
     val `data`: List<BlockedListRespData>,
@@ -7,7 +10,7 @@ data class BlockedListResp(
     val next: String,
     val status: String
 )
-
+@Parcelize
 data class BlockedListRespData(
     val admin_id: String,
     val block: String,
@@ -20,17 +23,10 @@ data class BlockedListRespData(
     val country: String,
     val created: String,
     val currency: String,
-    val delmethods: Any,
-    val facebook_link: Any,
     val hide: String,
-    val instagram_link: Any,
-    val landmark: Any,
     val locatedin: String,
     val miles: String,
-    val orderonline_link: Any,
-    val pass: Any,
     val `public`: String,
-    val restcat: Any,
     val s_address: String,
     val s_address1: String,
     val s_address2: String,
@@ -69,14 +65,10 @@ data class BlockedListRespData(
     val s_user_img: String,
     val s_username: String,
     val s_verified: String,
-    val saved: Any,
     val state: String,
     val tag: String,
-    val telegram_link: Any,
     val timezone: String,
-    val verified_by: Any,
-    val website_link: Any,
     val weight: String,
-    val whatsapp_link: Any,
-    val zone: String
-)
+    val zone: String,
+    val listing_type: String,
+): Parcelable

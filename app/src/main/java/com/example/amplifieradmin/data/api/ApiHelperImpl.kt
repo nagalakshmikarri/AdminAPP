@@ -186,4 +186,22 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
             confirmUserReq.s_id
         )
     }
+
+    override suspend fun allJobs():NetworkResponse<AllJobsResp,ErrorResponse>{
+        return apiService.allJobs(
+            "Basic $base64".trim()
+        )
+    }
+
+    override suspend fun confirmJobs(): NetworkResponse<ConfirmedJobsResp, ErrorResponse> {
+        return apiService.confirmJobs(
+            "Basic  $base64".trim()
+        )
+    }
+
+    override suspend fun blockJobs():NetworkResponse<BlockJobsResp,ErrorResponse>{
+        return apiService.blockJobs(
+            "Basic $base64".trim()
+        )
+    }
 }

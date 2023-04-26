@@ -1,5 +1,8 @@
 package com.example.amplifieradmin.data.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class RecommmendBusinnessResp(
     val api: String,
     val `data`: List<RecommendBusinessData>,
@@ -7,6 +10,7 @@ data class RecommmendBusinnessResp(
     val next: String,
     val status: String
 )
+@Parcelize
 data class RecommendBusinessData(
     val admin_id: String,
     val byuser: String,
@@ -14,15 +18,8 @@ data class RecommendBusinessData(
     val claim: String,
     val country: String,
     val created: String,
-    val delmethods: Any,
-    val facebook_link: Any,
     val hide: String,
-    val instagram_link: Any,
-    val landmark: Any,
     val locatedin: String,
-    val orderonline_link: Any,
-    val pass: Any,
-    val restcat: Any,
     val s_address: String,
     val s_address1: String,
     val s_address2: String,
@@ -61,14 +58,9 @@ data class RecommendBusinessData(
     val s_user_img: String,
     val s_username: String,
     val s_verified: String,
-    val saved: String,
     val state: String,
-    val telegram_link: Any,
     val timezone: String,
-    val verified_by: Any,
-    val website_link: Any,
-    val whatsapp_link: Any,
     val zone: String,
     val businesscategory: String,
-
-)
+    val listing_type: String,
+) : Parcelable

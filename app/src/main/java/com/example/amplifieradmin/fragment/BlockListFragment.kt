@@ -17,6 +17,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.amplifieradmin.BlockDetailsActivity
+import com.example.amplifieradmin.ConfirmDetailsActivity
 import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
@@ -104,6 +106,17 @@ class BlockListFragment : Fragment() {
                                     )
                                     startActivity(intent)
 
+
+                                }
+
+                            },
+                            object :BlockedListAdapter.OnBlockClick{
+                                override fun onBlockClick(
+                                    item: BlockedListRespData
+                                ) {
+                                    var intent = Intent(requireActivity(), BlockDetailsActivity::class.java)
+                                    intent.putExtra("info", item)
+                                    startActivity(intent)
 
                                 }
 

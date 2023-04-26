@@ -47,5 +47,11 @@ sealed  class MainState {
     data class BlockedUser(val blockedUserResp: BlockUserResp?):MainState()
 
     data class ConfirmUser(val confirmUserResp: ConfirmUserResp?):MainState()
+
+    data class AllJobs(val allJobsResp: AllJobsResp?):MainState()
+
+    data class ConfirmJobs(val confirmedJobsResp: ConfirmedJobsResp?):MainState()
+
+    data class BlockJobs(val blockJobsResp: BlockJobsResp?):MainState()
     data class Error(val error: String?) : MainState()
 }

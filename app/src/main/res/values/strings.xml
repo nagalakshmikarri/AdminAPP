@@ -111,4 +111,12 @@
     <string name="Block">Block</string>
     <string name="confirm">Confirm</string>
     <string name="user_Cliam_Business">User Cliam Business</string>
+    <string name="business_info">Business Info</string>
+    <string name="Business_name_refer">Business Name*</string>
+    <string name="Business_categorys">Business Category*</string>
+    <string name="listing_type">Listing Type*</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="located">Loicated</string>
+    <string name="jobs">Jobs</string>
+    <string name="jobs_list">Jobs List</string>
 </resources>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/userpic"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/banner" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5sp"
+            android:layout_marginEnd="45dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/user_name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:fontFamily="@font/jost_regular_400"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="2sp"
+                android:gravity="start"
+                android:textColor="@color/black"
+                android:fontFamily="@font/jost_regular_400"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="#24343F"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/jost_regular_400"
+        android:layout_marginHorizontal="10dp"/>
+
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:textColor="#24343F"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/jost_regular_400"
+        android:layout_marginHorizontal="10dp"/>
+
+
+    <LinearLayout
+        android:id="@+id/accept_reject_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/block_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_weight="1"
+            android:backgroundTint="#DF1B1B"
+            android:text="Block"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+        <Button
+            android:id="@+id/confirm_btn"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="30dp"
+            android:layout_weight="1"
+            android:backgroundTint="#2E8A06"
+            android:text="Confirm"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>
