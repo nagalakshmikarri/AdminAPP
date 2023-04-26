@@ -105,11 +105,23 @@ class ReferBusinessListFragment : Fragment() {
                     is MainState.ConfirmUser->{
                         Log.e("testtt", "Succesfully Confirmed the business")
                         binding.progressBar.visibility = View.GONE
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.RecommendBusiness
+
+                            )
+                        }
                     }
 
                     is MainState.BlockedUser->{
                         Log.e("testtt", "Succesfully blocked the business")
                         binding.progressBar.visibility = View.GONE
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.RecommendBusiness
+
+                            )
+                        }
                     }
 
                     else -> {}

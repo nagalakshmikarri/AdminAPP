@@ -41,16 +41,15 @@ class AdsPendingAdapter (
             binding.tvWatchnow.text=adsPendingData.link_name
             Glide.with(context).load(adsPendingData.img).into(binding.bannerImage)
 
-
             val inputPattern = "yyyy-MM-dd"
-            val outputPattern = "MMM dd"
+            val outputPattern = "MMM dd, yyyy"
             val inputFormat = SimpleDateFormat(inputPattern, Locale.US)
             val outputFormat = SimpleDateFormat(outputPattern, Locale.US)
-            val date: Date? =
-                inputFormat.parse(adsPendingData.sdate)
-            binding.startDateTv.text = "${outputFormat.format(date)}"
-            binding.endDateTv.text = "${outputFormat.format(date)}"
 
+            val sDate = inputFormat.parse(adsPendingData.sdate)
+            val eDate = inputFormat.parse(adsPendingData.edate)
+
+           binding.startDateTv.text = outputFormat.format(sDate)+" \u00b7 " +outputFormat.format(eDate)
 
 
 

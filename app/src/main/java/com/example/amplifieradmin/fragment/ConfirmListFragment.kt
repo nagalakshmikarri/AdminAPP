@@ -121,6 +121,17 @@ class ConfirmListFragment : Fragment() {
                     is MainState.BlockedUser->{
                         Log.e("testtt", "Succesfully blocked the business")
                         binding.progressBar.visibility = View.GONE
+
+                        val confirmListReq=ConfirmListReq(s_id)
+
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.ConfirmList(
+                                    confirmListReq
+                                )
+
+                            )
+                        }
                     }
                     else -> {}
                 }

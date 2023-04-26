@@ -20,6 +20,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="5sp"
                 android:layout_marginEnd="5sp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/banner" />
 
             <LinearLayout
@@ -38,6 +39,7 @@
                     android:gravity="start"
                     android:fontFamily="@font/jost_regular_400"
                     android:textColor="@color/black"
+                    android:layout_marginTop="10dp"
                     android:textSize="14sp"
                   />
 
@@ -85,7 +87,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:fontFamily="@font/jost_regular_400"
+            android:fontFamily="@font/jost_medium_500"
             android:padding="1sp"
             android:textColor="#24343F"
             android:textSize="12dp" />
@@ -98,7 +100,7 @@
             android:text="\u00b7"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:visibility="visible"/>
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/end_date_tv"
@@ -111,7 +113,7 @@
             android:fontFamily="@font/jost_regular_400"
             android:padding="1sp"
             android:textColor="#24343F"
-            android:visibility="visible"
+            android:visibility="gone"
             android:textSize="12dp" />
 
     </LinearLayout>

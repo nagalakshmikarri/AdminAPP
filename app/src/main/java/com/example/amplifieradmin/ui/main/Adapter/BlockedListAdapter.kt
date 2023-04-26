@@ -25,14 +25,23 @@ class BlockedListAdapter(
         ) {
             binding.username.text=blockedListRespData.s_business
             binding.address.text =
-                if (!blockedListRespData.s_address.isNullOrEmpty())
-                    blockedListRespData.s_address + ", " else " " +
-                        if (!blockedListRespData.s_address1.isNullOrEmpty())
-                            blockedListRespData.s_address1 + ", " else " " +
-                                if (!blockedListRespData.s_address2.isNullOrEmpty())
-                                    blockedListRespData.s_address2 + ", " else " " +
-                                        if (!blockedListRespData.s_address3.isNullOrEmpty())
-                                            blockedListRespData.s_address3 + ", " else ""
+                if (!blockedListRespData.s_address.isNullOrEmpty()) {
+                    blockedListRespData.s_address + ", "
+                } else {
+                    " "
+                } + if (!blockedListRespData.s_address1.isNullOrEmpty()) {
+                    blockedListRespData.s_address1 + ", "
+                } else {
+                    " "
+                } + if (!blockedListRespData.s_address2.isNullOrEmpty()) {
+                    blockedListRespData.s_address2 + ", "
+                } else {
+                    " "
+                } + if (!blockedListRespData.s_address3.isNullOrEmpty()) {
+                    blockedListRespData.s_address3 + ", "
+                } else {
+                    ""
+                }
             binding.phoneNumber.text=blockedListRespData.s_phone_code+blockedListRespData.s_phone
             binding.category.text=blockedListRespData.businesscategory
 

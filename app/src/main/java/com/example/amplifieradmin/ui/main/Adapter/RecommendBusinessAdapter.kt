@@ -28,6 +28,7 @@ class RecommendBusinessAdapter(
             onBlockClick: OnBlockClick,
         ) {
             binding.tvBusiness.text = recommendBusinessData.s_business
+            binding.phoneNumber.text=recommendBusinessData.s_phone_code+recommendBusinessData.s_phone
             if (recommendBusinessData.businesscategory.isNullOrEmpty()){
                 binding.tvCategory.text="Please add Business Category"
                 binding.tvCategory.setTextColor(ContextCompat.getColor(context, R.color.red));
@@ -35,16 +36,24 @@ class RecommendBusinessAdapter(
                 binding.tvCategory.text=recommendBusinessData.businesscategory
                 binding.tvCategory.setTextColor(ContextCompat.getColor(context, R.color.purple_500));
             }
-            binding.tvAddress.text = if (!recommendBusinessData.s_address.isNullOrEmpty())
-                recommendBusinessData.s_address + ", " else " " +
-                    if (!recommendBusinessData.s_address1.isNullOrEmpty())
-                        recommendBusinessData.s_address1 + ", " else " " +
-                            if (!recommendBusinessData.s_address2.isNullOrEmpty())
-                                recommendBusinessData.s_address2 + ", " else " " +
-                                    if (!recommendBusinessData.s_address3.isNullOrEmpty())
-                                        recommendBusinessData.s_address3 + ", " else "" +
-                                            if (!recommendBusinessData.city.isNullOrEmpty())
-                                                recommendBusinessData.city + ", " else ""
+            binding.tvAddress.text =
+                if (!recommendBusinessData.s_address.isNullOrEmpty()) {
+                    recommendBusinessData.s_address + ", "
+                } else {
+                    " "
+                } + if (!recommendBusinessData.s_address1.isNullOrEmpty()) {
+                    recommendBusinessData.s_address1 + ", "
+                } else {
+                    " "
+                } + if (!recommendBusinessData.s_address2.isNullOrEmpty()) {
+                    recommendBusinessData.s_address2 + ", "
+                } else {
+                    " "
+                } + if (!recommendBusinessData.s_address3.isNullOrEmpty()) {
+                    recommendBusinessData.s_address3 + ", "
+                } else {
+                    ""
+                }
 
             binding.businessCategoryTv.setOnClickListener {
                 val intent = Intent(context, BusinessCategoryActivity::class.java)

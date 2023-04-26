@@ -25,14 +25,25 @@ class ConfirmListAdapter(
         ) {
             binding.username.text=confirmedListRespData.s_business
             binding.address.text =
-                if (!confirmedListRespData.s_address.isNullOrEmpty())
-                    confirmedListRespData.s_address + ", " else " " +
-                        if (!confirmedListRespData.s_address1.isNullOrEmpty())
-                            confirmedListRespData.s_address1 + ", " else " " +
-                                if (!confirmedListRespData.s_address2.isNullOrEmpty())
-                                    confirmedListRespData.s_address2 + ", " else " " +
-                                        if (!confirmedListRespData.s_address3.isNullOrEmpty())
-                                            confirmedListRespData.s_address3 + ", " else ""
+                if (!confirmedListRespData.s_address.isNullOrEmpty()) {
+                    confirmedListRespData.s_address + ", "
+                } else {
+                    " "
+                } + if (!confirmedListRespData.s_address1.isNullOrEmpty()) {
+                    confirmedListRespData.s_address1 + ", "
+                } else {
+                    " "
+                } + if (!confirmedListRespData.s_address2.isNullOrEmpty()) {
+                    confirmedListRespData.s_address2 + ", "
+                } else {
+                    " "
+                } + if (!confirmedListRespData.s_address3.isNullOrEmpty()) {
+                    confirmedListRespData.s_address3 + ", "
+                } else {
+                    ""
+                }
+
+
             binding.phoneNumber.text=confirmedListRespData.s_phone_code+confirmedListRespData.s_phone
             binding.category.text=confirmedListRespData.businesscategory
 

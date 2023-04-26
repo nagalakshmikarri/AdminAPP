@@ -8,32 +8,40 @@
         android:id="@+id/tv_business"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lucky fruit Juice Point"
         android:textSize="15dp"
         android:textColor="@color/text_header_color"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/jost_medium_500"
-        android:layout_marginHorizontal="22dp"/>
+        android:layout_marginHorizontal="10dp"/>
     <TextView
         android:id="@+id/tv_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="60 Feet Road,Bank Colony Rd,Salem Nagar,Narasaraopeta,\nAndhra Pradesh 522601,India"
         android:textSize="14dp"
         android:textColor="#24343F"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/jost_regular_400"
-        android:layout_marginHorizontal="22dp"/>
+        android:layout_marginHorizontal="10dp"/>
+
+    <TextView
+        android:id="@+id/phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10sp"
+        android:layout_marginTop="10sp"
+        android:fontFamily="@font/jost_regular_400"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
     <TextView
         android:id="@+id/tv_category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Category"
         android:textSize="15dp"
         android:textColor="@color/text_header_color"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/jost_medium_500"
-        android:layout_marginHorizontal="22dp"/>
+        android:layout_marginHorizontal="10dp"/>
     <LinearLayout
         android:id="@+id/accept_reject_tv"
         android:layout_width="match_parent"
