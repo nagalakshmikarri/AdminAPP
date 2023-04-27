@@ -1,6 +1,10 @@
 package com.example.amplifieradmin.fragment
 
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +12,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -17,10 +22,15 @@ import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.data.model.AllJobsResp
+import com.example.amplifieradmin.data.model.BlockUserJobReq
+import com.example.amplifieradmin.data.model.ConfirmUserJobReq
 import com.example.amplifieradmin.data.model.RecommendBusinessData
+import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.FragmentAllJobsBinding
 import com.example.amplifieradmin.databinding.FragmentReferBusinessListBinding
 import com.example.amplifieradmin.ui.main.Adapter.AllJobAdapter
+import com.example.amplifieradmin.ui.main.Adapter.BlockJobsAdapter
+import com.example.amplifieradmin.ui.main.Adapter.ConfirmJobsAdapter
 import com.example.amplifieradmin.ui.main.Adapter.RecommendBusinessAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
@@ -80,17 +90,130 @@ class AllJobsFragment : Fragment() {
                         adapter = AllJobAdapter(
                             it.allJobsResp!!.data,
                             requireActivity(),
-                            )
+                            object : AllJobAdapter.OnBlockClick{
+                                override fun onBlockClick(
+                                    id: String
+                                ) {
+                                    blockedClicks(id)
+                                }
+
+                            },
+                            object : AllJobAdapter.OnConfirmClick{
+                                override fun onConfirmClick(
+                                    id: String
+                                ) {
+                                    confirmClicks(id)
+
+                                }
+
+                            }
+
+                        )
                         binding.allJobsRecy.adapter = adapter
                         homeRenderList(it.allJobsResp)
 
                     }
+                    is MainState.BlockUserJobs->{
+                        Log.e("testtt", "Succesfully blocked the job")
+                        binding.progressBar.visibility = View.GONE
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.AllJobs
 
+                            )
+                        }
+
+                    }
+
+                    is MainState.ConfirmUserJobs->{
+                        Log.e("testtt", "Succesfully Confirmed the job")
+                        binding.progressBar.visibility = View.GONE
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.AllJobs
+
+                            )
+                        }
+
+                    }
 
                     else -> {}
                 }
             }
         }
+
+    }
+
+    private fun confirmClicks(id: String) {
+        val dialog = Dialog(requireContext())
+        val inflaterBlock =
+            requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val bindingDialog = AlertDialogBinding.inflate(inflaterBlock)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(bindingDialog.root)
+
+
+
+        bindingDialog.tvSubTitle.text = "Are you sure do you want to Confirm?"
+        bindingDialog.btnCancel.setOnClickListener { dialog.dismiss() }
+        bindingDialog.cancelIv.setOnClickListener { dialog.dismiss() }
+
+
+        val confirmUserJobReq= ConfirmUserJobReq(id)
+
+        bindingDialog.btnYes.setOnClickListener {
+            lifecycleScope.launch {
+                homeViewModel.homeIntent.send(
+                    MainIntent.ConfirmUserJobs(
+                        confirmUserJobReq                    )
+
+                )
+            }
+
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+
+    }
+
+    private fun blockedClicks(id: String) {
+        val dialog = Dialog(requireContext())
+        val inflaterBlock =
+            requireContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val bindingDialog = AlertDialogBinding.inflate(inflaterBlock)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.setContentView(bindingDialog.root)
+
+
+
+        bindingDialog.tvSubTitle.text = "Are you sure do you want to Block?"
+        bindingDialog.btnCancel.setOnClickListener { dialog.dismiss() }
+        bindingDialog.cancelIv.setOnClickListener { dialog.dismiss() }
+
+
+        val blockUserJobReq= BlockUserJobReq(id)
+
+        bindingDialog.btnYes.setOnClickListener {
+            lifecycleScope.launch {
+                homeViewModel.homeIntent.send(
+                    MainIntent.BlockUserJobs(
+                        blockUserJobReq
+                    )
+
+                )
+            }
+
+
+            dialog.dismiss()
+        }
+
+        dialog.show()
 
     }
 

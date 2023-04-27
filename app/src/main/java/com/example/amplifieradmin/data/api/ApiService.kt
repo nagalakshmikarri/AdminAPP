@@ -253,4 +253,32 @@ interface ApiService {
         @Header("Authorization") authorization: String,
     ): NetworkResponse<BlockJobsResp, ErrorResponse>
 
+    @POST("block_user_addedjobs")
+    @FormUrlEncoded
+    suspend fun blockUserJobs(
+        @Header("Authorization") authorization: String,
+        @Field("id") id: String?,
+    ): NetworkResponse<BlockUserJobResp, ErrorResponse>
+
+    @POST("confirm_user_addedjobs")
+    @FormUrlEncoded
+    suspend fun confirmUserJobs(
+        @Header("Authorization") authorization: String,
+        @Field("id") id: String?,
+    ): NetworkResponse<ConfirmUserJobResp, ErrorResponse>
+
+    @POST("get_rewards_settings")
+    suspend fun gettingRewards(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<GettingRewardResp, ErrorResponse>
+
+    @POST("update_rewards_settings")
+    @FormUrlEncoded
+    suspend fun updateRewards(
+        @Header("Authorization") authorization: String,
+        @Field("register") register: String?,
+        @Field("home_screen_view") home_screen_view: String?,
+        @Field("friend_accept") friend_accept: String?,
+    ): NetworkResponse<UpdateRewardsResp, ErrorResponse>
+
 }

@@ -7,6 +7,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -49,6 +51,8 @@ class ReferBusinessListFragment : Fragment() {
     private val binding get() = _binding!!
     private var admin_id = ""
     private var s_id=""
+    var filterList: RecommmendBusinnessResp? = null
+
 
 
     override fun onCreateView(
@@ -130,6 +134,7 @@ class ReferBusinessListFragment : Fragment() {
 
                         )
                         binding.recyclerView.adapter = adapter
+                        filterList = it.recommendBusinessResp
                         homeRenderList(it.recommendBusinessResp)
 
                     }
@@ -161,6 +166,27 @@ class ReferBusinessListFragment : Fragment() {
             }
         }
 
+    }
+    private fun filter(text: String?) {
+        val filteredHomeList = mutableListOf<RecommendBusinessData>()
+        if (filterList != null) {
+
+            for (filteredList in filterList!!.data) {
+                if (filteredList.s_business.toLowerCase().contains(text?.toLowerCase().toString())) {
+                    filteredHomeList.add(filteredList)
+                }
+            }
+            binding.recyclerView.adapter = adapter
+            filteredHomeList.let { listOfUsers ->
+                listOfUsers.let {
+                    adapter.filterList(
+                        it,
+                    )
+                }
+            }
+            adapter.notifyDataSetChanged()
+
+        }
     }
 
     private fun blockClicks(sId: String) {
@@ -263,6 +289,20 @@ class ReferBusinessListFragment : Fragment() {
         )
         binding.recyclerView.layoutManager =
             LinearLayoutManager(requireActivity())
+
+
+        binding.searchBarText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filter(s.toString())
+            }
+        })
+
     }
 
     private fun setupClicks() {

@@ -15,6 +15,7 @@ import com.example.amplifieradmin.databinding.ConfirmjoibslayoutBinding
 class ConfirmJobsAdapter(
     private var confirmedJobsRespData: List<ConfirmedJobsRespData>,
     private val context: Context,
+    private var onBlockClick:OnBlockClick
 ): RecyclerView.Adapter<ConfirmJobsAdapter.DataViewHolder>(){
 
     class DataViewHolder(itemView: ConfirmjoibslayoutBinding):
@@ -22,7 +23,8 @@ class ConfirmJobsAdapter(
         private var binding = itemView
         fun bind(
             confirmedJobsRespData: ConfirmedJobsRespData,
-            context: Context
+            context: Context,
+            onBlockClick: OnBlockClick
         ) {
 
             var requestOptions = RequestOptions()
@@ -36,6 +38,10 @@ class ConfirmJobsAdapter(
             binding.type.text="Posted by ${confirmedJobsRespData.type}"
             binding.tvTitle.text=confirmedJobsRespData.title
             binding.tvAddress.text=confirmedJobsRespData.address
+
+            binding.blockBtn.setOnClickListener {
+                onBlockClick.onBlockClick(confirmedJobsRespData.id)
+            }
 
         }
     }
@@ -57,7 +63,9 @@ class ConfirmJobsAdapter(
     override fun onBindViewHolder(holder:ConfirmJobsAdapter.DataViewHolder,position: Int) {
         holder.bind(
             confirmedJobsRespData[position],
-            context)
+            context,
+            onBlockClick
+        )
 
     }
     fun filterList(adminUsersData: MutableList<ConfirmedJobsRespData>) {
@@ -67,4 +75,9 @@ class ConfirmJobsAdapter(
     fun addData(list: List<ConfirmedJobsRespData>) {
         this.confirmedJobsRespData = list
     }
+
+    interface OnBlockClick{
+        fun onBlockClick(id:String)
+    }
+
 }

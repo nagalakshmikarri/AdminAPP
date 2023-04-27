@@ -70,4 +70,12 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun confirmJobs()=apiHelper.confirmJobs()
 
     suspend fun blockJobs()=apiHelper.blockJobs()
+
+    suspend fun blockUserJobs(blockUserJobReq: BlockUserJobReq)=apiHelper.blockUserJobs(blockUserJobReq)
+
+    suspend fun confirmUserJobs(confirmUserJobReq: ConfirmUserJobReq)=apiHelper.confirmUserJobs(confirmUserJobReq)
+
+    suspend fun gettingRewards()=apiHelper.gettingRewards()
+
+    suspend fun updateRewards(updateRewardsReq: UpdateRewardsReq)=apiHelper.updateRewards(updateRewardsReq)
 }

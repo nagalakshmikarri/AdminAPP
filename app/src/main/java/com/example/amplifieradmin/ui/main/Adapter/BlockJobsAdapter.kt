@@ -15,13 +15,15 @@ import com.example.amplifieradmin.databinding.BlockjoibslayoutBinding
 class BlockJobsAdapter(
     private var blockJobsRespData: List<BlockJobsRespData>,
     private val context: Context,
+    private var onConfirmClick:OnConfirmClick,
 ) : RecyclerView.Adapter<BlockJobsAdapter.DataViewHolder>() {
     class DataViewHolder(itemView: BlockjoibslayoutBinding):
         RecyclerView.ViewHolder(itemView.root){
         private var binding = itemView
         fun bind(
             blockJobsRespData: BlockJobsRespData,
-            context: Context
+            context: Context,
+            onConfirmClick: OnConfirmClick
         ) {
 
             var requestOptions = RequestOptions()
@@ -35,6 +37,10 @@ class BlockJobsAdapter(
             binding.type.text="Posted by ${blockJobsRespData.type}"
             binding.tvTitle.text=blockJobsRespData.title
             binding.tvAddress.text=blockJobsRespData.address
+
+            binding.confirmBtn.setOnClickListener {
+                onConfirmClick.onConfirmClick(blockJobsRespData.id)
+            }
 
         }
     }
@@ -56,7 +62,9 @@ class BlockJobsAdapter(
     override fun onBindViewHolder(holder:BlockJobsAdapter.DataViewHolder,position: Int) {
         holder.bind(
             blockJobsRespData[position],
-            context)
+            context,
+            onConfirmClick
+        )
 
     }
     fun filterList(adminUsersData: MutableList<BlockJobsRespData>) {
@@ -66,4 +74,9 @@ class BlockJobsAdapter(
     fun addData(list: List<BlockJobsRespData>) {
         this.blockJobsRespData = list
     }
+
+    interface OnConfirmClick{
+        fun onConfirmClick(id:String)
+    }
+
 }

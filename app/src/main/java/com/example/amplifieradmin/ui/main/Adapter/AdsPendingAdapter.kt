@@ -10,7 +10,11 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.amplifieradmin.AdsListStatusActivity
+import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.model.AcceptResp
 import com.example.amplifieradmin.data.model.AdminUsersData
 import com.example.amplifieradmin.data.model.AdsPendingData
@@ -34,7 +38,12 @@ class AdsPendingAdapter (
             adsPendingData: AdsPendingData,
             context: Context,
         ) {
-           Glide.with(context).load(adsPendingData.s_user_img).into(binding.userpic)
+
+            var requestOptions = RequestOptions()
+            requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(50))
+            Glide.with(context).load(adsPendingData.s_user_img)
+                //  .apply(requestOptions)
+                .placeholder(R.drawable.user).into(binding.userpic)
             binding.userNameTv.text = adsPendingData.s_business
             binding.title.text=adsPendingData.title
             binding.description.text=adsPendingData.descript

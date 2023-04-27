@@ -119,4 +119,14 @@
     <string name="located">Loicated</string>
     <string name="jobs">Jobs</string>
     <string name="jobs_list">Jobs List</string>
+    <string name="rewards_assign">Rewards Assign</string>
+    <string name="edit">Edit</string>
+    <string name="rewards">Rewards</string>
+    <string name="register">Register :</string>
+    <string name="home_screen">Home Screen :</string>
+    <string name="contact">Contact :</string>
+    <string name="update_rewards">Updaterewards Points</string>
+    <string name="register_points">Register Points(*)</string>
+    <string name="home_points">Homescreen Points(*)</string>
+    <string name="contact_point">ContactPoints(*)</string>
 </resources>

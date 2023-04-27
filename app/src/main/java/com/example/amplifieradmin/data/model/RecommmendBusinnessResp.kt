@@ -63,4 +63,5 @@ data class RecommendBusinessData(
     val zone: String,
     val businesscategory: String,
     val listing_type: String,
-) : Parcelable
+) : Parcelable {
+}

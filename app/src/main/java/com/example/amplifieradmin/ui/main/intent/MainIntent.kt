@@ -94,4 +94,18 @@ sealed class MainIntent {
     object ConfirmJobs:MainIntent()
 
     object BlockJobs:MainIntent()
+
+    class BlockUserJobs(
+        val blockUserJobReq: BlockUserJobReq
+    ):MainIntent()
+
+    class ConfirmUserJobs(
+        val confirmUserJobReq: ConfirmUserJobReq
+    ):MainIntent()
+
+    object GettingReward:MainIntent()
+
+    class UpdateRewards(
+        val updateRewardsReq: UpdateRewardsReq
+    ):MainIntent()
 }

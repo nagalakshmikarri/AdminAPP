@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,7 +49,7 @@ public class TagsSpinnerAdapter extends ArrayAdapter<GetTagsData> {
                         .inflate(R.layout.layout_spinner_hint, parent, false);
                 holder.tilTitle = row.findViewById(R.id.til_title);
                 holder.etTitle = row.findViewById(R.id.et_title);
-                holder.tilTitle.setHintEnabled(false);
+//                holder.tilTitle.setHintEnabled(false);
             } else {
                 row = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.layout_spinner_plain, parent, false);
@@ -67,8 +68,8 @@ public class TagsSpinnerAdapter extends ArrayAdapter<GetTagsData> {
                     holder.etTitle.setHint(items.get(position).getTitle());
                 }
             } else {
-                holder.tilTitle.setHintEnabled(true);
-                holder.tilTitle.setHint(items.get(0).getTitle());
+//                holder.tilTitle.setHintEnabled(true);
+//                holder.tilTitle.setHint(items.get(0).getTitle());
 
                 if (items.get(position).getTitle().contains("|")) {
                     holder.etTitle.setText(items.get(position).getTitle().split("\\|")[0]);
@@ -141,7 +142,7 @@ public class TagsSpinnerAdapter extends ArrayAdapter<GetTagsData> {
 
     static class SpinnerItemHolder {
         TextView tvTitle;
-        TextInputLayout tilTitle;
+        RelativeLayout tilTitle;
         EditText etTitle;
     }
 }

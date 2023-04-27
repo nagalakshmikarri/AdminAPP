@@ -33,9 +33,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class RegistrationActivity : AppCompatActivity() {
-    private lateinit var homeViewModel: HomeViewModel
+   private lateinit var homeViewModel: HomeViewModel
     private var _binding: ActivityRegistrationBinding? = null
-    private val binding get() = _binding!!
+    private  val binding get() = _binding!!
     private var selected_code: String = ""
     private lateinit var destinationAdapter: TypesSpinnerAdapter
     lateinit var prefHelper: PrefHelper

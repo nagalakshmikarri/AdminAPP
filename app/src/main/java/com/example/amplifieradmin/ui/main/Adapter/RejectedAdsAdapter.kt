@@ -9,12 +9,18 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.model.AcceptAdsData
 import com.example.amplifieradmin.data.model.RejectAdsData
 import com.example.amplifieradmin.databinding.AcceptadsBinding
 import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.RejectedBinding
 import kotlinx.android.synthetic.main.pending.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class RejectedAdsAdapter
     (
@@ -29,12 +35,29 @@ class RejectedAdsAdapter
             rejectAdsData:RejectAdsData,
             context: Context,
         ) {
-            Glide.with(context).load(rejectAdsData.s_user_img).into(binding.userpic)
+
+            var requestOptions = RequestOptions()
+            requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(50))
+            Glide.with(context).load(rejectAdsData.s_user_img)
+                //  .apply(requestOptions)
+                .placeholder(R.drawable.user).into(binding.userpic)
+
             binding.userNameTv.text = rejectAdsData.s_business
             binding.title.text = rejectAdsData.title
             binding.description.text = rejectAdsData.descript
             binding.tvWatchnow.text = rejectAdsData.link_name
             Glide.with(context).load(rejectAdsData.img).into(binding.bannerImage)
+
+            val inputPattern = "yyyy-MM-dd"
+            val outputPattern = "MMM dd, yyyy"
+            val inputFormat = SimpleDateFormat(inputPattern, Locale.US)
+            val outputFormat = SimpleDateFormat(outputPattern, Locale.US)
+
+            val sDate = inputFormat.parse(rejectAdsData.sdate)
+            val eDate = inputFormat.parse(rejectAdsData.edate)
+
+            binding.startDateTv.text = outputFormat.format(sDate)+" \u00b7 " +outputFormat.format(eDate)
+
 
         }
     }
