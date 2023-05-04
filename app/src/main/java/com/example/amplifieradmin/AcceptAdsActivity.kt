@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.AcceptAdsData
 import com.example.amplifieradmin.data.model.AcceptAdsResp
 import com.example.amplifieradmin.databinding.ActivityAcceptAdsBinding
 import com.example.amplifieradmin.databinding.ActivityPendingBinding
@@ -70,7 +71,16 @@ class AcceptAdsActivity : AppCompatActivity() {
                                         )
                                     }
                                 }
-                            })
+                            },
+
+                            object :AcceptedAdsAdapter.OnLinkClick{
+                                override fun onLinkClick(
+                                    acceptAdsData: AcceptAdsData?
+                                ) {
+                                }
+
+                            }
+                            )
                         binding.acceptRecyclerview.adapter = adapter
                         homeRenderList(it.acceptAdsResp)
                     }

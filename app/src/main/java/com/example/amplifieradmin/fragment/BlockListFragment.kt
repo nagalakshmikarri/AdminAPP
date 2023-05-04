@@ -130,6 +130,9 @@ class BlockListFragment : Fragment() {
                     is MainState.ConfirmUser->{
                         Log.e("testtt", "Succesfully Confirmed the business")
                         binding.progressBar.visibility = View.GONE
+
+                        binding.blockListRecy.visibility = View.GONE
+                        binding.noResultTv.visibility = View.VISIBLE
                         val blockedListReq= BlockedListReq(s_id)
 
                         lifecycleScope.launch {
@@ -195,10 +198,10 @@ class BlockListFragment : Fragment() {
     private fun homeRenderList(blockedListResp: BlockedListResp) {
         if (blockedListResp!!.data.isNotEmpty()) {
             binding.blockListRecy.visibility = View.VISIBLE
-            binding.tvEmptyMsg.visibility = View.GONE
+            binding.noResultTv.visibility = View.GONE
         } else {
             binding.blockListRecy.visibility = View.GONE
-            binding.tvEmptyMsg.visibility = View.VISIBLE
+            binding.noResultTv.visibility = View.VISIBLE
         }
     }
 
@@ -207,6 +210,8 @@ class BlockListFragment : Fragment() {
             ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
                 .get(HomeViewModel::class.java)
 
+        binding.blockListRecy.visibility = View.GONE
+        binding.noResultTv.visibility = View.VISIBLE
         val blockedListReq= BlockedListReq(s_id)
 
         lifecycleScope.launch {

@@ -45,15 +45,19 @@ class RecommendBusinessAdapter(
                     recommendBusinessData.s_address + ", "
                 } else {
                     " "
-                } + if (!recommendBusinessData.s_address1.isNullOrEmpty()) {
-                    recommendBusinessData.s_address1 + ", "
-                } else {
-                    " "
                 } + if (!recommendBusinessData.s_address2.isNullOrEmpty()) {
                     recommendBusinessData.s_address2 + ", "
                 } else {
                     " "
-                } + if (!recommendBusinessData.s_address3.isNullOrEmpty()) {
+                } + if (!recommendBusinessData.city.isNullOrEmpty()) {
+                    recommendBusinessData.city + ", "
+                } else {
+                    " "
+                } + if (!recommendBusinessData.s_state.isNullOrEmpty()) {
+                    recommendBusinessData.s_state + ", "
+                } else {
+                    ""
+                }   + if (!recommendBusinessData.s_address3.isNullOrEmpty()) {
                     recommendBusinessData.s_address3 + ", "
                 } else {
                     ""

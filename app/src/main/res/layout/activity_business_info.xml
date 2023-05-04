@@ -235,6 +235,28 @@
                 android:layout_marginStart="20sp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/jost_regular_400"
+                android:text="@string/Country"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:id="@+id/country_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/round"
+                android:fontFamily="@font/jost_regular_400"
+                android:paddingStart="15sp"
+                android:paddingEnd="15sp"
+                android:paddingVertical="15dp"
+                android:textColor="#24343F"
+                android:textSize="14sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/jost_regular_400"
                 android:text="@string/city"
                 android:textColor="#24343F"
                 android:textSize="14sp" />

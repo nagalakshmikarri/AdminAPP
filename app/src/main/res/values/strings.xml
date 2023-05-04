@@ -9,8 +9,8 @@
     <string name="AdminSupportes">Admin Supportes</string>
     <string name="AdsList">ADS LIST</string>
     <string name="subadmin">Sub Admin 1</string>
-    <string name="Reject">REJECT</string>
-    <string name="Accept">ACCEPT</string>
+    <string name="Reject">Reject</string>
+    <string name="Accept">Accept</string>
     <string name="vamsi">Vamsi</string>
     <string name="pending">Pending</string>
     <string name="fullname_txt">LIC HousingFinanceFinancialSerivicesLtd</string>
@@ -129,4 +129,5 @@
     <string name="register_points">Register Points(*)</string>
     <string name="home_points">Homescreen Points(*)</string>
     <string name="contact_point">ContactPoints(*)</string>
+    <string name="pleselogin">Please Login</string>
 </resources>

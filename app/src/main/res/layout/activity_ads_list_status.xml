@@ -157,7 +157,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/add_category"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                 />
 
             <TextView
                 android:id="@+id/category_add"
@@ -207,7 +207,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/ads_pending"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+               />
 
             <TextView
                 android:id="@+id/tv_pending_list"
@@ -258,7 +258,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/ads_accepted"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                 />
 
             <TextView
                 android:id="@+id/tv_aceeptads"
@@ -307,7 +307,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/ads_rejected"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                 />
 
             <TextView
                 android:id="@+id/AdsRejected"
@@ -355,7 +355,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/refer_business1"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                />
 
             <TextView
                 android:id="@+id/refer_business"
@@ -398,7 +398,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/business_add"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                 />
 
             <TextView
                 android:id="@+id/Business_list"
@@ -448,7 +448,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/user_claim"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                />
 
             <TextView
                 android:id="@+id/Cliam_business"
@@ -497,7 +497,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/aproved_business"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                />
 
             <TextView
                 android:id="@+id/approved_business_tv"
@@ -545,7 +545,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/jobs"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -591,8 +591,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginStart="10dp"
                 android:src="@drawable/aproved_business"
-                android:visibility="visible"
-                app:tint="#F1744B" />
+                android:visibility="visible" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -614,7 +613,7 @@
                 android:layout_marginEnd="15sp"
                 android:src="@drawable/ic_baseline_arrow_right_24"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                />
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
@@ -630,7 +629,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15sp"
             android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/List_business"
@@ -640,7 +640,7 @@
                 android:layout_marginStart="10dp"
                 android:src="@drawable/all_businesses"
                 android:visibility="visible"
-                app:tint="#F1744B" />
+                />
 
             <TextView
                 android:id="@+id/Business_List"

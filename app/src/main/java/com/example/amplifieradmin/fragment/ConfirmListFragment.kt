@@ -135,7 +135,8 @@ class ConfirmListFragment : Fragment() {
                     is MainState.BlockedUser->{
                         Log.e("testtt", "Succesfully blocked the business")
                         binding.progressBar.visibility = View.GONE
-
+                        binding.confirmListRecy.visibility = View.GONE
+                        binding.noResultTv.visibility = View.VISIBLE
                         val confirmListReq=ConfirmListReq(s_id)
 
                         lifecycleScope.launch {
@@ -195,10 +196,10 @@ class ConfirmListFragment : Fragment() {
     private fun homeRenderList(confirmedListResp: ConfirmedListResp) {
         if (confirmedListResp!!.data.isNotEmpty()) {
             binding.confirmListRecy.visibility = View.VISIBLE
-            binding.tvEmptyMsg.visibility = View.GONE
+            binding.noResultTv.visibility = View.GONE
         } else {
             binding.confirmListRecy.visibility = View.GONE
-            binding.tvEmptyMsg.visibility = View.VISIBLE
+            binding.noResultTv.visibility = View.VISIBLE
         }
 
     }
@@ -208,6 +209,8 @@ class ConfirmListFragment : Fragment() {
             ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
                 .get(HomeViewModel::class.java)
 
+        binding.confirmListRecy.visibility = View.GONE
+        binding.noResultTv.visibility = View.VISIBLE
         val confirmListReq=ConfirmListReq(s_id)
 
         lifecycleScope.launch {

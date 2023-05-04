@@ -100,6 +100,9 @@ class ConfirmJobsFragment : Fragment() {
                         Log.e("testtt", "Succesfully blocked the job")
                         binding.progressBar.visibility = View.GONE
 
+                        binding.confirmJobsRecy.visibility = View.GONE
+                        binding.noResultTv.visibility = View.VISIBLE
+
                         lifecycleScope.launch {
                             homeViewModel.homeIntent.send(
                                 MainIntent.ConfirmJobs
@@ -186,6 +189,9 @@ class ConfirmJobsFragment : Fragment() {
     }
     override fun onResume() {
         super.onResume()
+        binding.confirmJobsRecy.visibility = View.GONE
+        binding.noResultTv.visibility = View.VISIBLE
+
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
                 MainIntent.ConfirmJobs

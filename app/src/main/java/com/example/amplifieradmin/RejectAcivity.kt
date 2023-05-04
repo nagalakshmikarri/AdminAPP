@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.RejectAdsData
 import com.example.amplifieradmin.data.model.RejectAdsResp
 import com.example.amplifieradmin.databinding.ActivityRejectAcivityBinding
 import com.example.amplifieradmin.helper.Constants
@@ -70,6 +71,14 @@ class RejectAcivity : AppCompatActivity() {
                                         )
                                     }
                                 }
+                            },
+                            object :RejectedAdsAdapter.OnLinkClick{
+                                override fun onLinkClick(
+                                    rejectAdsData: RejectAdsData?
+                                ) {
+
+                                }
+
                             }
                             )
                         binding.rejectRecyclerview.adapter = adapter

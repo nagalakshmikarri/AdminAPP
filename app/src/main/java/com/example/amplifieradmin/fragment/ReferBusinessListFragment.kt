@@ -84,6 +84,8 @@ class ReferBusinessListFragment : Fragment() {
                         //Toast.makeText(context, R.string.datanotfound, Toast.LENGTH_LONG).show()
                     }
                     is MainState.RecommendBusiness -> {
+                        binding.recyclerView.visibility = View.GONE
+                        binding.noResultTv.visibility = View.VISIBLE
                         Log.e("testtt", it.recommendBusinessResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
                         adapter = RecommendBusinessAdapter(
@@ -140,6 +142,8 @@ class ReferBusinessListFragment : Fragment() {
                     }
 
                     is MainState.ConfirmUser->{
+                        binding.recyclerView.visibility = View.GONE
+                        binding.noResultTv.visibility = View.VISIBLE
                         Log.e("testtt", "Succesfully Confirmed the business")
                         binding.progressBar.visibility = View.GONE
                         lifecycleScope.launch {
@@ -151,6 +155,8 @@ class ReferBusinessListFragment : Fragment() {
                     }
 
                     is MainState.BlockedUser->{
+                        binding.recyclerView.visibility = View.GONE
+                        binding.noResultTv.visibility = View.VISIBLE
                         Log.e("testtt", "Succesfully blocked the business")
                         binding.progressBar.visibility = View.GONE
                         lifecycleScope.launch {
@@ -311,6 +317,8 @@ class ReferBusinessListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        binding.recyclerView.visibility = View.GONE
+        binding.noResultTv.visibility = View.VISIBLE
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
                 MainIntent.RecommendBusiness

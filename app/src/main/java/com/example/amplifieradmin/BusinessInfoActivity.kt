@@ -35,10 +35,10 @@ class BusinessInfoActivity : AppCompatActivity() {
         binding.locatedTv.text=recommendBusinessData?.locatedin
         binding.streetTv.text=recommendBusinessData?.s_address
         binding.areanameTv.text=recommendBusinessData?.s_address2
-        binding.stateTv.text=recommendBusinessData?.s_address1
+        binding.stateTv.text=recommendBusinessData?.s_state
+        binding.countryTv.text=recommendBusinessData?.s_country
         binding.cityTv.text=recommendBusinessData?.city
         binding.pincodeTv.text=recommendBusinessData?.s_address3
-
 
     }
 

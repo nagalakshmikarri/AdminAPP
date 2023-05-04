@@ -1,13 +1,11 @@
 package com.example.amplifieradmin
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.util.Patterns
-import android.view.KeyEvent
 import android.view.View
-import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -27,7 +25,6 @@ import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
 import com.example.amplifieradmin.viewstate.MainState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.ArrayList
 
@@ -137,6 +134,11 @@ class CategoryActivity : AppCompatActivity() {
 
     }
 
+    private fun hideKeyboard(view: View) {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
     private fun typesRenderAdapter(data: List<GetTagsData>) {
         val filteredTypes = ArrayList<GetTagsData>()
         filteredTypes.add(GetTagsData("-1","select a type",""))
@@ -226,6 +228,7 @@ class CategoryActivity : AppCompatActivity() {
                 }
             }
             if (checkValidations()) {
+                hideKeyboard(currentFocus ?: View(this))
                 lifecycleScope.launch {
                     homeViewModel.homeIntent.send(
                         MainIntent.Category(

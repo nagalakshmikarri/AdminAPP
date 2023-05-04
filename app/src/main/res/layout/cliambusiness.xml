@@ -14,6 +14,30 @@
             android:textSize="16sp"
             android:textColor="@color/black"
             android:fontFamily="@font/jost_medium_500" />
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/jost_regular_400" />
+        <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/appcolor"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/jost_regular_400" />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/jost_regular_400" />
     <TextView
         android:id="@+id/tv_phone"
         android:layout_width="match_parent"

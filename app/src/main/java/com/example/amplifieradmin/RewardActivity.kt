@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.GettingRewardResp
 import com.example.amplifieradmin.data.model.GettingRewardRespData
 import com.example.amplifieradmin.data.model.RecommmendBusinnessResp
 import com.example.amplifieradmin.databinding.ActivityAllBusinessListBinding
@@ -25,6 +26,7 @@ class RewardActivity : AppCompatActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: ActivityRewardBinding? = null
     private val binding get() = _binding!!
+    private lateinit var gettingRewars: GettingRewardRespData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +60,7 @@ class RewardActivity : AppCompatActivity() {
                         binding.pointsTv.text=it.gettingRewardResp?.data!!.register+" "+"Ponits"
                         binding.homeScreenTv.text=it.gettingRewardResp?.data!!.home_screen_view+" "+"Ponits"
                         binding.contactTv.text=it.gettingRewardResp?.data!!.friend_accept+" "+"Ponits"
+                        gettingRewars=it.gettingRewardResp?.data
                     }
 
                     is MainState.Error -> {
@@ -97,6 +100,7 @@ class RewardActivity : AppCompatActivity() {
 
         binding.editTv.setOnClickListener {
             val intent = Intent(this@RewardActivity, EditActivity::class.java)
+            intent.putExtra("info",gettingRewars )
             startActivity(intent);
         }
     }

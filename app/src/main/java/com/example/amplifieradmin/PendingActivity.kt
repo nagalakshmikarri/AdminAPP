@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.AdsPendingData
 import com.example.amplifieradmin.data.model.AdsPendingResp
 import com.example.amplifieradmin.databinding.ActivityHomeBinding
 import com.example.amplifieradmin.databinding.ActivityPendingBinding
@@ -89,7 +90,13 @@ class PendingActivity : AppCompatActivity() {
                                     }
 
                                 }
-                            })
+                            },
+                        object :AdsPendingAdapter.OnLinkClick{
+                            override fun onLinkClick(adsPendingData: AdsPendingData?) {
+
+                            }
+
+                        })
                         binding.recyclerView.adapter = adapter
                         homeRenderList(it.AdsPendingResp)
                     }

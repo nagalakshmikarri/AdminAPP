@@ -149,6 +149,6 @@
         android:backgroundTint="#2E8A06"
         android:paddingHorizontal="40dp"
         android:text="@string/Accept"
-        android:textAllCaps="true"
+        android:textAllCaps="false"
         android:textColor="@color/white" />
 </LinearLayout>

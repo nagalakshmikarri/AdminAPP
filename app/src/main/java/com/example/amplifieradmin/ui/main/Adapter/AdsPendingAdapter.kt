@@ -5,22 +5,23 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
-import com.example.amplifieradmin.AdsListStatusActivity
 import com.example.amplifieradmin.R
-import com.example.amplifieradmin.data.model.AcceptResp
-import com.example.amplifieradmin.data.model.AdminUsersData
 import com.example.amplifieradmin.data.model.AdsPendingData
-import com.example.amplifieradmin.databinding.AdminSupportersBinding
 import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.PendingBinding
+import com.example.amplifieradmin.helper.Constants
+import com.example.amplifieradmin.helper.PrefHelper
 import kotlinx.android.synthetic.main.pending.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -30,14 +31,20 @@ class AdsPendingAdapter (
             private val context: Context,
     private var onAcceptClick: OnAcceptClick,
     private var onRejectClick:OnRejectClick,
-) : RecyclerView.Adapter<AdsPendingAdapter.DataViewHolder>() {
+    private var onLinkClick: OnLinkClick,
+
+    ) : RecyclerView.Adapter<AdsPendingAdapter.DataViewHolder>() {
     class DataViewHolder(itemView: PendingBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         private var binding = itemView
+        lateinit var prefHelper: PrefHelper
+
         fun bind(
             adsPendingData: AdsPendingData,
             context: Context,
+            onLinkClick: OnLinkClick,
         ) {
+            prefHelper = PrefHelper(context)
 
             var requestOptions = RequestOptions()
             requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(50))
@@ -60,6 +67,66 @@ class AdsPendingAdapter (
 
            binding.startDateTv.text = outputFormat.format(sDate)+" \u00b7 " +outputFormat.format(eDate)
 
+            binding.tvWatchnow.setOnClickListener {
+                if (prefHelper.getBoolean(Constants.PREF_IS_LOGIN)) {
+                    onLinkClick.onLinkClick(adsPendingData)
+                    if (adsPendingData.link_type.equals("link")) {
+                        var webpage = ""
+                        if (!adsPendingData.link.startsWith("http://") && !adsPendingData.link.startsWith("https://")) {
+                            webpage = "http://" + adsPendingData.link
+                        } else {
+                            webpage = adsPendingData.link
+                        }
+                        val viewIntent = Intent(
+                            "android.intent.action.VIEW",
+                            Uri.parse(webpage)
+                        )
+                        context.startActivity(viewIntent)
+                    } else if (adsPendingData.link_type.equals("email")) {
+
+                        /*ACTION_SEND action to launch an email client installed on your Android device.*/
+                        val email1 = Intent(Intent.ACTION_SEND)
+                        email1.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(adsPendingData.link))
+                        email1.putExtra(Intent.EXTRA_SUBJECT, "subject")
+                        email1.putExtra(Intent.EXTRA_TEXT, " ")
+                        email1.type = "message/rfc822"
+                        context.startActivity(
+                            Intent.createChooser(
+                                email1,
+                                "Choose an Email client :"
+                            )
+                        )
+
+
+                    } else if (adsPendingData.link_type.equals("phone")) {
+                        val phone: String = adsPendingData.link
+                        Log.e("phonenumber", phone)
+                        val phoneIntent = Intent(
+                            Intent.ACTION_DIAL, Uri.fromParts(
+                                "tel", phone, null
+                            )
+                        )
+                        context.startActivity(phoneIntent)
+
+                    } else if (adsPendingData.link_type.equals("telegram")) {
+                        try {
+                            val telegram =
+                                Intent(Intent.ACTION_VIEW, Uri.parse(adsPendingData.link))
+                            telegram.setPackage("org.telegram.messenger")
+                            context.startActivity(telegram)
+                        } catch (e: Exception) {
+                            Toast.makeText(
+                                context,
+                                "Telegram app is not installed",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(context, R.string.pleselogin, Toast.LENGTH_SHORT).show();
+                }
+
+            }
 
 
         }
@@ -85,6 +152,7 @@ class AdsPendingAdapter (
         holder.bind(
             adsPendingData[position],
             context,
+            onLinkClick
         )
         holder.itemView.accepted_btn.setOnClickListener {
             val dialog = Dialog(context)
@@ -154,6 +222,9 @@ class AdsPendingAdapter (
         }
     interface OnRejectClick{
         fun onRejectClick(RejectedId:String,reject:String)
+    }
+    interface OnLinkClick {
+        fun onLinkClick(adsPendingData: AdsPendingData?)
     }
 
 }

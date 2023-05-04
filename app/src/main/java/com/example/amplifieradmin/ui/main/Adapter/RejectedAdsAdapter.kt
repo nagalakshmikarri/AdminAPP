@@ -2,22 +2,26 @@ package com.example.amplifieradmin.ui.main.Adapter
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.amplifieradmin.R
-import com.example.amplifieradmin.data.model.AcceptAdsData
 import com.example.amplifieradmin.data.model.RejectAdsData
-import com.example.amplifieradmin.databinding.AcceptadsBinding
 import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.RejectedBinding
+import com.example.amplifieradmin.helper.Constants
+import com.example.amplifieradmin.helper.PrefHelper
 import kotlinx.android.synthetic.main.pending.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,15 +30,21 @@ class RejectedAdsAdapter
     (
     private var rejectAdsData: List<RejectAdsData>,
     private val context: Context,
-    private var onAcceptClick: RejectedAdsAdapter.OnAcceptClick,
-) : RecyclerView.Adapter<RejectedAdsAdapter.DataViewHolder>(){
+    private var onAcceptClick: OnAcceptClick,
+    private var onLinkClick:OnLinkClick,
+
+    ) : RecyclerView.Adapter<RejectedAdsAdapter.DataViewHolder>(){
     class DataViewHolder(itemView: RejectedBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         private var binding = itemView
+        lateinit var prefHelper: PrefHelper
+
         fun bind(
-            rejectAdsData:RejectAdsData,
+            rejectAdsData: RejectAdsData,
             context: Context,
+            onLinkClick: OnLinkClick,
         ) {
+            prefHelper = PrefHelper(context)
 
             var requestOptions = RequestOptions()
             requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(50))
@@ -58,6 +68,66 @@ class RejectedAdsAdapter
 
             binding.startDateTv.text = outputFormat.format(sDate)+" \u00b7 " +outputFormat.format(eDate)
 
+            binding.tvWatchnow.setOnClickListener {
+                if (prefHelper.getBoolean(Constants.PREF_IS_LOGIN)) {
+                    onLinkClick.onLinkClick(rejectAdsData)
+                    if (rejectAdsData.link_type.equals("link")) {
+                        var webpage = ""
+                        if (!rejectAdsData.link.startsWith("http://") && !rejectAdsData.link.startsWith("https://")) {
+                            webpage = "http://" + rejectAdsData.link
+                        } else {
+                            webpage = rejectAdsData.link
+                        }
+                        val viewIntent = Intent(
+                            "android.intent.action.VIEW",
+                            Uri.parse(webpage)
+                        )
+                        context.startActivity(viewIntent)
+                    } else if (rejectAdsData.link_type.equals("email")) {
+
+                        /*ACTION_SEND action to launch an email client installed on your Android device.*/
+                        val email1 = Intent(Intent.ACTION_SEND)
+                        email1.putExtra(Intent.EXTRA_EMAIL, arrayOf<String>(rejectAdsData.link))
+                        email1.putExtra(Intent.EXTRA_SUBJECT, "subject")
+                        email1.putExtra(Intent.EXTRA_TEXT, " ")
+                        email1.type = "message/rfc822"
+                        context.startActivity(
+                            Intent.createChooser(
+                                email1,
+                                "Choose an Email client :"
+                            )
+                        )
+
+
+                    } else if (rejectAdsData.link_type.equals("phone")) {
+                        val phone: String = rejectAdsData.link
+                        Log.e("phonenumber", phone)
+                        val phoneIntent = Intent(
+                            Intent.ACTION_DIAL, Uri.fromParts(
+                                "tel", phone, null
+                            )
+                        )
+                        context.startActivity(phoneIntent)
+
+                    } else if (rejectAdsData.link_type.equals("telegram")) {
+                        try {
+                            val telegram =
+                                Intent(Intent.ACTION_VIEW, Uri.parse(rejectAdsData.link))
+                            telegram.setPackage("org.telegram.messenger")
+                            context.startActivity(telegram)
+                        } catch (e: Exception) {
+                            Toast.makeText(
+                                context,
+                                "Telegram app is not installed",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                } else {
+                    Toast.makeText(context, R.string.pleselogin, Toast.LENGTH_SHORT).show();
+                }
+
+            }
 
         }
     }
@@ -87,6 +157,7 @@ class RejectedAdsAdapter
         holder.bind(
             rejectAdsData[position],
             context,
+            onLinkClick
         )
         holder.itemView.accepted_btn.setOnClickListener {
             val dialog = Dialog(context)
@@ -118,6 +189,9 @@ class RejectedAdsAdapter
     }
     interface OnAcceptClick{
         fun onAcceptClick(acceptdId: String,accept: String)
+    }
+    interface OnLinkClick {
+        fun onLinkClick(rejectAdsData: RejectAdsData?)
     }
 
 }

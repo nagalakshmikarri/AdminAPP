@@ -22,7 +22,28 @@ class ApproveBusinessListAdapter(
             onItemClick: OnItemClick,
         ){
             binding.tvBusiness.text=cliamBusinessListRespData.sBusiness
-            binding.tvPhone.text=cliamBusinessListRespData.sPhone
+            binding.tvEmail.text=cliamBusinessListRespData.sEmail
+            binding.tvCategory.text=cliamBusinessListRespData.businesscategory
+            binding.tvAddress.text =
+                if (!cliamBusinessListRespData.sAddress.isNullOrEmpty()) {
+                    cliamBusinessListRespData.sAddress + ", "
+                } else {
+                    " "
+                } + if (!cliamBusinessListRespData.sAddress1.isNullOrEmpty()) {
+                    cliamBusinessListRespData.sAddress1 + ", "
+                } else {
+                    " "
+                } + if (!cliamBusinessListRespData.sAddress2.isNullOrEmpty()) {
+                    cliamBusinessListRespData.sAddress2 + ", "
+                } else {
+                    " "
+                } + if (!cliamBusinessListRespData.sAddress3.isNullOrEmpty()) {
+                    cliamBusinessListRespData.sAddress3 + ", "
+                } else {
+                    ""
+                }
+
+            binding.tvPhone.text=cliamBusinessListRespData.sPhoneCode+cliamBusinessListRespData.sPhone
 /*
             binding.linearLayoutTv.setOnClickListener {
                 //  Toast.makeText(context ,adminUsersData.admin_id, Toast.LENGTH_SHORT).show()

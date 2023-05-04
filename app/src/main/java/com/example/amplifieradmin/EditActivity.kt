@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
+import com.example.amplifieradmin.data.model.GettingRewardRespData
+import com.example.amplifieradmin.data.model.RecommendBusinessData
 import com.example.amplifieradmin.data.model.UpdateRewardsReq
 import com.example.amplifieradmin.databinding.ActivityEditBinding
 import com.example.amplifieradmin.databinding.ActivityRegistrationBinding
@@ -92,7 +95,12 @@ class EditActivity : AppCompatActivity() {
                     is MainState.UpdateRewards -> {
                         Log.e("testtt", it.updateRewardsResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
-
+                        Toast.makeText(
+                            this@EditActivity,
+                            "Update Successfully",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
                     }
 
                     is MainState.Error -> {
@@ -115,6 +123,15 @@ class EditActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
+        val dataDetails: GettingRewardRespData?=intent.getParcelableExtra<GettingRewardRespData>("info")
+        setData(dataDetails)
+    }
+
+    private fun setData(gettingRewardRespData: GettingRewardRespData?) {
+
+        binding.etRegisterPoints.setText(gettingRewardRespData!!.register)
+        binding.etHomeScreenPoints.setText(gettingRewardRespData!!.home_screen_view)
+        binding.etContact.setText(gettingRewardRespData!!.friend_accept)
 
     }
 }
