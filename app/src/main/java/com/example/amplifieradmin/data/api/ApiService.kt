@@ -281,4 +281,29 @@ interface ApiService {
         @Field("friend_accept") friend_accept: String?,
     ): NetworkResponse<UpdateRewardsResp, ErrorResponse>
 
+    @POST("list_invite_type")
+    suspend fun listInviteType(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<ListInviteTypeResp, ErrorResponse>
+
+    @POST("add_invite_type")
+    @FormUrlEncoded
+    suspend fun addInviteType(
+        @Header("Authorization") authorization: String,
+        @Field("type") type: String?
+    ): NetworkResponse<AddInviteTypeResp, ErrorResponse>
+    @POST("list_invite_subtype")
+    @FormUrlEncoded
+    suspend fun subInviteType(
+        @Header("Authorization") authorization: String,
+        @Field("type_id") type_id: String?
+    ): NetworkResponse<SubTypeInviteListResp, ErrorResponse>
+    @POST("add_invite_subtype")
+    @FormUrlEncoded
+    suspend fun addSubTypeInvite(
+        @Header("Authorization") authorization: String,
+        @Field("type") type: String?,
+        @Field("type_id") type_id: String?
+    ): NetworkResponse<AddSubTypeInviteResp, ErrorResponse>
+
 }

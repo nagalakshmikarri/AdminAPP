@@ -622,6 +622,45 @@
             android:layout_marginTop="15sp"
             android:background="@color/litegray" />
 
+        <RelativeLayout
+            android:id="@+id/recommand_service_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/recommanded_services"
+                android:layout_width="25dp"
+                android:layout_height="25sp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/add_category"
+                android:visibility="visible" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/recommanded_services"
+                android:fontFamily="@font/jost_medium_500"
+                android:text="@string/recommanded_services"
+                android:textColor="@color/text_header_color"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25sp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="15sp"
+                android:src="@drawable/ic_baseline_arrow_right_24"
+                android:visibility="visible"
+                />
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/business_list_tv"

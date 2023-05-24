@@ -130,4 +130,8 @@
     <string name="home_points">Homescreen Points(*)</string>
     <string name="contact_point">ContactPoints(*)</string>
     <string name="pleselogin">Please Login</string>
+    <string name="recommanded_services">Recommanded Services</string>
+    <string name="sub_types">Add Types*</string>
+    <string name="Types_list">Types List</string>
+    <string name="Add_types">Sub Types*</string>
 </resources>

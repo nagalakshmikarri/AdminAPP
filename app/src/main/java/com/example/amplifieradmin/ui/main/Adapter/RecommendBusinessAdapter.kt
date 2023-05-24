@@ -33,6 +33,7 @@ class RecommendBusinessAdapter(
         ) {
             binding.tvBusiness.text = recommendBusinessData.s_business
             binding.phoneNumber.text=recommendBusinessData.s_phone_code+recommendBusinessData.s_phone
+/*
             if (recommendBusinessData.businesscategory.isNullOrEmpty()){
                 binding.tvCategory.text="Please add Business Category"
                 binding.tvCategory.setTextColor(ContextCompat.getColor(context, R.color.red));
@@ -40,6 +41,9 @@ class RecommendBusinessAdapter(
                 binding.tvCategory.text=recommendBusinessData.businesscategory
                 binding.tvCategory.setTextColor(ContextCompat.getColor(context, R.color.purple_500));
             }
+*/
+            binding.tvCategory.text=recommendBusinessData.businesscategory
+
             binding.tvAddress.text =
                 if (!recommendBusinessData.s_address.isNullOrEmpty()) {
                     recommendBusinessData.s_address + ", "
@@ -58,7 +62,7 @@ class RecommendBusinessAdapter(
                 } else {
                     ""
                 }   + if (!recommendBusinessData.s_address3.isNullOrEmpty()) {
-                    recommendBusinessData.s_address3 + ", "
+                    recommendBusinessData.s_address3
                 } else {
                     ""
                 }

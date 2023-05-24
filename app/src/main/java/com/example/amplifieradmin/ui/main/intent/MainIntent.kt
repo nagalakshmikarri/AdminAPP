@@ -108,4 +108,18 @@ sealed class MainIntent {
     class UpdateRewards(
         val updateRewardsReq: UpdateRewardsReq
     ):MainIntent()
+
+    object ListingInviteType:MainIntent()
+
+    class AddInviteType(
+        val addInviteTypeReq: AddInviteTypeReq
+    ):MainIntent()
+
+    class SubInviteType(
+        val subTypeInviteListReq: SubTypeInviteListReq
+    ):MainIntent()
+
+    class AddSubTypeInvite(
+        val addSubTypeInviteReq: AddSubTypeInviteReq
+    ):MainIntent()
 }

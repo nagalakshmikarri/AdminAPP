@@ -4,7 +4,6 @@ import android.util.Base64
 import com.amplifier.amplifier.data.network.NetworkResponse
 import com.example.amplifieradmin.ErrorResponse
 import com.example.amplifieradmin.data.model.*
-import com.example.amplifieradmin.ui.main.intent.MainIntent
 
 class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     val authPayload = "amplify:amplify"
@@ -234,4 +233,22 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
             updateRewardsReq.friend_accept
         )
     }
+
+    override suspend fun listingInviteType(): NetworkResponse<ListInviteTypeResp, ErrorResponse> {
+        return apiService.listInviteType("Basic $base64".trim())
+    }
+
+    override suspend fun addInviteType(addInviteTypeReq: AddInviteTypeReq):NetworkResponse<AddInviteTypeResp,ErrorResponse>{
+        return apiService.addInviteType("Basic $base64".trim(),addInviteTypeReq.type)
+    }
+
+    override suspend fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq):NetworkResponse<SubTypeInviteListResp,ErrorResponse>{
+        return apiService.subInviteType("Basic $base64".trim(),subTypeInviteListReq.type_id)
+    }
+
+    override suspend fun addSubTypeInvite(addSubTypeInviteReq: AddSubTypeInviteReq): NetworkResponse<AddSubTypeInviteResp, ErrorResponse> {
+        return apiService.addSubTypeInvite("Basic $base64".trim(),addSubTypeInviteReq.type,addSubTypeInviteReq.type_id)
+
+    }
+
 }

@@ -11,7 +11,8 @@ import com.example.amplifieradmin.databinding.CliambusinessBinding
 class ApproveBusinessListAdapter(
     private var cliamBusinessListRespData: List<ApprovedBusinessListResp.Data>,
     private val context: Context,
-    private var onItemClick: OnItemClick
+    private var onItemClick: OnItemClick,
+    private var onPhoneClick:OnPhoneClick
 ): RecyclerView.Adapter<ApproveBusinessListAdapter.DataViewHolder>(){
     class DataViewHolder(itemView: CliambusinessBinding):
         RecyclerView.ViewHolder(itemView.root){
@@ -20,6 +21,7 @@ class ApproveBusinessListAdapter(
             cliamBusinessListRespData: ApprovedBusinessListResp.Data,
             context: Context,
             onItemClick: OnItemClick,
+            onPhoneClick: OnPhoneClick,
         ){
             binding.tvBusiness.text=cliamBusinessListRespData.sBusiness
             binding.tvEmail.text=cliamBusinessListRespData.sEmail
@@ -38,12 +40,18 @@ class ApproveBusinessListAdapter(
                 } else {
                     " "
                 } + if (!cliamBusinessListRespData.sAddress3.isNullOrEmpty()) {
-                    cliamBusinessListRespData.sAddress3 + ", "
+                    cliamBusinessListRespData.sAddress3
                 } else {
                     ""
                 }
 
             binding.tvPhone.text=cliamBusinessListRespData.sPhoneCode+cliamBusinessListRespData.sPhone
+
+
+            binding.tvPhone.setOnClickListener {
+                onPhoneClick.onPhoneClick(cliamBusinessListRespData.sPhone)
+            }
+
 /*
             binding.linearLayoutTv.setOnClickListener {
                 //  Toast.makeText(context ,adminUsersData.admin_id, Toast.LENGTH_SHORT).show()
@@ -83,6 +91,7 @@ class ApproveBusinessListAdapter(
             cliamBusinessListRespData[position],
             context,
             onItemClick,
+            onPhoneClick
         )
 
     }
@@ -102,6 +111,9 @@ class ApproveBusinessListAdapter(
             sId: String,
             cliamBusinessListRespData: CliamBusinessListRespData
         )
+    }
+    interface OnPhoneClick{
+        fun onPhoneClick(phone:String)
     }
 
 }

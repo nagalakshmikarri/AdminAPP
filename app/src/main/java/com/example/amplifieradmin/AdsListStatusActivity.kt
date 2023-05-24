@@ -225,5 +225,9 @@ class AdsListStatusActivity : AppCompatActivity() {
             val intent = Intent(this@AdsListStatusActivity, ApproveBusinessListActivity::class.java)
             startActivity(intent);
         }
+        binding.recommandServiceRl.setOnClickListener {
+            val intent = Intent(this@AdsListStatusActivity, RecommandedServicesActivity::class.java)
+            startActivity(intent);
+        }
     }
 }

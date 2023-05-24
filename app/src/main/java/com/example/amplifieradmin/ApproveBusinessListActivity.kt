@@ -1,6 +1,7 @@
 package com.example.amplifieradmin
 
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -18,6 +19,7 @@ import com.example.amplifieradmin.databinding.ActivityApproveBusinessListBinding
 import com.example.amplifieradmin.databinding.ActivityCliamBusinessListBinding
 import com.example.amplifieradmin.helper.PrefHelper
 import com.example.amplifieradmin.ui.main.Adapter.ApproveBusinessListAdapter
+import com.example.amplifieradmin.ui.main.Adapter.BlockedListAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
@@ -77,6 +79,21 @@ class ApproveBusinessListActivity : AppCompatActivity() {
                                     intent.putExtra("s_business", s_business)
                                     intent.putExtra("s_phone", cliamBusinessListRespData.s_phone)
                                     startActivity(intent);
+
+                                }
+
+                            },
+                            object : ApproveBusinessListAdapter.OnPhoneClick{
+                                override fun onPhoneClick(
+                                    phone: String
+                                ) {
+                                    val intent = Intent(
+                                        Intent.ACTION_DIAL, Uri.parse(
+                                            "tel:" +phone
+                                        )
+                                    )
+                                    startActivity(intent)
+
 
                                 }
 

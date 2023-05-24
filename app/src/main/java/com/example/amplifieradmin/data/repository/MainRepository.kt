@@ -78,4 +78,12 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun gettingRewards()=apiHelper.gettingRewards()
 
     suspend fun updateRewards(updateRewardsReq: UpdateRewardsReq)=apiHelper.updateRewards(updateRewardsReq)
+
+    suspend fun listingInviteType()=apiHelper.listingInviteType()
+
+    suspend fun addInviteType(addInviteTypeReq: AddInviteTypeReq)=apiHelper.addInviteType(addInviteTypeReq)
+
+    suspend fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq)=apiHelper.subInviteType(subTypeInviteListReq)
+
+    suspend fun addSubInviteType(addSubTypeInviteReq: AddSubTypeInviteReq)=apiHelper.addSubTypeInvite(addSubTypeInviteReq)
 }

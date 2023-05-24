@@ -61,5 +61,13 @@ sealed  class MainState {
     data class GettingRewards(val gettingRewardResp: GettingRewardResp?):MainState()
 
     data class UpdateRewards(val updateRewardsResp: UpdateRewardsResp?):MainState()
+
+    data class ListingInviteTpe(val listInviiteTypeResp: ListInviteTypeResp?):MainState()
+
+    data class AddInviteType(val addInviteTypeResp: AddInviteTypeResp?):MainState()
+
+    data class SubInviteType(val subTypeInviteListResp: SubTypeInviteListResp?):MainState()
+
+    data class AddSubTypeInvite(val addSubTypeInviteResp: AddSubTypeInviteResp?):MainState()
     data class Error(val error: String?) : MainState()
 }

@@ -40,7 +40,7 @@ class ConfirmListAdapter(
                 } else {
                     " "
                 } + if (!confirmedListRespData.s_address3.isNullOrEmpty()) {
-                    confirmedListRespData.s_address3 + ", "
+                    confirmedListRespData.s_address3
                 } else {
                     ""
                 }

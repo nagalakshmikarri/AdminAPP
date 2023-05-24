@@ -41,7 +41,7 @@ class BlockedListAdapter(
                 } else {
                     " "
                 } + if (!blockedListRespData.s_address3.isNullOrEmpty()) {
-                    blockedListRespData.s_address3 + ", "
+                    blockedListRespData.s_address3
                 } else {
                     ""
                 }

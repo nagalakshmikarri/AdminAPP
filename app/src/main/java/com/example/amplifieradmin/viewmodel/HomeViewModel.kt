@@ -83,11 +83,131 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel() {
                     is MainIntent.ConfirmUserJobs->confirmUserJobs(it.confirmUserJobReq)
                     is MainIntent.GettingReward->gettingReward()
                     is MainIntent.UpdateRewards->updateRewards(it.updateRewardsReq)
+                    is MainIntent.ListingInviteType->listingInviteType()
+                    is MainIntent.AddInviteType->addInviteType(it.addInviteTypeReq)
+                    is MainIntent.SubInviteType->subInviteType(it.subTypeInviteListReq)
+                    is MainIntent.AddSubTypeInvite->addSubTypeInvite(it.addSubTypeInviteReq)
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun addSubTypeInvite(addSubTypeInviteReq: AddSubTypeInviteReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.addSubInviteType(addSubTypeInviteReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AddSubTypeInvite(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.subInviteType(subTypeInviteListReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.SubInviteType(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun addInviteType(addInviteTypeReq: AddInviteTypeReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.addInviteType(addInviteTypeReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AddInviteType(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun listingInviteType() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.listingInviteType()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.ListingInviteTpe(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 

@@ -210,6 +210,13 @@ class BlockListFragment : Fragment() {
             ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
                 .get(HomeViewModel::class.java)
 
+
+
+
+    }
+
+    override fun onResume() {
+        super.onResume()
         binding.blockListRecy.visibility = View.GONE
         binding.noResultTv.visibility = View.VISIBLE
         val blockedListReq= BlockedListReq(s_id)
@@ -222,9 +229,8 @@ class BlockListFragment : Fragment() {
 
             )
         }
-
-
     }
+
 
     private fun setupUI() {
         binding.blockListRecy.addItemDecoration(

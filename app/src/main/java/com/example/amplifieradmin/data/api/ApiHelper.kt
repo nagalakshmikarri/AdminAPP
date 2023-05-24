@@ -3,7 +3,6 @@ package com.example.amplifieradmin.data.api
 import com.amplifier.amplifier.data.network.NetworkResponse
 import com.example.amplifieradmin.ErrorResponse
 import com.example.amplifieradmin.data.model.*
-import com.example.amplifieradmin.ui.main.intent.MainIntent
 
 interface ApiHelper {
     suspend fun getLoginUser(loginReq: LoginReq): NetworkResponse<LoginResp, ErrorResponse>
@@ -77,4 +76,12 @@ interface ApiHelper {
     suspend fun gettingRewards():NetworkResponse<GettingRewardResp,ErrorResponse>
 
     suspend fun updateRewards(updateRewardsReq: UpdateRewardsReq):NetworkResponse<UpdateRewardsResp,ErrorResponse>
+
+    suspend fun listingInviteType():NetworkResponse<ListInviteTypeResp,ErrorResponse>
+
+    suspend fun addInviteType(addInviteTypeReq: AddInviteTypeReq):NetworkResponse<AddInviteTypeResp,ErrorResponse>
+
+    suspend fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq):NetworkResponse<SubTypeInviteListResp,ErrorResponse>
+
+    suspend fun addSubTypeInvite(addSubTypeInviteReq: AddSubTypeInviteReq):NetworkResponse<AddSubTypeInviteResp,ErrorResponse>
 }
