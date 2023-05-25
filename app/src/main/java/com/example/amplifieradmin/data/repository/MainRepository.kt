@@ -86,4 +86,8 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq)=apiHelper.subInviteType(subTypeInviteListReq)
 
     suspend fun addSubInviteType(addSubTypeInviteReq: AddSubTypeInviteReq)=apiHelper.addSubTypeInvite(addSubTypeInviteReq)
+
+    suspend fun getCategories()=apiHelper.getCategories()
+
+    suspend fun subCategories(subCategoriesReq: SubCategoriesReq)=apiHelper.subCategories(subCategoriesReq)
 }

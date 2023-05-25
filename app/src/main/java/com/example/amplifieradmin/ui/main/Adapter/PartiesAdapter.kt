@@ -10,15 +10,22 @@ import com.example.amplifieradmin.databinding.RecommandedServicesLayoutBinding
 class PartiesAdapter(
     private var subTypeInviteListRespData: List<SubTypeInviteListRespData>,
     private val context: Context,
+    private var onItemClick: OnItemClick
+
 ) : RecyclerView.Adapter<PartiesAdapter.DataViewHolder>()  {
     class DataViewHolder(itemView: RecommandedServicesLayoutBinding) :
         RecyclerView.ViewHolder(itemView.root) {
         private var binding = itemView
         fun bind(
             subTypeInviteListRespData: SubTypeInviteListRespData,
-            context: Context
+            context: Context,
+            onItemClick: OnItemClick
         ) {
             binding.tvType.text=subTypeInviteListRespData.type
+            binding.tvType.setOnClickListener {
+                onItemClick.onItemClick(subTypeInviteListRespData.type,subTypeInviteListRespData.type_id)
+
+            }
 
         }
     }
@@ -46,7 +53,8 @@ class PartiesAdapter(
         holder.bind(
             subTypeInviteListRespData[position],
             context,
-        )
+            onItemClick,
+            )
 
     }
 
@@ -57,6 +65,12 @@ class PartiesAdapter(
 
     fun addData(list: List<SubTypeInviteListRespData>) {
         this.subTypeInviteListRespData = list
+    }
+    interface OnItemClick {
+        fun onItemClick(
+            type:String,
+            id:String
+        )
     }
 
 }

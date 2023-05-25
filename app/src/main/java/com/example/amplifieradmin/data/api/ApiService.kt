@@ -292,12 +292,14 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("type") type: String?
     ): NetworkResponse<AddInviteTypeResp, ErrorResponse>
+
     @POST("list_invite_subtype")
     @FormUrlEncoded
     suspend fun subInviteType(
         @Header("Authorization") authorization: String,
         @Field("type_id") type_id: String?
     ): NetworkResponse<SubTypeInviteListResp, ErrorResponse>
+
     @POST("add_invite_subtype")
     @FormUrlEncoded
     suspend fun addSubTypeInvite(
@@ -305,5 +307,18 @@ interface ApiService {
         @Field("type") type: String?,
         @Field("type_id") type_id: String?
     ): NetworkResponse<AddSubTypeInviteResp, ErrorResponse>
+
+    @POST("get_categories")
+    suspend fun getCategories(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<GetCategoriesResp, ErrorResponse>
+
+    @POST("update_subtype_categories")
+    @FormUrlEncoded
+    suspend fun subCategories(
+        @Header("Authorization") authorization: String,
+        @Field("subtype_id") subtype_id: String?,
+        @Field("cat_id") cat_id: String?
+    ): NetworkResponse<SubCategoriesResp, ErrorResponse>
 
 }

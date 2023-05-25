@@ -251,4 +251,11 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
 
     }
 
+    override suspend fun getCategories():NetworkResponse<GetCategoriesResp,ErrorResponse>{
+        return apiService.getCategories("Basic $base64".trim())
+    }
+
+    override suspend fun subCategories(subCategoriesReq: SubCategoriesReq):NetworkResponse<SubCategoriesResp,ErrorResponse>{
+        return apiService.subCategories("Basic $base64".trim(),subCategoriesReq.subtype_id,subCategoriesReq.cat_id)
+    }
 }

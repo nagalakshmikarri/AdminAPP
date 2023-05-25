@@ -122,4 +122,10 @@ sealed class MainIntent {
     class AddSubTypeInvite(
         val addSubTypeInviteReq: AddSubTypeInviteReq
     ):MainIntent()
+
+    object GetCategories:MainIntent()
+
+    class SubCategories(
+        val subCategoriesReq: SubCategoriesReq
+    ):MainIntent()
 }

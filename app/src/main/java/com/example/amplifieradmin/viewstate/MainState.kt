@@ -69,5 +69,9 @@ sealed  class MainState {
     data class SubInviteType(val subTypeInviteListResp: SubTypeInviteListResp?):MainState()
 
     data class AddSubTypeInvite(val addSubTypeInviteResp: AddSubTypeInviteResp?):MainState()
+
+    data class GetCategories(val getCategoriesResp: GetCategoriesResp?):MainState()
+
+    data class SubCategories(val subCategoriesResp: SubCategoriesResp?):MainState()
     data class Error(val error: String?) : MainState()
 }

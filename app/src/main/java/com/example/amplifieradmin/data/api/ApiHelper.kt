@@ -84,4 +84,8 @@ interface ApiHelper {
     suspend fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq):NetworkResponse<SubTypeInviteListResp,ErrorResponse>
 
     suspend fun addSubTypeInvite(addSubTypeInviteReq: AddSubTypeInviteReq):NetworkResponse<AddSubTypeInviteResp,ErrorResponse>
+
+    suspend fun getCategories():NetworkResponse<GetCategoriesResp,ErrorResponse>
+
+    suspend fun subCategories(subCategoriesReq: SubCategoriesReq):NetworkResponse<SubCategoriesResp,ErrorResponse>
 }

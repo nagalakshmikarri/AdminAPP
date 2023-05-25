@@ -87,11 +87,71 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel() {
                     is MainIntent.AddInviteType->addInviteType(it.addInviteTypeReq)
                     is MainIntent.SubInviteType->subInviteType(it.subTypeInviteListReq)
                     is MainIntent.AddSubTypeInvite->addSubTypeInvite(it.addSubTypeInviteReq)
+                    is MainIntent.GetCategories->getCategories()
+                    is MainIntent.SubCategories->subCategories(it.subCategoriesReq)
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun subCategories(subCategoriesReq: SubCategoriesReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.subCategories(subCategoriesReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.SubCategories(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
+
+    }
+
+    private fun getCategories() {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.getCategories()
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.GetCategories(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 

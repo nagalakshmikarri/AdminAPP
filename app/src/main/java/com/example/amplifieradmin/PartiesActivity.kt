@@ -73,7 +73,18 @@ class PartiesActivity : AppCompatActivity() {
                         binding.progressBar.visibility = View.GONE
                         adapter = PartiesAdapter(
                             it.subTypeInviteListResp!!.list,
-                            this@PartiesActivity
+                            this@PartiesActivity,
+                            object :PartiesAdapter.OnItemClick{
+                                override fun onItemClick(
+                                    type: String,
+                                    id: String
+                                ) {
+                                    val intent = Intent(this@PartiesActivity, GetCategoriesActivity::class.java)
+                                    intent.putExtra("type", type)
+                                    startActivity(intent);
+                                }
+
+                            }
                         )
                         binding.servicesRecy.adapter = adapter
                         homeRenderList(it.subTypeInviteListResp)
