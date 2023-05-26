@@ -84,14 +84,14 @@ class GetCategoriesActivity : AppCompatActivity() {
                     }
 
 
-/*
-                    is MainState.AddSubTypeInvite -> {
-                        Log.e("testtt", it.addSubTypeInviteResp?.status.toString())
+
+                    is MainState.SubCategories -> {
+                        Log.e("testtt", it.subCategoriesResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
 
 
                     }
-*/
+
 
 
 
@@ -151,9 +151,10 @@ class GetCategoriesActivity : AppCompatActivity() {
         bindingDialog.btnCancel.setOnClickListener { dialog.dismiss() }
 
 
-    //    val subCategoriesReq=SubCategoriesReq(subtype_id!!,cat_id!!)
-
 /*
+        val subCategoriesReq=SubCategoriesReq(subtype_id!!,cat_id!!)
+
+
         bindingDialog.btnCancel.setOnClickListener {
             lifecycleScope.launch {
                 homeViewModel.homeIntent.send(
