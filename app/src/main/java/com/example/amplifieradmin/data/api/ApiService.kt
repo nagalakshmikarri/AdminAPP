@@ -321,4 +321,11 @@ interface ApiService {
         @Field("cat_id") cat_id: String?
     ): NetworkResponse<SubCategoriesResp, ErrorResponse>
 
+    @POST("edit_subtype_categories")
+    @FormUrlEncoded
+    suspend fun editSubTypeCategory(
+        @Header("Authorization") authorization: String,
+        @Field("subtype_id") subtype_id: String?,
+    ): NetworkResponse<EditSubTypeCategoryResp, ErrorResponse>
+
 }

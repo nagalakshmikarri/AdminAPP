@@ -90,4 +90,6 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun getCategories()=apiHelper.getCategories()
 
     suspend fun subCategories(subCategoriesReq: SubCategoriesReq)=apiHelper.subCategories(subCategoriesReq)
+
+    suspend fun editSubTypeCcategory(editSubTypeCategoryReq: EditSubTypeCategoryReq)=apiHelper.editSubTypeCategory(editSubTypeCategoryReq)
 }

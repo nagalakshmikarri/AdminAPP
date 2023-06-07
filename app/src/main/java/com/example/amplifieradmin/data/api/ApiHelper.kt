@@ -88,4 +88,6 @@ interface ApiHelper {
     suspend fun getCategories():NetworkResponse<GetCategoriesResp,ErrorResponse>
 
     suspend fun subCategories(subCategoriesReq: SubCategoriesReq):NetworkResponse<SubCategoriesResp,ErrorResponse>
+
+    suspend fun editSubTypeCategory(editSubTypeCategoryReq: EditSubTypeCategoryReq):NetworkResponse<EditSubTypeCategoryResp,ErrorResponse>
 }

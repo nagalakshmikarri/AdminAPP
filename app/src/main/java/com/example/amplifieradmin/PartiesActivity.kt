@@ -81,6 +81,7 @@ class PartiesActivity : AppCompatActivity() {
                                 ) {
                                     val intent = Intent(this@PartiesActivity, GetCategoriesActivity::class.java)
                                     intent.putExtra("type", type)
+                                    intent.putExtra("id", id)
                                     startActivity(intent);
                                 }
 

@@ -128,4 +128,8 @@ sealed class MainIntent {
     class SubCategories(
         val subCategoriesReq: SubCategoriesReq
     ):MainIntent()
+
+    class EditSubTypeCategory(
+        val editSubTypeCategoryReq: EditSubTypeCategoryReq
+    ):MainIntent()
 }

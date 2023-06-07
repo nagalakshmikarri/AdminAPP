@@ -57,7 +57,7 @@ class CategoriiesAdapter(
 
         holder.itemView.check_box.isChecked = selectedPosition == position
 
-        if (selectedPosition == -1) {
+        if (selectedPosition == 1) {
             holder.itemView.check_box.isChecked = false
         } else {
             holder.itemView.check_box.isChecked = selectedPosition == position

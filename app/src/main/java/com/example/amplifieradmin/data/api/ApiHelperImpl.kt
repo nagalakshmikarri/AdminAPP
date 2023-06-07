@@ -258,4 +258,8 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun subCategories(subCategoriesReq: SubCategoriesReq):NetworkResponse<SubCategoriesResp,ErrorResponse>{
         return apiService.subCategories("Basic $base64".trim(),subCategoriesReq.subtype_id,subCategoriesReq.cat_id)
     }
+
+    override suspend fun editSubTypeCategory(editSubTypeCategoryReq: EditSubTypeCategoryReq):NetworkResponse<EditSubTypeCategoryResp,ErrorResponse>{
+        return apiService.editSubTypeCategory("Basic $base64".trim(),editSubTypeCategoryReq.subtype_id)
+    }
 }

@@ -17,10 +17,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
-import com.example.amplifieradmin.data.model.BlockUserReq
-import com.example.amplifieradmin.data.model.GetCategoriesResp
-import com.example.amplifieradmin.data.model.SubCategoriesReq
-import com.example.amplifieradmin.data.model.SubTypeInviteListReq
+import com.example.amplifieradmin.data.model.*
 import com.example.amplifieradmin.databinding.ActivityGetCategoriesBinding
 import com.example.amplifieradmin.databinding.ActivityPartiesBinding
 import com.example.amplifieradmin.databinding.AlertDialogBinding
@@ -79,20 +76,31 @@ class GetCategoriesActivity : AppCompatActivity() {
                             it.getCategoriesResp!!.list,
                             this@GetCategoriesActivity,
                         )
+
                         binding.categoriesRecyclerView.adapter = adapter
                         homeRenderList(it.getCategoriesResp)
                     }
 
 
-
                     is MainState.SubCategories -> {
                         Log.e("testtt", it.subCategoriesResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
+                        saveClick()
+
+                    }
+                    is MainState.EditSubTypeCategory -> {
+                        Log.e("testtt", it.editSubTypeCategoryResp?.status.toString())
+                        binding.progressBar.visibility = View.GONE
+
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.GetCategories
+
+                            )
+                        }
 
 
                     }
-
-
 
 
                     else -> {}
@@ -100,39 +108,6 @@ class GetCategoriesActivity : AppCompatActivity() {
             }
         }
 
-    }
-
-    private fun homeRenderList(categoriesResp: GetCategoriesResp) {
-        if (categoriesResp!!.list.isNotEmpty()) {
-            binding.categoriesRecyclerView.visibility = View.VISIBLE
-        } else {
-            binding.categoriesRecyclerView.visibility = View.GONE
-        }
-    }
-
-    private fun setupViewModel() {
-        homeViewModel =
-            ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
-                .get(HomeViewModel::class.java)
-
-
-        lifecycleScope.launch {
-            homeViewModel.homeIntent.send(
-                MainIntent.GetCategories
-
-            )
-        }
-
-    }
-
-    private fun setupClicks() {
-        binding.backBtn.setOnClickListener {
-            onBackPressed()
-        }
-
-        binding.saveTv.setOnClickListener {
-            saveClick()
-        }
     }
 
     private fun saveClick() {
@@ -151,11 +126,53 @@ class GetCategoriesActivity : AppCompatActivity() {
         bindingDialog.btnCancel.setOnClickListener { dialog.dismiss() }
 
 
-/*
-        val subCategoriesReq=SubCategoriesReq(subtype_id!!,cat_id!!)
+
 
 
         bindingDialog.btnCancel.setOnClickListener {
+            finish()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+
+    }
+
+    private fun homeRenderList(categoriesResp: GetCategoriesResp) {
+        if (categoriesResp!!.list.isNotEmpty()) {
+            binding.categoriesRecyclerView.visibility = View.VISIBLE
+        } else {
+            binding.categoriesRecyclerView.visibility = View.GONE
+        }
+    }
+
+    private fun setupViewModel() {
+        homeViewModel =
+            ViewModelProviders.of(this, ViewModelFactory(ApiHelperImpl(RetrofitBuilder.apiService)))
+                .get(HomeViewModel::class.java)
+
+
+
+        lifecycleScope.launch {
+            homeViewModel.homeIntent.send(
+                MainIntent.GetCategories
+
+            )
+        }
+
+
+    }
+
+    private fun setupClicks() {
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
+
+        binding.saveTv.setOnClickListener {
+
+            val subCategoriesReq = SubCategoriesReq(subtype_id!!, cat_id!!)
+
             lifecycleScope.launch {
                 homeViewModel.homeIntent.send(
                     MainIntent.SubCategories(
@@ -164,19 +181,16 @@ class GetCategoriesActivity : AppCompatActivity() {
 
                 )
             }
-
-            dialog.dismiss()
         }
-*/
-
-        dialog.show()
-
-
     }
+
 
     private fun setupUI() {
         type = intent.getStringExtra("type").toString()
         binding.categoriesTv.text = type
+
+        subtype_id = intent.getStringExtra("id").toString()
+        cat_id = intent.getStringExtra("id").toString()
 
         binding.categoriesRecyclerView.addItemDecoration(
             DividerItemDecoration(
