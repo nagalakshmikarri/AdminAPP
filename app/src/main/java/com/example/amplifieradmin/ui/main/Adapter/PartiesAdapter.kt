@@ -23,7 +23,7 @@ class PartiesAdapter(
         ) {
             binding.tvType.text=subTypeInviteListRespData.type
             binding.tvType.setOnClickListener {
-                onItemClick.onItemClick(subTypeInviteListRespData.type,subTypeInviteListRespData.type_id)
+                onItemClick.onItemClick(subTypeInviteListRespData.type,subTypeInviteListRespData.id)
 
             }
 

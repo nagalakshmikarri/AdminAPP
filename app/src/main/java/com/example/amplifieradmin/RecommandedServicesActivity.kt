@@ -72,11 +72,11 @@ class RecommandedServicesActivity : AppCompatActivity() {
                             object :RecommandedServicesAdapter.OnItemClick{
                                 override fun onItemClick(
                                     type: String,
-                                    id: String
+                                    cat_id: String
                                 ) {
                                     val intent = Intent(this@RecommandedServicesActivity, PartiesActivity::class.java)
                                     intent.putExtra("type", type)
-                                    intent.putExtra("id", id)
+                                    intent.putExtra("cat_id", cat_id)
 
                                     startActivity(intent);
 

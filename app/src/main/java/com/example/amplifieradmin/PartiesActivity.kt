@@ -38,6 +38,7 @@ class PartiesActivity : AppCompatActivity() {
     private var type: String? = null
     private lateinit var adapter: PartiesAdapter
     private var type_id=""
+    private var cat_id=""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,11 +78,12 @@ class PartiesActivity : AppCompatActivity() {
                             object :PartiesAdapter.OnItemClick{
                                 override fun onItemClick(
                                     type: String,
-                                    id: String
+                                    sub_type_id: String
                                 ) {
                                     val intent = Intent(this@PartiesActivity, GetCategoriesActivity::class.java)
                                     intent.putExtra("type", type)
-                                    intent.putExtra("id", id)
+                                    intent.putExtra("cat_id", cat_id)
+                                    intent.putExtra("sub_type_id", sub_type_id)
                                     startActivity(intent);
                                 }
 
@@ -148,7 +150,8 @@ class PartiesActivity : AppCompatActivity() {
     private fun setupUI() {
         type = intent.getStringExtra("type").toString()
         binding.partiesTv.text = type
-        type_id=intent.getStringExtra("id").toString()
+        type_id=intent.getStringExtra("cat_id").toString()
+        cat_id=intent.getStringExtra("cat_id").toString()
 
         binding.servicesRecy.addItemDecoration(
             DividerItemDecoration(

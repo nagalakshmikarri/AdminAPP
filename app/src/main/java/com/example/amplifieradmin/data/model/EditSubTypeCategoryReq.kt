@@ -6,6 +6,6 @@ import com.google.gson.annotations.SerializedName
 data class EditSubTypeCategoryReq(
     @SerializedName("subtype_id")
     @Expose
-    val subtype_id:String=""
+    val subtype_id:String?=""
 
 )

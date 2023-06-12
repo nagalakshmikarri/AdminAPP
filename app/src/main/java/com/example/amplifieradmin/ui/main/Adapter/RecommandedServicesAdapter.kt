@@ -72,7 +72,7 @@ class RecommandedServicesAdapter(
     interface OnItemClick {
         fun onItemClick(
          type:String,
-         id:String
+         cat_id:String
         )
     }
 

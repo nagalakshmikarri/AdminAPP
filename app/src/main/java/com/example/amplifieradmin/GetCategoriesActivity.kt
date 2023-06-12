@@ -2,7 +2,6 @@ package com.example.amplifieradmin
 
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -19,12 +18,9 @@ import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
 import com.example.amplifieradmin.data.model.*
 import com.example.amplifieradmin.databinding.ActivityGetCategoriesBinding
-import com.example.amplifieradmin.databinding.ActivityPartiesBinding
-import com.example.amplifieradmin.databinding.AlertDialogBinding
 import com.example.amplifieradmin.databinding.SaveAlertDialogBinding
 import com.example.amplifieradmin.helper.PrefHelper
-import com.example.amplifieradmin.ui.main.Adapter.CategoriiesAdapter
-import com.example.amplifieradmin.ui.main.Adapter.PartiesAdapter
+import com.example.amplifieradmin.ui.main.Adapter.CategoriesAdapter
 import com.example.amplifieradmin.ui.main.intent.MainIntent
 import com.example.amplifieradmin.util.ViewModelFactory
 import com.example.amplifieradmin.viewmodel.HomeViewModel
@@ -38,8 +34,9 @@ class GetCategoriesActivity : AppCompatActivity() {
     private val binding get() = _binding!!
     private var type: String? = null
     private var subtype_id: String? = null
-    private var cat_id: String? = null
-    private lateinit var adapter: CategoriiesAdapter
+    private lateinit var adapter: CategoriesAdapter
+    private var editSubType: EditSubTypeCategoryResp? = null
+    private var selectedList: ArrayList<String> = java.util.ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,9 +69,15 @@ class GetCategoriesActivity : AppCompatActivity() {
                     is MainState.GetCategories -> {
                         Log.e("testtt", it.getCategoriesResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
-                        adapter = CategoriiesAdapter(
-                            it.getCategoriesResp!!.list,
+                        adapter = CategoriesAdapter(
                             this@GetCategoriesActivity,
+                            object : CategoriesAdapter.OnItemClick {
+                                override fun onClick(
+                                    data: ArrayList<String>
+                                ) {
+                                    selectedList = data
+                                }
+                            }
                         )
 
                         binding.categoriesRecyclerView.adapter = adapter
@@ -92,12 +95,6 @@ class GetCategoriesActivity : AppCompatActivity() {
                         Log.e("testtt", it.editSubTypeCategoryResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
 
-                        lifecycleScope.launch {
-                            homeViewModel.homeIntent.send(
-                                MainIntent.GetCategories
-
-                            )
-                        }
 
 
                     }
@@ -139,12 +136,15 @@ class GetCategoriesActivity : AppCompatActivity() {
 
     }
 
-    private fun homeRenderList(categoriesResp: GetCategoriesResp) {
+    private fun homeRenderList(categoriesResp: GetCategoriesResp?) {
         if (categoriesResp!!.list.isNotEmpty()) {
             binding.categoriesRecyclerView.visibility = View.VISIBLE
         } else {
             binding.categoriesRecyclerView.visibility = View.GONE
         }
+
+        categoriesResp.let { listOfUsers -> listOfUsers.let { adapter.addData(it.list) } }
+        adapter.notifyDataSetChanged()
     }
 
     private fun setupViewModel() {
@@ -154,10 +154,21 @@ class GetCategoriesActivity : AppCompatActivity() {
 
 
 
+
+
+
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
                 MainIntent.GetCategories
 
+            )
+        }
+
+
+        lifecycleScope.launch {
+            val editSubTypeCategoryReq = EditSubTypeCategoryReq(subtype_id)
+            homeViewModel.homeIntent.send(
+                MainIntent.EditSubTypeCategory(editSubTypeCategoryReq)
             )
         }
 
@@ -171,7 +182,9 @@ class GetCategoriesActivity : AppCompatActivity() {
 
         binding.saveTv.setOnClickListener {
 
-            val subCategoriesReq = SubCategoriesReq(subtype_id!!, cat_id!!)
+            val catId: String = java.lang.String.join(",", selectedList)
+
+            val subCategoriesReq = SubCategoriesReq(subtype_id!!, catId)
 
             lifecycleScope.launch {
                 homeViewModel.homeIntent.send(
@@ -189,8 +202,8 @@ class GetCategoriesActivity : AppCompatActivity() {
         type = intent.getStringExtra("type").toString()
         binding.categoriesTv.text = type
 
-        subtype_id = intent.getStringExtra("id").toString()
-        cat_id = intent.getStringExtra("id").toString()
+        subtype_id = intent.getStringExtra("sub_type_id").toString()
+     //   cat_id = intent.getStringExtra("cat_id").toString()
 
         binding.categoriesRecyclerView.addItemDecoration(
             DividerItemDecoration(

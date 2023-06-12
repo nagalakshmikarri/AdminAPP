@@ -7,5 +7,6 @@ data class GetCategoriesResp(
 
 data class GetCategoriesRespData(
     val id: String,
-    val name: String
+    val name: String,
+    var status: Boolean
 )
