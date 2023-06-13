@@ -250,10 +250,12 @@ class UserDetailsActivity : AppCompatActivity() {
                     ) {
                         countryAdapter.updateSelection(position)
                         if (countryAdapter.list[countryAdapter.selectedId].id != "-1") {
+                            binding.stateLl.visibility=View.VISIBLE
                             lifecycleScope.launch {
                                 homeViewModel.homeIntent.send(
                                     MainIntent.States(countryAdapter.list[countryAdapter.selectedId].id)
                                 )
+
                                 if (countryAdapter.list[countryAdapter.selectedId].name == "USA") {
                                     binding.etAreaName.visibility = View.GONE
                                     binding.tvAreaName.visibility = View.GONE
