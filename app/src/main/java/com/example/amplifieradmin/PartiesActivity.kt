@@ -98,6 +98,17 @@ class PartiesActivity : AppCompatActivity() {
                         Log.e("testtt", it.addSubTypeInviteResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
 
+                        val subTypeInviteListReq=SubTypeInviteListReq(type_id)
+
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.SubInviteType(
+                                    subTypeInviteListReq
+                                )
+
+                            )
+                        }
+
 
                     }
 
@@ -162,16 +173,17 @@ class PartiesActivity : AppCompatActivity() {
         binding.servicesRecy.layoutManager =
             LinearLayoutManager(this@PartiesActivity)
 
-
-        val addSubTypeInviteReq= AddSubTypeInviteReq(binding.categoryEt.text.toString(),type_id)
-
         binding.saveButton.setOnClickListener {
             if (checkValidations()) {
+                Log.e("TAG", "setupClicks: ${binding.categoryEt.text.toString()}", )
+                val addSubTypeInviteReq= AddSubTypeInviteReq(binding.categoryEt.text.toString(),type_id)
+
                 hideKeyboard(currentFocus ?: View(this))
                 lifecycleScope.launch {
                     homeViewModel.homeIntent.send(
                         MainIntent.AddSubTypeInvite(
-                            addSubTypeInviteReq                        )
+                            addSubTypeInviteReq
+                        )
                     )
 
                 }

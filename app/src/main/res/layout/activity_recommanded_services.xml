@@ -55,11 +55,11 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/round"
         android:backgroundTint="@color/white"
-        android:imeOptions="actionDone"
-        android:inputType="textAutoComplete"
+        android:inputType="text"
         android:layout_below="@+id/category_tv"
         android:paddingHorizontal="10dp"
         android:paddingVertical="15dp"
+        android:textColor="@color/text_header_color"
         android:textSize="14sp" />
     <Button
         android:id="@+id/save_button"

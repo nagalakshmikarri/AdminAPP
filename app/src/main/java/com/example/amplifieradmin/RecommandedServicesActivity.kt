@@ -92,6 +92,13 @@ class RecommandedServicesActivity : AppCompatActivity() {
                         Log.e("testtt", it.addInviteTypeResp?.status.toString())
                         binding.progressBar.visibility = View.GONE
 
+                        lifecycleScope.launch {
+                            homeViewModel.homeIntent.send(
+                                MainIntent.ListingInviteType
+
+                            )
+                        }
+
 
                     }
 
@@ -146,10 +153,13 @@ class RecommandedServicesActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        val addInviteTypeReq=AddInviteTypeReq(binding.categoryEt.text.toString())
 
         binding.saveButton.setOnClickListener {
+
             if (checkValidations()) {
+                Log.e("TAG", "setupClicks: ${binding.categoryEt.text.toString()}", )
+                val addInviteTypeReq=AddInviteTypeReq(binding.categoryEt.text.toString())
+
                 hideKeyboard(currentFocus ?: View(this))
                 lifecycleScope.launch {
                     homeViewModel.homeIntent.send(
