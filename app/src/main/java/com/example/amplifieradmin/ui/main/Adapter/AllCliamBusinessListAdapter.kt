@@ -61,7 +61,7 @@ class AllCliamBusinessListAdapter(
 
     }
     fun filterList(adminUsersData: MutableList<AllCliaedBusinessRespData>) {
-        this.allCliaedBusinessRespData=allCliaedBusinessRespData
+        this.allCliaedBusinessRespData=adminUsersData
         notifyDataSetChanged()
     }
     fun addData(list: List<AllCliaedBusinessRespData>) {

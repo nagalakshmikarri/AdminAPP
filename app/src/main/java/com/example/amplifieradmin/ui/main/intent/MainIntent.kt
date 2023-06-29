@@ -135,7 +135,9 @@ sealed class MainIntent {
 
     object PriorityList:MainIntent()
 
-    object AllClaimedBussiness:MainIntent()
+    class AllClaimedBussiness(
+        val allCliamedBusinessReq: AllCliamedBusinessReq
+    ):MainIntent()
 
     class GetCities(
         val getCitiesReq: GetCitiesReq

@@ -14,16 +14,17 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="4dp" />
 
-<!--
-    <ImageView
+    <TextView
         android:id="@+id/no_result_tv"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/refer_business1"
+        android:textSize="16dp"
+        android:textColor="@color/text_header_color"
+        android:fontFamily="@font/jost_medium_500"
+        android:text="Priority Business not available"
         android:visibility="visible" />
--->
     <LinearLayout
         android:id="@+id/progressBar"
         android:layout_width="match_parent"

@@ -91,13 +91,42 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel() {
                     is MainIntent.SubCategories->subCategories(it.subCategoriesReq)
                     is MainIntent.EditSubTypeCategory->editSubTypeCategory(it.editSubTypeCategoryReq)
                     is MainIntent.PriorityList->priorityList()
-                    is MainIntent.AllClaimedBussiness->allCliamedBusiness()
+                    is MainIntent.AllClaimedBussiness->allCliamedBusiness(it.allCliamedBusinessReq)
                     is MainIntent.GetCities->getCities(it.getCitiesReq)
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun allCliamedBusiness(allCliamedBusinessReq: AllCliamedBusinessReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.allCliamedBusiness(allCliamedBusinessReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AllCliamedBusiness(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 
@@ -129,36 +158,6 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel() {
         }
 
     }
-
-    private fun allCliamedBusiness() {
-        viewModelScope.launch {
-            //loading state
-            _state.value = MainState.Loading
-
-
-            val response = repository.allCliamedBusiness()
-            _state.value = when (response) {
-                is NetworkResponse.Success -> {
-                    if (response.body.status == "ok") {
-                        MainState.AllCliamedBusiness(response.body)
-                    } else {
-                        MainState.Error(response.body.status)
-                    }
-                }
-                is NetworkResponse.ApiError -> {
-                    MainState.Error(response.body.error)
-                }
-                is NetworkResponse.NetworkError -> {
-                    MainState.Error(response.error.message)
-                }
-                is NetworkResponse.UnknownError -> {
-                    MainState.Error(response.error?.message)
-                }
-            }
-        }
-
-    }
-
     private fun priorityList() {
         viewModelScope.launch {
             //loading state

@@ -332,9 +332,11 @@ interface ApiService {
         @Header("Authorization") authorization: String,
     ): NetworkResponse<PriorityListRsp, ErrorResponse>
     @POST("allbusiness_claimed")
+    @FormUrlEncoded
     suspend fun allCliamedBusiness(
         @Header("Authorization") authorization: String,
-    ): NetworkResponse<AllCliaedBusinessResp, ErrorResponse>
+        @Field("city") city: String?,
+        ): NetworkResponse<AllCliaedBusinessResp, ErrorResponse>
     @POST("get_cities_list")
     @FormUrlEncoded
     suspend fun getCities(

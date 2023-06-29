@@ -6,12 +6,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragment.AllBusinessFragment">
+    <RelativeLayout
+        android:id="@+id/search_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="22dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:orientation="horizontal"
+        android:padding="5dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/search_iv"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_search" />
+
+        <EditText
+            android:id="@+id/searchBarText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toEndOf="@id/search_iv"
+            android:background="@null"
+            android:fontFamily="@font/jost_regular_400"
+            android:hint="Search by Business"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/destination_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="22sp"
         android:layout_marginTop="10dp"
+        android:layout_below="@+id/search_rl"
         android:layout_marginEnd="22sp"
         android:orientation="vertical">
         <Spinner

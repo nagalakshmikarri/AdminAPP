@@ -90,10 +90,10 @@ class PriorityListFragment : Fragment() {
     private fun homeRenderList(priorityListRsp: PriorityListRsp) {
         if (priorityListRsp!!.data.isNotEmpty()) {
             binding.priorityListRecy.visibility = View.VISIBLE
-          //  binding.noResultTv.visibility = View.GONE
+            binding.noResultTv.visibility = View.GONE
         } else {
             binding.priorityListRecy.visibility = View.GONE
-        //    binding.noResultTv.visibility = View.VISIBLE
+            binding.noResultTv.visibility = View.VISIBLE
         }
 
     }
@@ -119,11 +119,11 @@ class PriorityListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-/*
-        binding.allJobsRecy.visibility = View.GONE
+
+        binding.priorityListRecy.visibility = View.GONE
         binding.noResultTv.visibility = View.VISIBLE
 
-*/
+
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
                 MainIntent.PriorityList

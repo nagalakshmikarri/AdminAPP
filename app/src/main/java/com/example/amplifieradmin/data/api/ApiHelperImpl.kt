@@ -267,8 +267,8 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         return apiService.priorityList("Basic $base64".trim())
     }
 
-    override suspend fun allCliamedBusiness():NetworkResponse<AllCliaedBusinessResp,ErrorResponse>{
-        return apiService.allCliamedBusiness("Basic $base64".trim())
+    override suspend fun allCliamedBusiness(allCliamedBusinessReq: AllCliamedBusinessReq):NetworkResponse<AllCliaedBusinessResp,ErrorResponse>{
+        return apiService.allCliamedBusiness("Basic $base64".trim(),allCliamedBusinessReq.city)
     }
 
     override suspend fun getCities(getCitiesReq: GetCitiesReq):NetworkResponse<GetCitiesResp,ErrorResponse>{

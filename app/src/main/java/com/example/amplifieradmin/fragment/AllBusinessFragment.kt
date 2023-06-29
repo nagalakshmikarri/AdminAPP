@@ -1,6 +1,8 @@
 package com.example.amplifieradmin.fragment
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,10 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
-import com.example.amplifieradmin.data.model.AllCliaedBusinessResp
-import com.example.amplifieradmin.data.model.GetCitiesReq
-import com.example.amplifieradmin.data.model.GetCitiesRespData
-import com.example.amplifieradmin.data.model.GetTagsData
+import com.example.amplifieradmin.data.model.*
 import com.example.amplifieradmin.databinding.FragmentAllBusinessBinding
 import com.example.amplifieradmin.databinding.FragmentPriorityListBinding
 import com.example.amplifieradmin.ui.main.Adapter.*
@@ -41,6 +40,7 @@ class AllBusinessFragment : Fragment() {
     private var _binding: FragmentAllBusinessBinding? = null
     private lateinit var citiesAdapter: CitiesSpinnerAdapter
     private val binding get() = _binding!!
+    var filteredDataList: AllCliaedBusinessResp? = null
 
 
     override fun onCreateView(
@@ -57,6 +57,34 @@ class AllBusinessFragment : Fragment() {
     }
 
     private fun setupClicks() {
+        binding.searchBarText.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                filter(s.toString())
+                Log.e("TAG", "filter1: " + s)
+
+            }
+        })
+
+    }
+    private fun filter(text: String?) {
+        val filteredHomeList = mutableListOf<AllCliaedBusinessRespData>()
+
+        Log.e("TAG", "filter: " + text)
+        if (filteredDataList != null) {
+            for (filteredList in filteredDataList!!.data) {
+                if (filteredList.s_business.toLowerCase().contains(text?.toLowerCase().toString())) {
+                    filteredHomeList.add(filteredList)
+                }
+            }
+            adapter?.filterList(filteredHomeList)
+        }
 
     }
 
@@ -84,6 +112,7 @@ class AllBusinessFragment : Fragment() {
                             it.allCliaedBusinessResp!!.data,
                             requireActivity()
                         )
+                        filteredDataList=it.allCliaedBusinessResp
                         binding.allBusinessListRecy.adapter = adapter
                         homeRenderList(it.allCliaedBusinessResp)
 
@@ -131,6 +160,21 @@ class AllBusinessFragment : Fragment() {
                         id: Long
                     ) {
                         citiesAdapter.updateSelection(position)
+
+                        if (citiesAdapter.list[citiesAdapter.selectedId].s_city != "-1") {
+
+                            val allCliamedBusinessReq=AllCliamedBusinessReq(citiesAdapter.list[citiesAdapter.selectedId].s_city)
+
+                            lifecycleScope.launch {
+                                homeViewModel.homeIntent.send(
+                                    MainIntent.AllClaimedBussiness(
+                                        allCliamedBusinessReq
+                                    )
+                                )
+
+                            }
+                        }
+
                         Log.e(
                             "jhfdgjghk",
                             citiesAdapter.list[citiesAdapter.selectedId].toString()
@@ -187,9 +231,12 @@ class AllBusinessFragment : Fragment() {
         binding.noResultTv.visibility = View.VISIBLE
 
 */
+        val allCliamedBusinessReq=AllCliamedBusinessReq("")
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
-                MainIntent.AllClaimedBussiness
+                MainIntent.AllClaimedBussiness(
+                    allCliamedBusinessReq
+                )
 
             )
         }

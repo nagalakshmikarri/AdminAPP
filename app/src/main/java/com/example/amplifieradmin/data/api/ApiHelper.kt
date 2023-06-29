@@ -93,7 +93,7 @@ interface ApiHelper {
 
     suspend fun priorityList():NetworkResponse<PriorityListRsp,ErrorResponse>
 
-    suspend fun allCliamedBusiness():NetworkResponse<AllCliaedBusinessResp,ErrorResponse>
+    suspend fun allCliamedBusiness(allCliamedBusinessReq: AllCliamedBusinessReq):NetworkResponse<AllCliaedBusinessResp,ErrorResponse>
 
     suspend fun getCities(getCitiesReq: GetCitiesReq):NetworkResponse<GetCitiesResp,ErrorResponse>
 }
