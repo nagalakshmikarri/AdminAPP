@@ -100,6 +100,7 @@ class CategoriesAdapter(
             holder.itemView.check_box.isChecked = selectedPosition == position
         }
 
+
 /*
         if (serviceList.selected == 1) {
             holder.itemView.check_box.isChecked = true

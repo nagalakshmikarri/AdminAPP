@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginStart="5sp"
+    android:layout_marginTop="10sp"
+    >
+    <TextView
+        android:id="@+id/business_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jost_medium_500"
+        android:textColor="@color/text_header_color"
+        android:maxLines="2"
+        android:textSize="16dp" />
+    <TextView
+        android:id="@+id/st_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jost_regular_400"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/text_header_color"
+        android:textSize="12dp" />
+
+    <TextView
+        android:id="@+id/category_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jost_medium_500"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/text_header_color"
+        android:textSize="13dp" />
+    <TextView
+        android:id="@+id/email_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jost_medium_500"
+        android:layout_marginTop="3dp"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/text_header_color"
+        android:textSize="13dp" />
+    <TextView
+        android:id="@+id/phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jost_medium_500"
+        android:layout_marginTop="3dp"
+        android:textColor="@color/text_header_color"
+        android:textSize="13dp" />
+
+    <TextView
+        android:id="@+id/address_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jost_regular_400"
+        android:textColor="@color/text_header_color"
+        android:layout_marginTop="3dp"
+        android:maxLines="4"
+        android:textSize="13dp" />
+
+</LinearLayout>

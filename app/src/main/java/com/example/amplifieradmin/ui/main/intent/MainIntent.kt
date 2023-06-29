@@ -132,4 +132,12 @@ sealed class MainIntent {
     class EditSubTypeCategory(
         val editSubTypeCategoryReq: EditSubTypeCategoryReq
     ):MainIntent()
+
+    object PriorityList:MainIntent()
+
+    object AllClaimedBussiness:MainIntent()
+
+    class GetCities(
+        val getCitiesReq: GetCitiesReq
+    ):MainIntent()
 }

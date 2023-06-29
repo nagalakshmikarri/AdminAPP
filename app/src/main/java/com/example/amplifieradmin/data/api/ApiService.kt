@@ -327,5 +327,19 @@ interface ApiService {
         @Header("Authorization") authorization: String,
         @Field("subtype_id") subtype_id: String?,
     ): NetworkResponse<EditSubTypeCategoryResp, ErrorResponse>
+    @POST("allbusiness_priority")
+    suspend fun priorityList(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<PriorityListRsp, ErrorResponse>
+    @POST("allbusiness_claimed")
+    suspend fun allCliamedBusiness(
+        @Header("Authorization") authorization: String,
+    ): NetworkResponse<AllCliaedBusinessResp, ErrorResponse>
+    @POST("get_cities_list")
+    @FormUrlEncoded
+    suspend fun getCities(
+        @Header("Authorization") authorization: String,
+        @Field("city") subtype_id: String?,
+    ): NetworkResponse<GetCitiesResp, ErrorResponse>
 
 }

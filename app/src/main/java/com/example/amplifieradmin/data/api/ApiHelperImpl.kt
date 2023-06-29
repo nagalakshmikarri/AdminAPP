@@ -262,4 +262,16 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     override suspend fun editSubTypeCategory(editSubTypeCategoryReq: EditSubTypeCategoryReq):NetworkResponse<EditSubTypeCategoryResp,ErrorResponse>{
         return apiService.editSubTypeCategory("Basic $base64".trim(),editSubTypeCategoryReq.subtype_id)
     }
+
+    override suspend fun priorityList():NetworkResponse<PriorityListRsp,ErrorResponse>{
+        return apiService.priorityList("Basic $base64".trim())
+    }
+
+    override suspend fun allCliamedBusiness():NetworkResponse<AllCliaedBusinessResp,ErrorResponse>{
+        return apiService.allCliamedBusiness("Basic $base64".trim())
+    }
+
+    override suspend fun getCities(getCitiesReq: GetCitiesReq):NetworkResponse<GetCitiesResp,ErrorResponse>{
+        return apiService.getCities("Basic $base64".trim(),getCitiesReq.city)
+    }
 }

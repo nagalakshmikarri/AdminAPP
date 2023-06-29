@@ -75,5 +75,11 @@ sealed  class MainState {
     data class SubCategories(val subCategoriesResp: SubCategoriesResp?):MainState()
 
     data class EditSubTypeCategory(val editSubTypeCategoryResp: EditSubTypeCategoryResp?):MainState()
+
+    data class PriorityList(val priorityListRsp: PriorityListRsp?):MainState()
+
+    data class AllCliamedBusiness(val allCliaedBusinessResp: AllCliaedBusinessResp?):MainState()
+
+    data class GetCities(val getCitiesResp: GetCitiesResp?):MainState()
     data class Error(val error: String?) : MainState()
 }

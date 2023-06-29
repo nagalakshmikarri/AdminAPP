@@ -90,4 +90,10 @@ interface ApiHelper {
     suspend fun subCategories(subCategoriesReq: SubCategoriesReq):NetworkResponse<SubCategoriesResp,ErrorResponse>
 
     suspend fun editSubTypeCategory(editSubTypeCategoryReq: EditSubTypeCategoryReq):NetworkResponse<EditSubTypeCategoryResp,ErrorResponse>
+
+    suspend fun priorityList():NetworkResponse<PriorityListRsp,ErrorResponse>
+
+    suspend fun allCliamedBusiness():NetworkResponse<AllCliaedBusinessResp,ErrorResponse>
+
+    suspend fun getCities(getCitiesReq: GetCitiesReq):NetworkResponse<GetCitiesResp,ErrorResponse>
 }

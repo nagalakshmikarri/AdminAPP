@@ -92,4 +92,10 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun subCategories(subCategoriesReq: SubCategoriesReq)=apiHelper.subCategories(subCategoriesReq)
 
     suspend fun editSubTypeCcategory(editSubTypeCategoryReq: EditSubTypeCategoryReq)=apiHelper.editSubTypeCategory(editSubTypeCategoryReq)
+
+    suspend fun priorityList()=apiHelper.priorityList()
+
+    suspend fun allCliamedBusiness()=apiHelper.allCliamedBusiness()
+
+    suspend fun getCities(getCitiesReq: GetCitiesReq)=apiHelper.getCities(getCitiesReq)
 }

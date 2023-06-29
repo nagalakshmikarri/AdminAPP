@@ -135,4 +135,6 @@
     <string name="Types_list">Types List</string>
     <string name="Add_types">Sub Types*</string>
     <string name="ok">Ok</string>
+    <string name="top_business_list">Top Business List</string>
+    <string name="ads_top_business">Ads Top Business</string>
 </resources>

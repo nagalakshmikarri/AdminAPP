@@ -220,6 +220,10 @@ class AdsListStatusActivity : AppCompatActivity() {
             val intent = Intent(this@AdsListStatusActivity, RewardActivity::class.java)
             startActivity(intent);
         }
+        binding.topBusinessLl.setOnClickListener {
+            val intent = Intent(this@AdsListStatusActivity, TopBusinessActivity::class.java)
+            startActivity(intent);
+        }
 
         binding.approvedBusiness.setOnClickListener {
             val intent = Intent(this@AdsListStatusActivity, ApproveBusinessListActivity::class.java)
