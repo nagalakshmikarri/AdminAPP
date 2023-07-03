@@ -98,4 +98,6 @@ class MainRepository (private val apiHelper: ApiHelper)  {
     suspend fun allCliamedBusiness(allCliamedBusinessReq: AllCliamedBusinessReq)=apiHelper.allCliamedBusiness(allCliamedBusinessReq)
 
     suspend fun getCities(getCitiesReq: GetCitiesReq)=apiHelper.getCities(getCitiesReq)
+
+    suspend fun addBusinessPriority(addBusinessPriorityReq: AddBusinessPriorityReq)=apiHelper.addBusinessPriority(addBusinessPriorityReq)
 }

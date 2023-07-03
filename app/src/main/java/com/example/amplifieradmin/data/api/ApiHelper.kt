@@ -96,4 +96,6 @@ interface ApiHelper {
     suspend fun allCliamedBusiness(allCliamedBusinessReq: AllCliamedBusinessReq):NetworkResponse<AllCliaedBusinessResp,ErrorResponse>
 
     suspend fun getCities(getCitiesReq: GetCitiesReq):NetworkResponse<GetCitiesResp,ErrorResponse>
+
+    suspend fun addBusinessPriority(addBusinessPriorityReq: AddBusinessPriorityReq):NetworkResponse<AddBusinessPriorityResp,ErrorResponse>
 }

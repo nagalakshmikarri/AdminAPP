@@ -341,7 +341,17 @@ interface ApiService {
     @FormUrlEncoded
     suspend fun getCities(
         @Header("Authorization") authorization: String,
-        @Field("city") subtype_id: String?,
+        @Field("city") city: String?,
     ): NetworkResponse<GetCitiesResp, ErrorResponse>
+    @POST("add_business_priority")
+    @FormUrlEncoded
+    suspend fun addBusinessPriority(
+        @Header("Authorization") authorization: String,
+        @Field("s_id") s_id: String?,
+        @Field("duration") duration: String?,
+        @Field("start_date") start_date: String?,
+        @Field("amount") amount: String?,
+        @Field("rank") rank: String?,
+    ): NetworkResponse<AddBusinessPriorityResp, ErrorResponse>
 
 }

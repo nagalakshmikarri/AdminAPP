@@ -1,5 +1,6 @@
 package com.example.amplifieradmin.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,6 +15,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.amplifieradmin.PendingActivity
+import com.example.amplifieradmin.PriorityListActivity
 import com.example.amplifieradmin.R
 import com.example.amplifieradmin.data.api.ApiHelperImpl
 import com.example.amplifieradmin.data.api.RetrofitBuilder
@@ -73,13 +76,16 @@ class AllBusinessFragment : Fragment() {
         })
 
     }
+
     private fun filter(text: String?) {
         val filteredHomeList = mutableListOf<AllCliaedBusinessRespData>()
 
         Log.e("TAG", "filter: " + text)
         if (filteredDataList != null) {
             for (filteredList in filteredDataList!!.data) {
-                if (filteredList.s_business.toLowerCase().contains(text?.toLowerCase().toString())) {
+                if (filteredList.s_business.toLowerCase()
+                        .contains(text?.toLowerCase().toString())
+                ) {
                     filteredHomeList.add(filteredList)
                 }
             }
@@ -110,9 +116,27 @@ class AllBusinessFragment : Fragment() {
                         binding.progressBar.visibility = View.GONE
                         adapter = AllCliamBusinessListAdapter(
                             it.allCliaedBusinessResp!!.data,
-                            requireActivity()
+                            requireActivity(),
+                            object : AllCliamBusinessListAdapter.OnItemClick {
+                                override fun onItemClick(
+                                    s_business: String,
+                                    category: String,
+                                    address: String,
+                                    s_id:String
+                                ) {
+                                    val intent =
+                                        Intent(requireActivity(), PriorityListActivity::class.java)
+                                    intent.putExtra("s_business", s_business)
+                                    intent.putExtra("category", category)
+                                    intent.putExtra("address", address)
+                                    intent.putExtra("s_id", s_id)
+                                    startActivity(intent);
+
+                                }
+
+                            }
                         )
-                        filteredDataList=it.allCliaedBusinessResp
+                        filteredDataList = it.allCliaedBusinessResp
                         binding.allBusinessListRecy.adapter = adapter
                         homeRenderList(it.allCliaedBusinessResp)
 
@@ -163,7 +187,8 @@ class AllBusinessFragment : Fragment() {
 
                         if (citiesAdapter.list[citiesAdapter.selectedId].s_city != "-1") {
 
-                            val allCliamedBusinessReq=AllCliamedBusinessReq(citiesAdapter.list[citiesAdapter.selectedId].s_city)
+                            val allCliamedBusinessReq =
+                                AllCliamedBusinessReq(citiesAdapter.list[citiesAdapter.selectedId].s_city)
 
                             lifecycleScope.launch {
                                 homeViewModel.homeIntent.send(
@@ -231,7 +256,7 @@ class AllBusinessFragment : Fragment() {
         binding.noResultTv.visibility = View.VISIBLE
 
 */
-        val allCliamedBusinessReq=AllCliamedBusinessReq("")
+        val allCliamedBusinessReq = AllCliamedBusinessReq("")
         lifecycleScope.launch {
             homeViewModel.homeIntent.send(
                 MainIntent.AllClaimedBussiness(

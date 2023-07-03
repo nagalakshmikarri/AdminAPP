@@ -81,5 +81,7 @@ sealed  class MainState {
     data class AllCliamedBusiness(val allCliaedBusinessResp: AllCliaedBusinessResp?):MainState()
 
     data class GetCities(val getCitiesResp: GetCitiesResp?):MainState()
+
+    data class AddBusinessPriority(val addBusinessPriorityResp: AddBusinessPriorityResp?):MainState()
     data class Error(val error: String?) : MainState()
 }

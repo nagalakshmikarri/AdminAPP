@@ -142,4 +142,9 @@ sealed class MainIntent {
     class GetCities(
         val getCitiesReq: GetCitiesReq
     ):MainIntent()
+
+
+    class AddBusinessPriority(
+        val addBusinessPriorityReq: AddBusinessPriorityReq
+    ):MainIntent()
 }

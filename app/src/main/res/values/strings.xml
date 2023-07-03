@@ -137,4 +137,9 @@
     <string name="ok">Ok</string>
     <string name="top_business_list">Top Business List</string>
     <string name="ads_top_business">Ads Top Business</string>
+    <string name="start_date">Start Date*</string>
+    <string name="amount">Amount*</string>
+    <string name="rank">Rank*</string>
+    <string name="priority">Priority</string>
+    <string name="advertaise_type">Advertaise Type*</string>
 </resources>

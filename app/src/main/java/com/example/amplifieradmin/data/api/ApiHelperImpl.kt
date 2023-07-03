@@ -186,7 +186,7 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         )
     }
 
-    override suspend fun allJobs():NetworkResponse<AllJobsResp,ErrorResponse>{
+    override suspend fun allJobs(): NetworkResponse<AllJobsResp, ErrorResponse> {
         return apiService.allJobs(
             "Basic $base64".trim()
         )
@@ -198,13 +198,13 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         )
     }
 
-    override suspend fun blockJobs():NetworkResponse<BlockJobsResp,ErrorResponse>{
+    override suspend fun blockJobs(): NetworkResponse<BlockJobsResp, ErrorResponse> {
         return apiService.blockJobs(
             "Basic $base64".trim()
         )
     }
 
-    override suspend fun blockUserJobs(blockUserJobReq: BlockUserJobReq):NetworkResponse<BlockUserJobResp,ErrorResponse>{
+    override suspend fun blockUserJobs(blockUserJobReq: BlockUserJobReq): NetworkResponse<BlockUserJobResp, ErrorResponse> {
         return apiService.blockUserJobs(
             "Basic $base64".trim(),
             blockUserJobReq.id
@@ -212,20 +212,20 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
     }
 
 
-    override suspend fun confirmUserJobs(confirmUserJobReq: ConfirmUserJobReq):NetworkResponse<ConfirmUserJobResp,ErrorResponse>{
+    override suspend fun confirmUserJobs(confirmUserJobReq: ConfirmUserJobReq): NetworkResponse<ConfirmUserJobResp, ErrorResponse> {
         return apiService.confirmUserJobs(
             "Basic $base64".trim(),
             confirmUserJobReq.id
         )
     }
 
-    override suspend fun gettingRewards():NetworkResponse<GettingRewardResp,ErrorResponse>{
+    override suspend fun gettingRewards(): NetworkResponse<GettingRewardResp, ErrorResponse> {
         return apiService.gettingRewards(
             "Basic $base64".trim()
         )
     }
 
-    override suspend fun updateRewards(updateRewardsReq: UpdateRewardsReq):NetworkResponse<UpdateRewardsResp,ErrorResponse>{
+    override suspend fun updateRewards(updateRewardsReq: UpdateRewardsReq): NetworkResponse<UpdateRewardsResp, ErrorResponse> {
         return apiService.updateRewards(
             "Basic $base64".trim(),
             updateRewardsReq.register,
@@ -238,40 +238,62 @@ class ApiHelperImpl(private val apiService: ApiService) : ApiHelper {
         return apiService.listInviteType("Basic $base64".trim())
     }
 
-    override suspend fun addInviteType(addInviteTypeReq: AddInviteTypeReq):NetworkResponse<AddInviteTypeResp,ErrorResponse>{
-        return apiService.addInviteType("Basic $base64".trim(),addInviteTypeReq.type)
+    override suspend fun addInviteType(addInviteTypeReq: AddInviteTypeReq): NetworkResponse<AddInviteTypeResp, ErrorResponse> {
+        return apiService.addInviteType("Basic $base64".trim(), addInviteTypeReq.type)
     }
 
-    override suspend fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq):NetworkResponse<SubTypeInviteListResp,ErrorResponse>{
-        return apiService.subInviteType("Basic $base64".trim(),subTypeInviteListReq.type_id)
+    override suspend fun subInviteType(subTypeInviteListReq: SubTypeInviteListReq): NetworkResponse<SubTypeInviteListResp, ErrorResponse> {
+        return apiService.subInviteType("Basic $base64".trim(), subTypeInviteListReq.type_id)
     }
 
     override suspend fun addSubTypeInvite(addSubTypeInviteReq: AddSubTypeInviteReq): NetworkResponse<AddSubTypeInviteResp, ErrorResponse> {
-        return apiService.addSubTypeInvite("Basic $base64".trim(),addSubTypeInviteReq.type,addSubTypeInviteReq.type_id)
+        return apiService.addSubTypeInvite(
+            "Basic $base64".trim(),
+            addSubTypeInviteReq.type,
+            addSubTypeInviteReq.type_id
+        )
 
     }
 
-    override suspend fun getCategories():NetworkResponse<GetCategoriesResp,ErrorResponse>{
+    override suspend fun getCategories(): NetworkResponse<GetCategoriesResp, ErrorResponse> {
         return apiService.getCategories("Basic $base64".trim())
     }
 
-    override suspend fun subCategories(subCategoriesReq: SubCategoriesReq):NetworkResponse<SubCategoriesResp,ErrorResponse>{
-        return apiService.subCategories("Basic $base64".trim(),subCategoriesReq.subtype_id,subCategoriesReq.cat_id)
+    override suspend fun subCategories(subCategoriesReq: SubCategoriesReq): NetworkResponse<SubCategoriesResp, ErrorResponse> {
+        return apiService.subCategories(
+            "Basic $base64".trim(),
+            subCategoriesReq.subtype_id,
+            subCategoriesReq.cat_id
+        )
     }
 
-    override suspend fun editSubTypeCategory(editSubTypeCategoryReq: EditSubTypeCategoryReq):NetworkResponse<EditSubTypeCategoryResp,ErrorResponse>{
-        return apiService.editSubTypeCategory("Basic $base64".trim(),editSubTypeCategoryReq.subtype_id)
+    override suspend fun editSubTypeCategory(editSubTypeCategoryReq: EditSubTypeCategoryReq): NetworkResponse<EditSubTypeCategoryResp, ErrorResponse> {
+        return apiService.editSubTypeCategory(
+            "Basic $base64".trim(),
+            editSubTypeCategoryReq.subtype_id
+        )
     }
 
-    override suspend fun priorityList():NetworkResponse<PriorityListRsp,ErrorResponse>{
+    override suspend fun priorityList(): NetworkResponse<PriorityListRsp, ErrorResponse> {
         return apiService.priorityList("Basic $base64".trim())
     }
 
-    override suspend fun allCliamedBusiness(allCliamedBusinessReq: AllCliamedBusinessReq):NetworkResponse<AllCliaedBusinessResp,ErrorResponse>{
-        return apiService.allCliamedBusiness("Basic $base64".trim(),allCliamedBusinessReq.city)
+    override suspend fun allCliamedBusiness(allCliamedBusinessReq: AllCliamedBusinessReq): NetworkResponse<AllCliaedBusinessResp, ErrorResponse> {
+        return apiService.allCliamedBusiness("Basic $base64".trim(), allCliamedBusinessReq.city)
     }
 
-    override suspend fun getCities(getCitiesReq: GetCitiesReq):NetworkResponse<GetCitiesResp,ErrorResponse>{
-        return apiService.getCities("Basic $base64".trim(),getCitiesReq.city)
+    override suspend fun getCities(getCitiesReq: GetCitiesReq): NetworkResponse<GetCitiesResp, ErrorResponse> {
+        return apiService.getCities("Basic $base64".trim(), getCitiesReq.city)
+    }
+
+    override suspend fun addBusinessPriority(addBusinessPriorityReq: AddBusinessPriorityReq): NetworkResponse<AddBusinessPriorityResp, ErrorResponse> {
+        return apiService.addBusinessPriority(
+            "Basic $base64".trim(),
+            addBusinessPriorityReq.s_id,
+            addBusinessPriorityReq.duration,
+            addBusinessPriorityReq.start_date,
+            addBusinessPriorityReq.amount,
+            addBusinessPriorityReq.rank
+        )
     }
 }

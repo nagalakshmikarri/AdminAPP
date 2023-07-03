@@ -93,11 +93,41 @@ class HomeViewModel(private val repository: MainRepository) : ViewModel() {
                     is MainIntent.PriorityList->priorityList()
                     is MainIntent.AllClaimedBussiness->allCliamedBusiness(it.allCliamedBusinessReq)
                     is MainIntent.GetCities->getCities(it.getCitiesReq)
+                    is MainIntent.AddBusinessPriority->addBusinessPriority(it.addBusinessPriorityReq)
                     else -> {}
                 }
             }
         }
 
+
+    }
+
+    private fun addBusinessPriority(addBusinessPriorityReq: AddBusinessPriorityReq) {
+        viewModelScope.launch {
+            //loading state
+            _state.value = MainState.Loading
+
+
+            val response = repository.addBusinessPriority(addBusinessPriorityReq)
+            _state.value = when (response) {
+                is NetworkResponse.Success -> {
+                    if (response.body.status == "ok") {
+                        MainState.AddBusinessPriority(response.body)
+                    } else {
+                        MainState.Error(response.body.status)
+                    }
+                }
+                is NetworkResponse.ApiError -> {
+                    MainState.Error(response.body.error)
+                }
+                is NetworkResponse.NetworkError -> {
+                    MainState.Error(response.error.message)
+                }
+                is NetworkResponse.UnknownError -> {
+                    MainState.Error(response.error?.message)
+                }
+            }
+        }
 
     }
 
